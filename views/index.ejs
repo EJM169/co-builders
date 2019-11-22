@@ -1,0 +1,131 @@
+
+<% include ./partials/header %>
+
+<!--================Home Banner Area =================-->
+<section id="Home" class="home_banner_area">
+    <div class="banner_inner d-flex align-items-center">
+       <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+       <div class="container">
+           <div class="banner_content text-center">
+            <span>Mirai construction</span>
+            <h3>We Help Make Your Dreams <br> Come True</h3>
+         </div>
+     </div>
+ </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+
+<!--================About  Area =================-->
+<section id="about" class="about-area area-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="about-img">
+                    <img src="img/banner/about1.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h4>WE HELP YOU BUILD<br>
+                        A HOUSE OF YOUR DREAMS<br> </h4>
+                    <h5>PROVIDING SOLUTIONS SINCE LAST NIGHT.</h5> 
+                    <p>We aim ourselves to find a contractor for you that fits your criteria<br>perfectly and make sure that from beginning to end to be help you without making you face any problems</p>
+
+                    <!-- <a class="main_btn" href="#">learn more</a> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================About Area End =================-->
+<!--================Customer Area Start=============-->
+<section id="customer" class="customer-area area-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-7">
+                <div class="customer-content">
+                    <h4>ARE YOU NEW HERE?, MAKE YOUR DREAM HOUSE COME TRUE</h4>
+                    <p>Start today by logging in to your acccount and finding a contractor that fits your budget. If you're new here don't worry you can register now itself and use our service.</p>
+                </div>
+            </div>
+             <div class="col-lg-6 col-md-6">
+                <div class="customer-login">
+                    <div class="modal-dialog modal-login">
+                        <div class="modal-content">
+                            <div class="modal-header">				
+                                <h4 class="modal-title">Customer Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/customer-login" method="post">
+                                    <div class="form-group">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" class="form-control" placeholder="User email/username" name="username" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" placeholder="Password" name="password" required="required">					
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+                                    </div>
+                                    <div class="hint-text">Don't have an account? <a href="/customer-signup">Sign Up Today</a></div>
+            
+                                </form>				
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<!--===============Customer Area Ends================-->
+<!--================Contractor Area Start=============-->
+<section id="contractor" class="contractor-area area-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-7">
+                <div class="contractor-content">
+                    <h4>ARE YOU A CONTRACTOR?</h4>
+                    <p>Expand your business today by logging on to our website and finding clients who are looking for someone to build their house. Who knows maybe it will be you. If you don't have a account then register today and expand your business</p>
+                </div>
+            </div>
+             <div class="col-lg-6 col-md-6">
+                <div class="contractor-login">
+                    <div class="modal-dialog modal-login">
+                        <div class="modal-content">
+                            <div class="modal-header">				
+                                <h4 class="modal-title">Contractor Login</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/contractor-login" method="post">
+                                    <div class="form-group">
+                                        <i class="fa fa-user"></i>
+                                        <input type="text" class="form-control" placeholder="Contractor email/username" name="username" required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <i class="fa fa-lock"></i>
+                                        <input type="password" class="form-control" placeholder="Password" name="password" required="required">					
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary btn-block btn-lg" value="Login">
+                                    </div>
+                                    <div class="hint-text">Don't have an account? <a href="/contractor-signup">Sign Up Today</a></div>
+            
+                                </form>				
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--===============Contractor Area Ends================-->
+<!--================Service  Area =================-->
+<% include ./partials/footer %>
