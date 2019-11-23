@@ -44,9 +44,7 @@
              <!-- Collect the nav links, forms, and other content for toggling -->
              <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul class="nav navbar-nav menu_nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="/contractor/dashboard">Home</a></li> 
-                    <li class="nav-item "><a href="/contractor/logout" class="nav-link">Logout</a></li>
-
+                    <li class="nav-item active"><a class="nav-link" href="/customer/dashboard">Home</a></li> 
                     <!-- <li class="nav-item submenu dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
                         <ul class="dropdown-menu">
@@ -54,11 +52,12 @@
                             <li class="nav-item"><a class="nav-link" href="single-blog.html">Contractor Login</a></li>
                         </ul>
                     </li>  -->
-                    <!-- <% if(!currentUser){  %>
+                    <% if(!currentUser){  %>
                         <% console.log(currentUser) %>
-                      <% } else { %> -->
+                      <% } else { %>
                         
-                      <!-- <% } %> -->
+                            <li class="nav-item active"><a href="/customer/logout" class="nav-link">Logout</a></li>
+                      <% } %>
                       
                 </ul>
             </div>
@@ -81,17 +80,3 @@
 
     </header>
 <!--================Header Menu Area =================-->
-<section id="Dashboard" class="dash_banner_area">
-    <div class="dash_banner_inner d-flex align-items-center">
-       <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-       <div class="container">
-           <div class="dash_banner_content text-center">
-            <h3>Welcome Contractor</h3>
-            <br>
-            <br>
-            <span>The site is under maintenance right now. We Will be back soon</span>
-         </div>
-     </div>
- </div>
-</section>
-<% include ./partials/footer %>

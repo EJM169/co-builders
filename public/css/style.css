@@ -3182,7 +3182,53 @@ h6 {
   line-height: 26px; 
 }
 /*----------------------------------------------------*/
-/*login form */
+/*-------------- Customer-login area -------------------*/
+.dash_banner_area {
+  position: relative;
+  z-index: 1;
+  min-height: 770px; }
+  .dash_banner_area .dash_banner_inner {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 770px; }
+    .dash_banner_area .dash_banner_inner .overlay {
+      background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ),url(../img/banner/dash-banner.jpg) no-repeat scroll center center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 100%;
+      bottom: 0;
+      z-index: -1; }
+    .dash_banner_area .dash_banner_inner .dash_banner_content {
+      color: #fff; }
+      .dash_banner_area .dash_banner_inner .dash_banner_content span {
+        font-size: 24px;
+        color: #fff;
+        font-family: "Heebo", sans-serif;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        display: inline-block;
+        position: relative; }
+        .dash_banner_area .dash_banner_inner .dash_banner_content span:after {
+          content: '';
+          position: absolute;
+          left: 50%;
+          bottom: -16px;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 1px;
+          background: #fff; }
+      .dash_banner_area .dash_banner_inner .dash_banner_content h3 {
+        font-size: 60px;
+        font-family: "Heebo", sans-serif;
+        font-weight: 500; }
+      .dash_banner_area .dash_banner_inner .dash_banner_content .main_btn {
+        margin-top: 35px; }
+
+/*----------------------------------------------------*/
+/*-------------------login form-----------------------*/
   
 .modal-login {
   color: #636363;
@@ -3557,3 +3603,10 @@ background: linear-gradient(to top, #f2fcfe, #1c92d2); /* W3C, IE 10+/ Edge, Fir
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

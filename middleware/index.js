@@ -2,17 +2,14 @@
  var middlewareObject ={};
 
  
-// middlewareObject.isContractorLoggedIn=function(req,res,next){
-//     if(req.isAuthenticated()){
-//         console.log("Middleware");
-//         return next();
-//     }
-//     console.log("Middleware error");
-//     req.flash("error","Hi Contractor Please Login First")
-//     res.redirect("/");
-// } 
+middlewareObject.isContractorLoggedIn=function(req,res,next){
+    if (req.user.role === 'Contractor') return next();
+    console.log("Middleware error");
+    req.flash("error","Hi Contractor Please Login First")
+    res.redirect("/");
+} 
 
- middlewareObject.isCustomerLoggedIn=function(req,res,next){
+ middlewareObject.isLoggedIn=function(req,res,next){
     if(req.isAuthenticated()){
         return next();
     }
