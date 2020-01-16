@@ -129,7 +129,7 @@ router.post("/contractor-signup",passport.authenticate('contractor-signup', {
    function(req,res){
 }); 
 
-router.get("/contractor/dashboard",middleware.isLoggedIn,function(req,res){
+router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,res){
     contractorUser.findById(req.params.id,function(err,contractor){
         if(err){
             console.log(err);

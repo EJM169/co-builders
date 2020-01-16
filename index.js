@@ -51,6 +51,7 @@ passport.serializeUser(function(user, done) {
   });
   
 
+
 app.use(contractorRoute);
 app.use(customerRoute);
 
