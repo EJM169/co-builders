@@ -8,13 +8,15 @@ var express                 = require("express"),
     flash                   = require("connect-flash"),
     bCrypt                  = require('bcrypt'),
     LocalStrategy           = require("passport-local"),
-    // customerUser            = require("./models/customer"),
     contractorUser          = require("./models/contractor"),
-    // customerRoute           = require("./routes/customer"),
+    customerUser            = require("./models/customer"),
     contractorRoute         = require("./routes/contractor");
+    customerRoute           = require("./routes/customer");
     
+// mongoose.connect("mongodb://localhost:27017/contractor");
 // mongoose.connect("mongodb://localhost:27017/customer");
-mongoose.connect("mongodb://localhost:27017/contractor");
+mongoose.connect("mongodb://localhost:27017/construction");
+
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
@@ -35,15 +37,14 @@ app.use(function(req,res,next){
 });
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.serializeUser(customerUser.serializeUser());
-// passport.deserializeUser(customerUser.deserializeUser());
+passport.serializeUser(customerUser.serializeUser());
 passport.serializeUser(contractorUser.serializeUser());
 passport.deserializeUser(contractorUser.deserializeUser());
+passport.deserializeUser(customerUser.deserializeUser());
 
 
-
-// app.use(customerRoute);
 app.use(contractorRoute);
+app.use(customerRoute);
 
 
 app.get("/",function(req,res){
