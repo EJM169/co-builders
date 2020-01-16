@@ -35,14 +35,14 @@ app.use(function(req,res,next){
 });
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(customerUser.serializeUser());
-passport.deserializeUser(customerUser.deserializeUser());
+// passport.serializeUser(customerUser.serializeUser());
+// passport.deserializeUser(customerUser.deserializeUser());
 passport.serializeUser(contractorUser.serializeUser());
 passport.deserializeUser(contractorUser.deserializeUser());
 
 
 
-app.use(customerRoute);
+// app.use(customerRoute);
 app.use(contractorRoute);
 
 
