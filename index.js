@@ -8,12 +8,12 @@ var express                 = require("express"),
     flash                   = require("connect-flash"),
     bCrypt                  = require('bcrypt'),
     LocalStrategy           = require("passport-local"),
-    customerUser            = require("./models/customer"),
+    // customerUser            = require("./models/customer"),
     contractorUser          = require("./models/contractor"),
-    customerRoute           = require("./routes/customer"),
+    // customerRoute           = require("./routes/customer"),
     contractorRoute         = require("./routes/contractor");
     
-mongoose.connect("mongodb://localhost:27017/customer");
+// mongoose.connect("mongodb://localhost:27017/customer");
 mongoose.connect("mongodb://localhost:27017/contractor");
 
 app.set("view engine","ejs");

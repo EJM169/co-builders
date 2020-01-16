@@ -1,6 +1,6 @@
 var express             = require("express"),
     router              = express.Router({mergeParams:true}),
-    customerUser            = require("../models/customer"),
+    customerUser        = require("../models/customer"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
