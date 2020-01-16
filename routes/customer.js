@@ -126,7 +126,7 @@ router.post("/customer-signup",passport.authenticate('customer-signup', {
    function(req,res){
 }); 
 
-router.get("/customer/dashboard",middleware.isLoggedIn,function(req,res){
+router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res){
     customerUser.findById(req.params.id,function(err,customer){
         if(err){
             console.log(err);
