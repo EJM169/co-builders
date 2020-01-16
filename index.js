@@ -37,11 +37,19 @@ app.use(function(req,res,next){
 });
 app.use(passport.initialize());
 app.use(passport.session());
-passport.serializeUser(customerUser.serializeUser());
-passport.serializeUser(contractorUser.serializeUser());
-passport.deserializeUser(contractorUser.deserializeUser());
-passport.deserializeUser(customerUser.deserializeUser());
-
+// passport.serializeUser(customerUser.serializeUser());
+// passport.serializeUser(contractorUser.serializeUser());
+// passport.deserializeUser(contractorUser.deserializeUser());
+// passport.deserializeUser(customerUser.deserializeUser());
+passport.serializeUser(function(user, done) { 
+    done(null, user);
+  });
+  
+  passport.deserializeUser(function(user, done) {
+    if(user!=null)
+      done(null,user);
+  });
+  
 
 app.use(contractorRoute);
 app.use(customerRoute);
