@@ -39,15 +39,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 // passport.serializeUser(customerUser.serializeUser());
 // passport.deserializeUser(customerUser.deserializeUser());
-passport.serializeUser(contractorUser.serializeUser());
-passport.deserializeUser(contractorUser.deserializeUser());
 
-
-
-// app.use(customerRoute);
 // passport.serializeUser(contractorUser.serializeUser());
 // passport.deserializeUser(contractorUser.deserializeUser());
-// passport.deserializeUser(customerUser.deserializeUser());
 passport.serializeUser(function(user, done) { 
     done(null, user);
   });
