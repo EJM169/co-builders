@@ -56,6 +56,7 @@ app.use(customerRoute);
 
 
 app.get("/",function(req,res){
+    req.logout();
     res.render("index");
 });
 
