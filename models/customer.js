@@ -5,6 +5,7 @@ var customerSchema = new mongoose.Schema({
     password:String,
     email:String,
     mobile:Number,
+    role:{type:String,default:"Customer"},
 });
 
 customerSchema.plugin(passportLocalMongoose);

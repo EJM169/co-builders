@@ -12,6 +12,7 @@ middlewareObject.isContractorLoggedIn=function(req,res,next){
 
  middlewareObject.isCustomerLoggedIn=function(req,res,next){
     if(req.isAuthenticated()){
+        console.log(req.user.role);
         return next();
     }
     req.flash("error","Hi  Please Login First")

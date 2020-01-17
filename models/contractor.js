@@ -7,7 +7,7 @@ var contractorSchema = new mongoose.Schema({
     contractorid:String,
     mobile:Number,
     experience:Number,
-
+    role:{type:String, default:"Contractor"}
 });
 
 contractorSchema.plugin(passportLocalMongoose);
