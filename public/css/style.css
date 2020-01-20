@@ -3617,7 +3617,10 @@ input[type=number]::-webkit-outer-spin-button {
 #for_pop{
   display: none;
 }
-#pass_match{
+#pass_match1{
+  display:none;
+}
+#pass_match2{
   display: none;
 }
 #for_pop .form-group .btn {

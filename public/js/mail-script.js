@@ -47,7 +47,6 @@
         for_pop.fadeOut(500);
     })
     custpass2.keyup(function(){
-        console.log(custpass1.val());
         if(custpass1.val() != custpass2.val()){
             pass_match1.fadeIn(500);
         }
