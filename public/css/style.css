@@ -3629,8 +3629,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sidebar{
   position:fixed;
-  left:0;
-  width: 250px;
+  left:-300px;
+  width: 300px;
   height: 100%;
   background: #042331;
   z-index: 5;
@@ -3677,28 +3677,36 @@ input[type=number]::-webkit-outer-spin-button {
  }
 
  label #open-btn{
+   z-index: 9;
    left: 40px;
-   top: 25px;
+   top: 63px;
    font-size: 35px;
    color: white;
    padding: 6px 12px;
+   transition: all .6s;
  }
  
  label #close-btn{
    z-index: 10;
-   left: 195px;
-   top: 17px;
+   left: -300px;
+   top: 63px;
    font-size: 30px;
    color: #0a5275;
    padding: 4px 9px;
+   transition: all .5s ease;
  }
 
- #check-btn:checked .sidebar{
+ #check-btn:checked ~ .sidebar{
    left: 0;
  }
 
-#check-btn:checked label #open-btn{
-  left:250px;
+#check-btn:checked ~ label #open-btn{
+  left:300px;
   opacity: 0;
   pointer-events: none;
+}
+
+#check-btn:checked ~ label #close-btn{
+  left:255px;
+  
 }
