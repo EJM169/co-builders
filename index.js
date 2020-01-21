@@ -10,11 +10,10 @@ var express                 = require("express"),
     LocalStrategy           = require("passport-local"),
     contractorUser          = require("./models/contractor"),
     customerUser            = require("./models/customer"),
-    contractorRoute         = require("./routes/contractor");
+    contractorRoute         = require("./routes/contractor"),
     customerRoute           = require("./routes/customer");
     
-// mongoose.connect("mongodb://localhost:27017/contractor");
-// mongoose.connect("mongodb://localhost:27017/customer");
+
 mongoose.connect("mongodb://localhost:27017/construction");
 
 

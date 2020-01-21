@@ -3626,3 +3626,72 @@ input[type=number]::-webkit-outer-spin-button {
 #for_pop .form-group .btn {
   width: 48% !important;
 }
+
+.sidebar{
+  position:fixed;
+  left:0;
+  width: 250px;
+  height: 100%;
+  background: #042331;
+  z-index: 5;
+}
+
+.sidebar header{
+  color: rgb(241, 207, 92);
+      height: 80px;
+      text-align: center;
+      line-height: 69px;
+      font-size: 30px;
+      text-transform: uppercase;
+      font-weight: 700;
+      user-select: none;
+}
+
+.sidebar ul a{
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 69px;
+  font-size: 20px;
+  color: white;
+  padding-left: 40px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255,255,.1);
+  border-bottom: 1px solid black;
+  transition: .4s ;
+}
+
+.sidebar ul li:hover a{
+    padding-left: 65px;
+}
+
+#check{
+  display: none;
+}
+ label #open-btn, label #close-btn{
+   position: absolute;
+   cursor: pointer;
+   background: #042331;
+   border-radius: 3px;
+ }
+
+ label #open-btn{
+   left: 40px;
+   top: 25px;
+   font-size: 35px;
+   color: white;
+   padding: 6px 12px;
+ }
+ 
+ label #close-btn{
+   z-index: 10;
+   left: 195px;
+   top: 17px;
+   font-size: 30px;
+   color: #0a5275;
+   padding: 4px 9px;
+ }
+
+ #check:checked ~ .sidebar{
+   left: 0;
+ }
