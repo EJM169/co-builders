@@ -3634,6 +3634,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   background: #042331;
   z-index: 5;
+  transition: all .5s ease;
 }
 
 .sidebar header{
@@ -3665,7 +3666,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding-left: 65px;
 }
 
-#check{
+#check-btn{
   display: none;
 }
  label #open-btn, label #close-btn{
@@ -3692,6 +3693,12 @@ input[type=number]::-webkit-outer-spin-button {
    padding: 4px 9px;
  }
 
- #check:checked ~ .sidebar{
+ #check-btn:checked .sidebar{
    left: 0;
  }
+
+#check-btn:checked label #open-btn{
+  left:250px;
+  opacity: 0;
+  pointer-events: none;
+}
