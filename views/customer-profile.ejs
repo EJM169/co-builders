@@ -5,11 +5,22 @@
             <h3>Profile</h3>
         </div>
         <div class=" card profile_content">
-                <div class="card-body profile_details ">
-                        <p>Name:<%= currentUser.username ;%></p>
-                        <p>Email:<%= currentUser.email ;%></p>
-                        <p>Contact No.:<%= currentUser.mobile ;%></p>
-
+                <div class="card-body  row profile_details align-items-center">
+                    <div class="col-lg-6 .d-none d-lg-block">
+                        <div class="profile_image">
+                            <img src="img/default-user.jpg" class="card-img-top" alt="">
+                        </div>
+                        <div class="Profile_name">
+                            <p>Name:<%= currentUser.username ;%></p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="profile_information">
+                            <h4>Information</h4>
+                            <p>Email:<%= currentUser.email ;%></p>
+                            <p>Contact No.:<%= currentUser.mobile ;%></p>    
+                        </div>
+                    </div>
                 </div>
         </div>
     </div>

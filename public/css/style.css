@@ -3751,6 +3751,20 @@ input[type=number]::-webkit-outer-spin-button {
   background: none;  
 }
 
+.profile_area .profile_content .profile_image{
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.profile_image img{
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
 .profile_area .profile_content  p{
   font-size: 20px;
   color: #202e31;
