@@ -133,13 +133,24 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-            console.log("DASHBOARD");
             res.render("customer-dash",{currentUser:req.user});
         }
 
     });
 });
 
+router.get("/customer/profile",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err)
+        req.flash('error','Error while loading profile');
+          res.redirect("/customer/dashoard");
+    }
+    else{
+      res.render("customer-profile",{currentUser:req.user});
+    }
+  })
+})
 router.get("/customer/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');

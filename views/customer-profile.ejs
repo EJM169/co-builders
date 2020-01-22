@@ -1,0 +1,18 @@
+<% include ./partials/customerHeader %>
+<section id="Profile" class="profile_area">
+    <div class="container">
+        <div class="profile_header">
+            <h3>Profile</h3>
+        </div>
+        <div class=" card profile_content">
+                <div class="card-body profile_details ">
+                        <p>Name:<%= currentUser.username ;%></p>
+                        <p>Email:<%= currentUser.email ;%></p>
+                        <p>Contact No.:<%= currentUser.mobile ;%></p>
+
+                </div>
+        </div>
+    </div>
+</section>
+
+<% include ./partials/footer %>

@@ -3628,8 +3628,10 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .sidebar{
+  top:0;
+  padding-top: 20px;
   position:fixed;
-  left:-300px;
+  left:0;
   width: 300px;
   height: 100%;
   background: #042331;
@@ -3664,6 +3666,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 .sidebar ul li:hover a{
     padding-left: 65px;
+    color: #007bff;
+    text-decoration: underline;
 }
 
 #check-btn{
@@ -3678,8 +3682,10 @@ input[type=number]::-webkit-outer-spin-button {
 
  label #open-btn{
    z-index: 9;
-   left: 40px;
-   top: 63px;
+   left: 300px;
+   opacity: 0;
+   pointer-events:none;
+   top: 50px;
    font-size: 35px;
    color: white;
    padding: 6px 12px;
@@ -3687,9 +3693,10 @@ input[type=number]::-webkit-outer-spin-button {
  }
  
  label #close-btn{
+   position: fixed;
    z-index: 10;
-   left: -300px;
-   top: 63px;
+   left: 255px;
+   top: 33px;
    font-size: 30px;
    color: #0a5275;
    padding: 4px 9px;
@@ -3697,16 +3704,58 @@ input[type=number]::-webkit-outer-spin-button {
  }
 
  #check-btn:checked ~ .sidebar{
-   left: 0;
+   left: -300px;
  }
 
 #check-btn:checked ~ label #open-btn{
-  left:300px;
-  opacity: 0;
-  pointer-events: none;
+  left:40px;
+  opacity: 100%;
+  pointer-events: auto;
 }
 
 #check-btn:checked ~ label #close-btn{
-  left:255px;
-  
+  left:-255px;
+}
+#check-btn:checked ~ #Profile{
+  margin-left: 0;
+}
+
+.profile_area{
+  margin-right: 30px;
+  padding-top: 10px;
+  top: 15%;
+  margin-left: 350px;
+  position: relative;
+  z-index: 2;
+  min-height: 700px;
+  background: none;
+}
+
+.profile_area .profile_header{
+  padding-left: 40px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+}
+
+.profile_area .profile_header h3{
+  font-size: 35px;
+  color: #202e31;
+  font-family: "Heebo", sans-serif;
+  line-height: 40px;
+  margin-bottom: 0;
+  cursor: default;
+}
+
+.profile_area .profile_content{
+  top: 5px;
+  background: none;  
+}
+
+.profile_area .profile_content  p{
+  font-size: 20px;
+  color: #202e31;
+  font-family: "Heebo", sans-serif;
+  line-height: 25px;
+  margin-bottom: 0;
+  cursor: default;
 }
