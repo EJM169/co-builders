@@ -3716,7 +3716,7 @@ input[type=number]::-webkit-outer-spin-button {
 #check-btn:checked ~ label #close-btn{
   left:-255px;
 }
-#check-btn:checked ~ #Profile{
+#check-btn:checked ~ #Profile #edit_profile{
   margin-left: 0;
 }
 
@@ -3732,10 +3732,18 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .profile_area .profile_header{
-  padding-left: 40px;
+  padding-left: 25px;
   box-sizing: border-box;
   border-bottom: 1px solid black;
 }
+
+.profile_area .profile_header a{
+  text-decoration: none;
+  transition: all 0.3s ease-in-out; }
+  .profile_area .profile_header a:hover, a:focus {
+    text-decoration: none;
+    outline: none;}
+  
 
 .profile_area .profile_header h3{
   font-size: 35px;
@@ -3752,8 +3760,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .profile_area .profile_content .profile_image{
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   position: relative;
   overflow: hidden;
   border-radius: 50%;
@@ -3764,7 +3772,17 @@ input[type=number]::-webkit-outer-spin-button {
   height: 100%;
   width: auto;
 }
-
+.profile_area .profile_content .profile_name p{
+  margin-top: 10px;
+  margin-left: 15px;
+}
+.profile_area .profile_content h4{
+  font-size: 30px;
+  font-family: "Heebo", sans-serif;
+  line-height: 30px;
+  margin-bottom: 0;
+  cursor: default; 
+}
 .profile_area .profile_content  p{
   font-size: 20px;
   color: #202e31;
@@ -3772,4 +3790,35 @@ input[type=number]::-webkit-outer-spin-button {
   line-height: 25px;
   margin-bottom: 0;
   cursor: default;
+}
+
+.edit_area{
+  margin-right: 30px;
+  padding-top: 10px;
+  top: 15%;
+  margin-left: 350px;
+  position: relative;
+  z-index: 2;
+  min-height: 700px;
+  background: none;
+}
+
+.edit_area .edit_header{
+  padding-left: 25px;
+  box-sizing: border-box;
+  border-bottom: 1px solid black;
+}
+
+/* .edit_area .edit_header i{
+  margin-right: 5px;
+} */
+
+.edit_area .edit_header h3{
+  font-size: 35px;
+  color: #202e31;
+  font-family: "Heebo", sans-serif;
+  line-height: 40px;
+  margin-bottom: 0;
+  cursor: default;
+  text-transform: uppercase;
 }

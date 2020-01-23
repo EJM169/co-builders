@@ -149,8 +149,21 @@ router.get("/customer/profile",middleware.isCustomerLoggedIn,function(req,res){
     else{
       res.render("customer-profile",{currentUser:req.user});
     }
-  })
-})
+  });
+});
+
+router.get("/customer/profile/edit",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading edit page');
+      res.redirect("/customer/profile");
+    }
+    else{
+      res.render("customer-profile-edit",{customerUser:req.user});
+    }
+  });
+});
 router.get("/customer/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
