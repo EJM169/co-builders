@@ -139,7 +139,7 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
     });
 });
 
-router.get("/customer/profile",middleware.isCustomerLoggedIn,function(req,res){
+router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err)
@@ -147,23 +147,35 @@ router.get("/customer/profile",middleware.isCustomerLoggedIn,function(req,res){
           res.redirect("/customer/dashoard");
     }
     else{
-      res.render("customer-profile",{currentUser:req.user});
+      res.render("customer-profile",{currentUser:customer});
     }
   });
 });
 
-router.get("/customer/profile/edit",middleware.isCustomerLoggedIn,function(req,res){
+router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err);
       req.flash('error','Error while loading edit page');
-      res.redirect("/customer/profile");
+      res.redirect("/customer/:id/profile");
     }
     else{
-      res.render("customer-profile-edit",{customerUser:req.user});
+      res.render("customer-profile-edit",{currentUser:customer});
     }
   });
 });
+
+router.put("/customer/:id/profile",function(req,res){
+  customerUser.findByIdAndUpdate(req.params.id,req.body.customer, function(err,updateProfile){
+    if(err){
+      req.flash('error','error while updating profile');
+      res.redirect("/customer/profile");
+    }
+    else{
+      res.redirect("/customer/"+req.params.id+"/profile"); 
+    }
+  })
+})
 router.get("/customer/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
