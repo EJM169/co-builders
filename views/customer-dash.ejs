@@ -6,10 +6,10 @@
        <div class="container">
            <div class="dash_banner_content text-center">
             <h3>Welcome Customer</h3>
-            <br>
-            <br>
-            <span>The site is under maintenance right now. We Will be back soon</span>
-         </div>
+            <% if(currentUser.requirements=""){ %>
+                <p>Please fill in your requirements field <a href="/customer/<%=currentUser._id%>/profile/edit">Edit here</a></p>
+            <%}%>
+            </div>
      </div>
  </div>
 </section>

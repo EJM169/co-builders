@@ -3184,6 +3184,7 @@ h6 {
 /*----------------------------------------------------*/
 /*-------------- Customer-login area -------------------*/
 .dash_banner_area {
+  margin-left: 300px;
   position: relative;
   z-index: 1;
   min-height: 770px; }
@@ -3716,7 +3717,7 @@ input[type=number]::-webkit-outer-spin-button {
 #check-btn:checked ~ label #close-btn{
   left:-255px;
 }
-#check-btn:checked ~ #Profile #edit_profile{
+#check-btn:checked ~ #Profile #edit_profile #Dashboard{
   margin-left: 0;
 }
 
