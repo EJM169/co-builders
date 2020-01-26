@@ -21,7 +21,7 @@
                             <p>Contractor Id:<%=currentUser.contractorid%></p>
                             <p>Contact No.:<%= currentUser.mobile ;%></p>    
                             <p>Number of years of experience:<%= currentUser.experience ;%></p>    
-                            <p>Date of Joining:<%= currentUser.dateOfJoin ;%></p>    
+                            <p>Date of Joining:<%= currentUser.dateOfJoin.toDateString() ;%></p>    
                             <% if(currentUser.budget){ %>
                                 <p>Minimum Budget:<%= currentUser.budget; %></p>    
                             <%} %>
