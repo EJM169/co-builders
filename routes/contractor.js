@@ -172,10 +172,12 @@ router.get("/contractor/:id/profile/edit",middleware.isContractorLoggedIn,functi
 router.put("/contractor/:id/profile",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findByIdAndUpdate(req.params.id,req.body.contractor, function(err,updateProfile){
     if(err){
+      console.log(err);
       req.flash('error','error while updating profile');
-      res.redirect("/contractor/profile");
+      res.redirect("/contractor/"+req.params.id+"/profile");
     }
     else{
+      req.flash('success','Updated profile');
       res.redirect("/contractor/"+req.params.id+"/profile"); 
     }
   });

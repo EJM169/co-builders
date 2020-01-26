@@ -24,13 +24,17 @@
                     <input type="number" class="form-control" name="contractor[experience]" required="required" value="<%=currentUser.experience%>">
                 </div>
                 <div class="form-group">
-                    <label>Number of years of experience </label>
-                    <input type="number" class="form-control" name="contractor[experience]" required="required" value="<%=currentUser.experience%>">
+                    <label>Minimum Budget </label>
+                    <input type="number" class="form-control" name="contractor[budget]" required="required" value="<%=currentUser.budget%>">
                 </div>
                 <div class="form-group">
-                    <label>Minimum Budget </label>
-                    <input type="number" class="form-control" name="contractor[experience]" required="required" value="<%=currentUser.experience%>">
+                    <label>Number of Projects worked on</label>
+                    <input type="number" class="form-control" name="contractor[no_project]" required="required" value="<%=currentUser.no_project%>">
                 </div>
+                <div class="form-group">
+                    <label>Office Address</label>
+                       <textarea class="form-control" name="contractor[address]" rows="5" minlength="20" maxlength="1000"  ><%= currentUser.address %></textarea>
+                   </div>
                 <!-- <div class="form-group">
                     <label>New Password </label>
                     <input type="password" class="form-control" id="cust_pass1" name="customer[password]" minlength="8" maxlength="30" placeholder="Enter your new Password" required="required">
