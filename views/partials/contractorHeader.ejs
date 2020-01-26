@@ -19,50 +19,20 @@
 <body>
 
     <!--================Header Menu Area =================-->
-    <header class="header_area">
-        <div class="top_menu row m0">
-            <div class="float-right">
-                <span class="follow_us">Follow us: </span>
-                <ul class="list header_social">
-                    <li><a href="#"><i class="ti-facebook"></i></a></li>
-                    <li><a href="#"><i class="ti-twitter"></i></a></li>
-                    <li><a href="#"><i class="ti-instagram"></i></a></li>
-                </ul>	
-            </div>
-        </div>	
-    </div>	
-    <div class="main_menu">
-       <nav class="navbar navbar-expand-lg navbar-light">
-           <div class="container">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <a class="navbar-brand logo_h" href="/">Co-Builders</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-                 <span class="icon-bar"></span>
-             </button>
-             <!-- Collect the nav links, forms, and other content for toggling -->
-             <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                <ul class="nav navbar-nav menu_nav ml-auto">
-                    <li class="nav-item active"><a class="nav-link" href="/contractor/dashboard">Home</a></li> 
-                    <!-- <li class="nav-item submenu dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login</a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="nav-link" href="#">Customer Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="single-blog.html">Contractor Login</a></li>
-                        </ul>
-                    </li>  -->
-                    <% if(!currentUser){  %>
-                        <% console.log(currentUser) %>
-                      <% } else { %>
-                        
-                            <li class="nav-item active"><a href="/contractor/logout" class="nav-link">Logout</a></li>
-                      <% } %>
-                      
-                </ul>
-            </div>
-            </div>
-        </nav>
+    
+    <input type="checkbox" id="check-btn">
+    <label for="check-btn">
+        <i class="fas fa-bars" id="open-btn"></i>
+        <i class="fas fa-times" id="close-btn"></i>
+    </label>
+    <div class="sidebar">
+        <header>Co-builders</header>
+        <ul>
+            <li><a href="/contractor/<%=currentUser._id %>/profile">Profile</a></li>
+            <li><a href="/contractor/dashboard">Dashboard</a></li>
+            <li><a href="#">Project</a></li>
+            <li><a href="/contractor/logout">Logout</a></li>
+        </ul>
     </div>
     <div class="container mt-1 " style="width:550px;">
         <% if(error && error.length>0){ %>
@@ -78,5 +48,4 @@
         
       </div>
 
-    </header>
 <!--================Header Menu Area =================-->

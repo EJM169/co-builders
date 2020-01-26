@@ -1,4 +1,4 @@
-<% include ./partials/customerHeader %>
+<% include ./partials/contractorHeader %>
 <section id="Profile" class="profile_area">
     <div class="container">
         <div class="profile_header">
@@ -18,9 +18,11 @@
                         <div class="profile_information">
                             <h4>Information</h4>
                             <p>Email:<%= currentUser.email ;%></p>
+                            <p>Contractor Id:<%=currentUser.contractorid%></p>
                             <p>Contact No.:<%= currentUser.mobile ;%></p>    
-                            <% if(currentUser.requirements!=null){ %>
-                                <p>Requirement Details:<%= currentUser.requirements; %></p>    
+                            <p>Number of years of experience:<%= currentUser.experience ;%></p>    
+                            <% if(currentUser.criteria!=null){ %>
+                                <p>Criteria Details:<%= currentUser.criteria; %></p>    
                             <%} %>
                         </div>
                     </div>

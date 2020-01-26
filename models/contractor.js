@@ -7,6 +7,7 @@ var contractorSchema = new mongoose.Schema({
     contractorid:String,
     mobile:Number,
     experience:Number,
+    criteria:{type:String,default:null},
     role:{type:String, default:"Contractor"}
 });
 

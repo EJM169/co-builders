@@ -1,0 +1,42 @@
+<% include ./partials/contractorHeader %>
+
+<section id="edit_profile" class="edit_area">
+    <div class="container">
+        <div class="edit_header">
+            <h3><i class="fas fa-user-edit"></i> Edit Profile</h3>
+        </div>
+        <div class="updation-form">
+            <form action="/customer/<%=currentUser._id%>/profile?_method=PUT" method="POST">
+                <div class="form-group">
+                    <label>Name </label>
+                    <input type="text" class="form-control" name="customer[username]" pattern="[A-Z a-z]{3,30}"  value="<%=currentUser.username%>" maxlength="30" >
+                </div>
+                <div class="form-group">
+                    <label>Email </label>
+                    <input type="email" class="form-control" name="customer[email]" value="<%=currentUser.email%>" >
+                </div>
+                <div class="form-group">
+                    <label>Mobile </label>
+                    <input type="tel" class="form-control" name="customer[mobile]" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" value="<%=currentUser.mobile%>" maxlength="10">
+                </div>
+                <!-- <div class="form-group">
+                    <label>New Password </label>
+                    <input type="password" class="form-control" id="cust_pass1" name="customer[password]" minlength="8" maxlength="30" placeholder="Enter your new Password" required="required">
+                </div>
+                <div class="form-group">
+                    <label>Re-Enter New Password </label>
+                    <input type="password" class="form-control" id="cust_pass2" name="repassword" minlength="8" maxlength="30" placeholder="Re-Enter your new Password" required="required">
+                </div>
+                <p id="pass_match1"> Password doesn't match</p> -->
+                <div class="form-group">
+                    <label>Give a description about your project</label>
+                    <textarea class="form-control" name="customer[requirements]" rows="5" minlength="20" maxlength="100"  ><%= currentUser.requirements %></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+

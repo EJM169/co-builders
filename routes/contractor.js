@@ -136,12 +136,49 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-            console.log("DASHBOARD");
-            console.log(req.user);
             res.render("contractor-dash",{currentUser:req.user});
         }
 
     });
+});
+
+
+router.get("/contractor/:id/profile",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err)
+        req.flash('error','Error while loading profile');
+          res.redirect("/contractor/dashoard");
+    }
+    else{
+      res.render("contractor-profile",{currentUser:contractor});
+    }
+  });
+});
+
+router.get("/contractor/:id/profile/edit",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading edit page');
+      res.redirect("/contractor/:id/profile");
+    }
+    else{
+      res.render("contractor-profile-edit",{currentUser:contractor});
+    }
+  });
+});
+
+router.put("/contractor/:id/profile",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findByIdAndUpdate(req.params.id,req.body.contractor, function(err,updateProfile){
+    if(err){
+      req.flash('error','error while updating profile');
+      res.redirect("/contractor/profile");
+    }
+    else{
+      res.redirect("/contractor/"+req.params.id+"/profile"); 
+    }
+  });
 });
 router.get("/contractor/logout",function(req,res){
     req.logout();

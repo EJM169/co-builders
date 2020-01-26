@@ -174,8 +174,8 @@ router.put("/customer/:id/profile",function(req,res){
     else{
       res.redirect("/customer/"+req.params.id+"/profile"); 
     }
-  })
-})
+  });
+});
 router.get("/customer/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');

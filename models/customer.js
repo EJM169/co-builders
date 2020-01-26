@@ -5,7 +5,7 @@ var customerSchema = new mongoose.Schema({
     password:String,
     email:String,
     mobile:Number,
-    requirements:{type:String,default:""},
+    requirements:{type:String,default:null},
     role:{type:String,default:"Customer"},
 });
 
