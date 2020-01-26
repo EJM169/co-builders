@@ -168,10 +168,12 @@ router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(r
 router.put("/customer/:id/profile",function(req,res){
   customerUser.findByIdAndUpdate(req.params.id,req.body.customer, function(err,updateProfile){
     if(err){
+      console.log(err);
       req.flash('error','error while updating profile');
-      res.redirect("/customer/profile");
+      res.redirect("/customer/"+req.params.id+"/profile");
     }
     else{
+      req.flash('success','Profile Updation successful');
       res.redirect("/customer/"+req.params.id+"/profile"); 
     }
   });
