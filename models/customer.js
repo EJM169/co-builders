@@ -5,7 +5,12 @@ var customerSchema = new mongoose.Schema({
     password:String,
     email:String,
     mobile:Number,
+    address:String,
+    location:String,
+    budget:Number,
+    area:String,
     requirements:{type:String,default:null},
+    dateOfJoin:{type:Date , default:Date.now},
     role:{type:String,default:"Customer"},
 });
 

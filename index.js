@@ -16,6 +16,7 @@ var express                 = require("express"),
 
 mongoose.connect("mongodb://localhost:27017/construction");
 // mongoose.set('useFindAndModify', false);
+mongoose.set('useFindAndModify', false);
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));

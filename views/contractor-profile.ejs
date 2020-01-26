@@ -2,7 +2,7 @@
 <section id="Profile" class="profile_area">
     <div class="container">
         <div class="profile_header">
-            <h3><a href="/customer/<%=currentUser._id%>/profile/edit"><i class="fas fa-edit"></i></a>Profile</h3>
+            <h3><a href="/contractor/<%=currentUser._id%>/profile/edit"><i class="fas fa-edit"></i></a>Profile</h3>
         </div>
         <div class=" card profile_content">
                 <div class="card-body  row profile_details align-items-center">
@@ -21,7 +21,7 @@
                             <p>Contractor Id:<%=currentUser.contractorid%></p>
                             <p>Contact No.:<%= currentUser.mobile ;%></p>    
                             <p>Number of years of experience:<%= currentUser.experience ;%></p>    
-                            <% if(currentUser.criteria!=null){ %>
+                            <% if(currentUser.criteria){ %>
                                 <p>Criteria Details:<%= currentUser.criteria; %></p>    
                             <%} %>
                         </div>
