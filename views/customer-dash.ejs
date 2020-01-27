@@ -1,16 +1,19 @@
 <% include ./partials/customerHeader %>
 
 <section id="Dashboard" class="dash_banner_area">
-    <div class="dash_banner_inner d-flex align-items-center">
-       <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
-       <div class="container">
-           <div class="dash_banner_content text-center">
-            <h3>Welcome Customer</h3>
-            <% if(currentUser.requirements=""){ %>
-                <p>Please fill in your requirements field <a href="/customer/<%=currentUser._id%>/profile/edit">Edit here</a></p>
-            <%}%>
+    <div class="container">
+        <h1>List of contractors</h1>
+        <% contractoreDetail.forEach(function(contractor){ %>
+        <div class=" card dash_content">
+            <div class="card-body align-items-center">
+                <h3>Name: <%=contractor.username%></h3>
+                <p>Contractor Id: <%=contractor.contractorid%></p>
+                <p>Email: <%=contractor.email%></p>
+                <p>Experience: <%=contractor.experience%></p>
+                <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
+                </a>
             </div>
-     </div>
- </div>
+        </div>   
+        <%})%>
+    </div>
 </section>
-<% include ./partials/footer %>

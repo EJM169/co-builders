@@ -1,6 +1,7 @@
 var express             = require("express"),
     router              = express.Router({mergeParams:true}),
     customerUser        = require("../models/customer"),
+    contractorUser        = require("../models/contractor"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -127,18 +128,53 @@ router.post("/customer-signup",passport.authenticate('customer-signup', {
 }); 
 
 router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res){
-    customerUser.findById(req.params.id,function(err,customer){
-        if(err){
-            console.log(err);
-            req.flash('error','Error whil loading dashboard');
-            res.redirect("/");
-        } else {
-            res.render("customer-dash",{currentUser:req.user});
-        }
+    customerUser.findById(req.user,function(err,customer){
+      if(err){
+        console.log(err);
+        req.flash('error','Error whil loading dashboard');
+        res.redirect("/");
+      }
+        else{
+          contractorUser.find( function(conterr,contractor){
+            if(conterr){
+              console.log(conterr);
+              req.flash('error','Error whil loading dashboard');
+              res.redirect("/")
+            }
+            else{
+              res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});
+            }
+          });
+        }      
 
     });
 });
 
+router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+      contractorUser.findById(req.params.id,function(err,contractor){
+        if(err){
+          console.log("err");
+          req.flash('error','Error while loading contractor details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          res.render("cust_cont-details",{currentUser:customer,contractorDetail:contractor});
+        }
+      });
+    }
+  });
+});
+
+router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
+
+});
 router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){

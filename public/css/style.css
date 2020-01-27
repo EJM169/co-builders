@@ -3717,10 +3717,24 @@ input[type=number]::-webkit-outer-spin-button {
 #check-btn:checked ~ label #close-btn{
   left:-255px;
 }
-#check-btn:checked ~ #Profile #edit_profile #Dashboard{
+#check-btn:checked ~ #Dashboard {
   margin-left: 0;
 }
 
+#check-btn:checked ~ #Profile{
+  margin-left: 0;
+}
+
+#check-btn:checked ~ #edit_profile{
+  margin-left: 0;
+}
+
+#check-btn:checked ~ #contractor_details{
+  margin-left: 0;
+}
+.details_banner_area{
+  margin-left: 350px;
+}
 .profile_area{
   margin-right: 30px;
   padding-top: 10px;
@@ -3784,12 +3798,21 @@ input[type=number]::-webkit-outer-spin-button {
   margin-bottom: 0;
   cursor: default; 
 }
-.profile_area .profile_content  p{
+.profile_area .profile_content .profile_name p{
+  font-size: 25px;
+  color: #202e31;
+  font-family: "Heebo", sans-serif;
+  line-height: 25px;
+  margin-bottom: 0;
+  cursor: default;
+}
+.profile_area .profile_content .profile_information  p{
   font-size: 20px;
   color: #202e31;
   font-family: "Heebo", sans-serif;
   line-height: 25px;
   margin-bottom: 0;
+  margin: 10px;
   cursor: default;
 }
 

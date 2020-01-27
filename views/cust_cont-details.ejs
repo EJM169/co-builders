@@ -1,0 +1,23 @@
+<% include ./partials/customerHeader %>
+<section id="contractor_details" class="details_banner_area">
+    <div class="container">
+        <h1>Contractor Details</h1>
+        <div class=" card dash_content">
+            <div class="card-body align-items-center">
+                <h3>Name: <%=contractorDetail.username%></h3>
+                <p>Contractor Id: <%=contractorDetail.contractorid%></p>
+                <p>Email: <%=contractorDetail.email%></p>
+                <p>Experience: <%=contractorDetail.experience%></p>
+                <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
+                <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
+                <p>Office Address:<%= contractorDetail.address; %></p>    
+                <p>Criteria Details:<%= contractorDetail.criteria; %></p>    
+                <form action="/customer/dashboard" method="post">
+                    <input type="submit" class="btn btn-primary btn-lg" value="Submit"> 
+
+                </form>
+                </a>
+            </div>
+        </div>   
+    </div>
+</section>
