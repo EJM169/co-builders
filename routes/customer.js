@@ -172,9 +172,9 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
   });
 });
 
-router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
+// router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
 
-});
+// });
 router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){

@@ -10,6 +10,7 @@ var customerSchema = new mongoose.Schema({
     budget:String,
     area:String,
     requirements:{type:String,default:null},
+    reqselect:String,
     dateOfJoin:{type:Date , default:Date.now},
     role:{type:String,default:"Customer"},
 });

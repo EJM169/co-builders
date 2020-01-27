@@ -1,6 +1,7 @@
 var express             = require("express"),
     router              = express.Router({mergeParams:true}),
     contractorUser      = require("../models/contractor"),
+    customerUser        = require("../models/customer"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -136,6 +137,8 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
+          console.log(contractor);
+            // customerUser.findById(contractor)
             res.render("contractor-dash",{currentUser:req.user});
         }
 
