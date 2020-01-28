@@ -172,12 +172,12 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
   });
 });
 
-router.post("/customer/dashboard/:id",middleware.isCustomerLoggedIn,function(req,res){
+router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
       console.log(err);
       req.flash('error','Error whil loading details');
-      res.redirect("/customer/dash");
+      res.redirect("/customer/dashboard");
     }
     else{
       contractorUser.findById(req.params.id,function(err,contractor){
@@ -193,10 +193,10 @@ router.post("/customer/dashboard/:id",middleware.isCustomerLoggedIn,function(req
             if(err){
               console.log(err);
               req.flash('error','Error while saving');
-              res.redirect("/customer/dash");
+              res.redirect("/customer/dashboard");
             }
             else{
-              req.flash('success','Success');
+              req.flash('success','Successfully sent data');
               res.redirect("/customer/dashboard");
             }
           });
