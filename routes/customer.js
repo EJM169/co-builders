@@ -172,7 +172,7 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
   });
 });
 
-router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
+router.post("/customer/dashboard/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
       console.log(err);
@@ -181,6 +181,7 @@ router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,re
     }
     else{
       contractorUser.findById(req.params.id,function(err,contractor){
+        // console.log(contractor);
         if(err){
           console.log("err");
           req.flash('error','Error while loading contractor details');
@@ -195,7 +196,8 @@ router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,re
               res.redirect("/customer/dash");
             }
             else{
-              console.log(data);
+              req.flash('success','Success');
+              res.redirect("/customer/dashboard");
             }
           });
         }

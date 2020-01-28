@@ -12,7 +12,7 @@
                 <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
                 <p>Office Address:<%= contractorDetail.address; %></p>    
                 <p>Criteria Details:<%= contractorDetail.criteria; %></p>    
-                <form action="/customer/dashboard" method="post">
+                <form action="/customer/dashboard/<%=contractorDetail._id%>" method="post">
                     <input type="submit" class="btn btn-primary btn-lg" value="Submit"> 
 
                 </form>
