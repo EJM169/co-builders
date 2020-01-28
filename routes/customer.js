@@ -172,9 +172,37 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
   });
 });
 
-// router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
-
-// });
+router.post("/customer/dashboard/",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+      contractorUser.findById(req.params.id,function(err,contractor){
+        if(err){
+          console.log("err");
+          req.flash('error','Error while loading contractor details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          contractor.project.push(customer);
+          contractor.save(function(err,data){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving');
+              res.redirect("/customer/dash");
+            }
+            else{
+              console.log(data);
+            }
+          });
+        }
+      });
+    }
+  }); 
+});
 router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
