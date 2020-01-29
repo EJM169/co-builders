@@ -137,7 +137,7 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-          console.log(contractor);
+          console.log(contractor.project);
             // customerUser.findById(contractor)
             res.render("contractor-dash",{currentUser:req.user});
         }

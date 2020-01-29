@@ -196,7 +196,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
               res.redirect("/customer/dashboard");
             }
             else{
-              req.flash('success','Successfully sent data');
+              req.flash('success','Successfully sent data to contractor');
               res.redirect("/customer/dashboard");
             }
           });
