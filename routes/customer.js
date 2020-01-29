@@ -209,7 +209,7 @@ router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,re
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err)
-        req.flash('error','Error while loading profile');
+        req.flash('error','Error while loading profile please try again');
           res.redirect("/customer/dashoard");
     }
     else{
@@ -222,7 +222,7 @@ router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(r
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err);
-      req.flash('error','Error while loading edit page');
+      req.flash('error','Error while loading the edit page. Please try again');
       res.redirect("/customer/:id/profile");
     }
     else{
@@ -235,7 +235,7 @@ router.put("/customer/:id/profile",function(req,res){
   customerUser.findByIdAndUpdate(req.params.id,req.body.customer, function(err,updateProfile){
     if(err){
       console.log(err);
-      req.flash('error','error while updating profile');
+      req.flash('error','error while updating profile. Please try again');
       res.redirect("/customer/"+req.params.id+"/profile");
     }
     else{
