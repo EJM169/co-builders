@@ -176,7 +176,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
   customerUser.findById(req.user,function(err,customer){
     if(err){
       console.log(err);
-      req.flash('error','Error whil loading details');
+      req.flash('error','Error while loading data please try again');
       res.redirect("/customer/dashboard");
     }
     else{
@@ -184,7 +184,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
         // console.log(contractor);
         if(err){
           console.log("err");
-          req.flash('error','Error while loading contractor details');
+          req.flash('error','Error while loading contractor data please try again');
           res.redirect("/customer/dashboard");
         }
         else{
@@ -192,11 +192,11 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
           contractor.save(function(err,data){
             if(err){
               console.log(err);
-              req.flash('error','Error while saving');
+              req.flash('error','Error while saving and sending data please try again');
               res.redirect("/customer/dashboard");
             }
             else{
-              req.flash('success','Successfully sent data to contractor');
+              req.flash('success','Successfully contacted the contractor');
               res.redirect("/customer/dashboard");
             }
           });
