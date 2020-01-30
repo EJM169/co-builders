@@ -131,15 +131,25 @@ router.post("/contractor-signup",passport.authenticate('contractor-signup', {
 }); 
 
 router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,res){
-    contractorUser.findById(req.params.id,function(err,contractor){
+    contractorUser.findById(req.user,function(err,contractor){
         if(err){
             console.log(err);
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-          console.log(contractor.project);
-            // customerUser.findById(contractor)
-            res.render("contractor-dash",{currentUser:req.user});
+          // console.log(contractor.project[0]);
+          contractor.project.forEach(function(customer){
+            customerUser.findById(customer,function(err,customer){
+              if(err){
+                console.log(err);
+                req.flash('error','Error while loading customer data');
+              }
+              else{
+                res.render("contractor-dash",{currentUser:contractor,customerDetail:customer});
+              }
+            })
+            
+          });
         }
 
     });
