@@ -4,9 +4,18 @@
         <div class="container">
             <h1>List of Customers that conntacted</h1>
             <% console.log(customerDetail) %>
+            <div class=" card dash_content">
+                <div class="card-body align-items-center">
+                    <h3>Name: <%=customerDetail.username%></h3>
+                    <p>Email: <%=customerDetail.email%></p>
+                    <p>Email: <%=customerDetail.mobile%></p>
+                    <p>Experience: <%=contractor.requirements%></p>
+                    <!-- <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
+                    </a>
+                </div>
+            </div>   
         </div>
     </section>
     
-<% include ./partials/footer %>
 
 
