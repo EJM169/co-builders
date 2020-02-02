@@ -3,17 +3,34 @@
   <section id="Dashboard" class="dash_banner_area">
         <div class="container">
             <h1>List of Customers that conntacted</h1>
-            <% console.log(customerDetail) %>
+         
+
+            <% if(currentUser.project.length==1) { %>
+                <div class=" card dash_content">
+                    <div class="card-body align-items-center">
+                        <h3>Name: <%=customerDetail.username%></h3>
+                        <p>Email: <%=customerDetail.email%></p>
+                        <p>Email: <%=customerDetail.mobile%></p>
+                        <p>Experience: <%=customerDetail.requirements%></p>
+                        <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
+                        <!-- </a> -->
+                    </div>
+                </div> 
+            <%} else {%>
+            <%customerDetail.forEach(function(customerDetail){ %>
+
+         
             <div class=" card dash_content">
                 <div class="card-body align-items-center">
                     <h3>Name: <%=customerDetail.username%></h3>
                     <p>Email: <%=customerDetail.email%></p>
                     <p>Email: <%=customerDetail.mobile%></p>
-                    <p>Experience: <%=contractor.requirements%></p>
-                    <!-- <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
-                    </a>
+                    <p>Experience: <%=customerDetail.requirements%></p>
+                    <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
+                    <!-- </a> -->
                 </div>
-            </div>   
+            </div> 
+            <%}); } %>  
         </div>
     </section>
     
