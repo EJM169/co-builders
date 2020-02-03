@@ -2,7 +2,7 @@
 <!--================Header Menu Area =================-->
   <section id="Dashboard" class="dash_banner_area">
         <div class="container">
-            <h1>List of Customers that conntacted</h1>
+            <h1>List of Customers that contractor</h1>
          
 
             <% if(currentUser.project.length==1) { %>
@@ -14,6 +14,12 @@
                         <p>Experience: <%=customerDetail.requirements%></p>
                         <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
                         <!-- </a> -->
+                        <form action="#" method="post">
+                            <button type="button" class="btn btn-outline-success"><i class="far fa-check-circle"></i></button>
+                        </form>
+                        <form action="#" method="post">
+                            <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                        </form>
                     </div>
                 </div> 
             <%} else {%>
@@ -28,6 +34,12 @@
                     <p>Experience: <%=customerDetail.requirements%></p>
                     <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
                     <!-- </a> -->
+                    <form action="#" method="post">
+                        <button type="button" class="btn btn-outline-success"><i class="far fa-check-circle"></i></button>
+                    </form>
+                    <form action="#" method="post">
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                    </form>
                 </div>
             </div> 
             <%}); } %>  
