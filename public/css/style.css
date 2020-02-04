@@ -3846,3 +3846,17 @@ input[type=number]::-webkit-outer-spin-button {
   cursor: default;
   text-transform: uppercase;
 }
+
+
+.contractor_dash_content{
+  width: auto;
+  margin: 0 25px;
+}
+
+.contractor_dash_content .dash_button >form {
+  display: inline-block;
+}
+
+.contractor_dash_content .dash_button .btn{
+  width:75px;
+}
