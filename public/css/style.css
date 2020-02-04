@@ -3850,13 +3850,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 .contractor_dash_content{
   width: auto;
-  margin: 0 25px;
+  margin: 0 10%;
+  padding: 0 
 }
 
 .contractor_dash_content .dash_button >form {
   display: inline-block;
 }
 
-.contractor_dash_content .dash_button .btn{
-  width:75px;
-}
+ .contractor_dash_content .dash_button .btn{
+  width:50px;
+} 
