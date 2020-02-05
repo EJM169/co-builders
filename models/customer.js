@@ -23,9 +23,12 @@ var customerSchema = new mongoose.Schema({
     workareareq: Boolean,
     utilityroomreq: Boolean,
     carporchreq: Boolean,
-    additionalreq: {type:String,default:null}
-
-
+    additionalreq: {type:String,default:null},
+    project:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"contractor"
+    }],
+    status:Boolean
 
 });
 

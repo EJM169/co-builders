@@ -1,4 +1,9 @@
     // -------   Mail Send ajax
+    $('[data-toggle=offcanvas]').click(function(e) {
+        e.preventDefault()
+        $('.row-offcanvas').toggleClass('active');
+        $('.collapse').toggleClass('in').toggleClass('hidden-xs').toggleClass('visible-xs');
+    });
 
      $(document).ready(function() {
         var form = $('#myForm'); // contact form
