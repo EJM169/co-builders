@@ -13,6 +13,20 @@ var customerSchema = new mongoose.Schema({
     reqselect:String,
     dateOfJoin:{type:Date , default:Date.now},
     role:{type:String,default:"Customer"},
+    bedroomeq: String,
+    hallreq: String,
+    kitchenreq:String,
+    bathroomreq: String,
+    prayerroomreq: Boolean,
+    diningroomreq: Boolean,
+    studyroomreq: Boolean,
+    workareareq: Boolean,
+    utilityroomreq: Boolean,
+    carporchreq: Boolean,
+    additionalreq: {type:String,default:null}
+
+
+
 });
 
 customerSchema.plugin(passportLocalMongoose);

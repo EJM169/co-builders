@@ -244,11 +244,27 @@ router.put("/customer/:id/profile",function(req,res){
     }
   });
 });
+
+//Nidhilesh editing
+
+router.get("/customer/:id/project/",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the project page. Please try again');
+      res.redirect("/customer/:id/profile");
+    }
+    else{
+      res.render("customer-project",{currentUser:customer});
+    }
+  });
+});
+
 router.get("/customer/logout",function(req,res){
-    req.logout();
-    req.flash('success','Bye..');
-    // req.session.destroy();
-    res.redirect("/");
+  req.logout();
+  req.flash('success','Bye..');
+  // req.session.destroy();
+  res.redirect("/");
 });
 
 module.exports = router;

@@ -1,73 +1,42 @@
 <% include ./partials/customerHeader %>
-<section id="project" class="profile_area"> 
-
-
-    <div class="constructionrequirement">
-            <h4>Project Requirements</h4>
-            <form id=userrequirementform action="/customer/<%=currentUser._id%>/profile?_method=PUT" method="POST">
-                <div class=bedroomreqgroup>
-                <label>Bed Room</label>
-                 <select class="bedroom#requirement" id="bedroomid" name="bedroomreq">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-                 <option value="4+">4+</option>
-                 </select> 
-                </div>
-                <div class="hallreqgroup">
-                <label>Hall</label>
-                <select class="hall#requirement" id="hallid" name="hallreq">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="4+">4+</option>
-                </select>
-                </div>
-                <div class="kitchenreqgroup">
-                <label>Kitchen</label>
-                <select class="kitchen#requirement" id="kitchenid" name="kitchenreq">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="2+">2+</option>
-                </select>
-            </div>
-            <div class="bathroom#group">
-                <label>Bathroom</label> 
-                <select class="bathroom#requirement" id="bathroomid" name="bathroomreq"> 
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="3+">3+</option>
-                </select>
-            </div>
-            <div class="prayerroom#group">
-                <label>Prayer Room <input type="checkbox" name="prayerroomreq"></label>
-            </div>
-            <div class="studyroom#group">
-                <label>Study Room<input type="checkbox" name="studyroomreq"></label>
-            </div> 
-            <div class="diningroom#group">
-                <label>Dining Room<input type="checkbox"name="diningroomreq"></label>
-            </div>
-            
-            <div class="workarea#group">
-                    <label>Work Area<input type="checkbox" name="workareareq"> </label>
-                </div>
-                <div class="utilityroom#group">
-                    <label>Utility Room<input type="checkbox" name="utilityroomreq"> </label>
-                </div>
-                <div class="carporch#group">
-                    <label>Car Porch<input type="checkbox" name="carporchreq"></label>
-                </div>
-                <div class="additional#group">
-                    <label>Additional Discription</label>
-                    <!-- TEXT AREA EDIT NEEDED IN FORMAT -->
-                    <textarea class="additional#requirement" name="additionalreq"  width="10" rows="5"></textarea>
-                </div>
-           </form>
+<section id="project-customer" class="project_area">
+    <div class="project-container">
+        <div class="project_header">
+            <h3><a href="/customer/<%=currentUser._id%>/project/edit"><i class="fas fa-edit1"></i></a>Project</h3>
         </div>
-    </section>
+        <div class=" card project_content">
+                <div class="project-card-body  row profile_details align-items-center">
+                    
+                        <h4>Projcet Requirements</h4>
+                        <div class="project-bedroom">
+                            <p>Naumber of Bedroom:<%= currentUser.bedroomreq ;%></p>
+                        </div>
+                    
                    
-    
+                            
+                            <p>Number of Hall:</p> <%= currentUser.hallreq ;%>
+                            <p>Number of Kitchen:<%= currentUser.kitchenreq ;%></p> 
+                           <!---<p>Study Room:<%= currentUser.dateOfJoin.toDateString() ;%></p>       
+                            <% if(currentUser.location){ %>
+                                <p>Location of Construction site:<%= currentUser.location; %></p>    
+                            <%} %>
+                            <% if(currentUser.budget){ %>
+                                <p>Budget range:<%= currentUser.budget; %></p>    
+                            <%} %>
+                            <% if(currentUser.area){ %>
+                                <p>Total area:<%= currentUser.area; %></p>    
+                            <%} %>
+                            <% if(currentUser.requirements){ %>
+                                <p>Requirement Details:<%= currentUser.requirements; %></p>    
+                            <%} %>
+                            <% if(currentUser.reqselect){ %>
+                                <p>Budget range:<%= currentUser.reqselect; %></p>    
+                            <%} %>
+                          
+                            -->
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+
