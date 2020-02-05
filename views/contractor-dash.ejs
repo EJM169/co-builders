@@ -1,27 +1,28 @@
 <% include ./partials/contractorHeader %>
 <!--================Header Menu Area =================-->
-  <section id="Dashboard" class="dash_banner_area">
+  <section id="main" class="dcolumn col-sm-9 col-xs-11">
         <div class="container">
             <h1>List of Customers that contacted</h1>
          
 
             <% if(currentUser.project.length==1) { %>
                 <div class=" card contractor_dash_content">
-                    <div class="card-body align-items-center">
+                    <div class="card-body align-items-center">  
                         <h3>Name: <%=customerDetail.username%></h3>
                         <p>Email: <%=customerDetail.email%></p>
                         <p>Email: <%=customerDetail.mobile%></p>
                         <p>Requirements: <%=customerDetail.requirements%></p>
                         <!-- <a href="/customer/contractor//"><input type="submit" class="btn btn-primary btn-lg" value="See More"> -->
                         <!-- </a> -->
-                        <div class="dash_button ">  
-                            <form action="#" method="post">
-                                <button type="button" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>
-                            </form>
-                            <form action="#" method="post">
-                                <button type="button" class="btn btn-outline-danger btn-reject"><i class="fas fa-times"></i></button>
-                            </form>
-                        </div>
+                        
+                    </div>
+                    <div class="dash_button ">  
+                        <form action="#" method="post">
+                            <button type="button" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>
+                        </form>
+                        <form action="#" method="post">
+                            <button type="button" class="btn btn-outline-danger btn-reject"><i class="fas fa-times"></i></button>
+                        </form>
                     </div>
                 </div> 
             <%} else {%>
@@ -35,19 +36,24 @@
                     <p>Email: <%=customerDetail.mobile%></p>
                     <p>Requirements: <%=customerDetail.requirements%></p>
                    
-                    <div class="dash_button ">
-                        <form action="#" method="post">
-                            <button type="button" class="btn btn-outline-success"><i class="far fa-check-circle"></i></button>
-                        </form>
-                        <form action="#" method="post">
-                            <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
-                        </form>
-                    </div>
+                    
+                </div>
+                <div class="dash_button ">
+                    <form action="#" method="post">
+                        <button type="button" class="btn btn-outline-success"><i class="far fa-check-circle"></i></button>
+                    </form>
+                    <form action="#" method="post">
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
+                    </form>
                 </div>
             </div> 
             <%}); } %>  
         </div>
     </section>
-    
+
+          
+</div>
+</div>
+   
 
 

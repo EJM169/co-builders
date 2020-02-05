@@ -3851,9 +3851,18 @@ input[type=number]::-webkit-outer-spin-button {
 .contractor_dash_content{
   width: auto;
   margin: 0 10%;
-  padding: 0 
+  padding: 0 35px;
+  padding: 0 ;
+  z-index:3;
 }
 
+.contractor_dash_content .dash_button{
+  margin: 0;
+  margin-left: 650px;
+  margin-top:15px;
+  z-index: 6;
+  position: absolute;
+}
 .contractor_dash_content .dash_button >form {
   display: inline-block;
 }
