@@ -155,6 +155,82 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
     });
 });
 
+router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while accepting customer, contractor detail not found');
+      res.redirect("/contractor/dashoard");
+    }
+    else{
+      customerUser.findById(req.params.id,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error while accepting customer, customer not found');
+          res.redirect("/contractor/dashoard");
+        }
+        else{
+          customer.project.push(contractor);
+          customer.save(function(err,data){
+            if(err){
+              console.log(err)
+              req.flash('error','Error while saving and sending data please try again');
+              res.redirect("/contractor/dashboard");
+            }
+            else{
+              req.flash('success','Successfully accepted the customer');
+              res.redirect("/contractor/dashboard");            
+            }
+          });
+        }
+      });
+    }
+  });
+});
+
+router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while accepting customer, contractor detail not found');
+      res.redirect("/contractor/dashoard");
+    }
+    else{
+      customerUser.findById(req.params.id,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error while accepting customer, customer not found');
+          res.redirect("/contractor/dashoard");
+        }
+        else{
+          contractor.project.pop(customer);
+          contractor.save(function(err,data){
+            if(err){
+              console.log(err)
+              req.flash('error','Error while rejecting, please try again');
+              res.redirect("/contractor/dashboard");
+            }
+            else{
+              console.log("Need to send notification to customer");
+              customer.status.push(False);
+              customer.save(function(err,savedata){
+                if(err){
+                  console.log(err)
+                  req.flash('error','Error while updating, please try again');
+                  res.redirect("/contractor/dashboard");
+                }
+                else{
+                  req.flash('success','Successfully rejected the customer');
+                  res.redirect("/contractor/dashboard");   
+                }
+              });         
+            }
+          });
+        }
+      });
+    }
+  });
+});
 
 router.get("/contractor/:id/profile",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.params.id,function(err,contractor){

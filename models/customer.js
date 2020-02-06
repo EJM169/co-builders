@@ -13,6 +13,11 @@ var customerSchema = new mongoose.Schema({
     reqselect:String,
     dateOfJoin:{type:Date , default:Date.now},
     role:{type:String,default:"Customer"},
+    project:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"contractor"
+    }],
+    status:Boolean
 });
 
 customerSchema.plugin(passportLocalMongoose);
