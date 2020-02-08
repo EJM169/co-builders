@@ -139,15 +139,21 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
         } else {
           // console.log(contractor.project[0]);
           contractor.project.forEach(function(customer){
-            customerUser.findById(customer,function(err,customer){
-              if(err){
-                console.log(err);
-                req.flash('error','Error while loading customer data');
-              }
-              else{
-                res.render("contractor-dash",{currentUser:contractor,customerDetail:customer});
-              }
-            })
+            if(customer==" "){
+              res.render("contractor-dash",{currentUser:contractor,customerDetail:"" });
+
+            }
+            else{
+              customerUser.findById(customer,function(err,customer){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while loading customer data');
+                }
+                else{
+                  res.render("contractor-dash",{currentUser:contractor,customerDetail:customer});
+                }
+              });
+            }
             
           });
         }
