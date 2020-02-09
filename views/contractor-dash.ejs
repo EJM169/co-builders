@@ -8,13 +8,15 @@
                     <a class="btn btn-primary btn-lg" href="/contractor/<%=currentUser._id%>/profile/edit" role="button">Edit</a>
                 </div>
             <%} else {%>
-            <h1>List of Customers that contacted</h1>
+            
          
-            <% if(!currentUser.project){ %>
+            <% if(currentUser.customer.length==0){ %>
             <div class="jumbotron ">
                 <p class="lead">Sorry there are no customers to display right now, come back later </p>
             </div>
-            <%}else if(currentUser.project.length==1) { %>
+           
+            <%}else if(currentUser.customer.length==1) { %>
+                <h1>List of Customers that contacted</h1>
                 <div class=" card contractor_dash_content">
                     <div class="card-body align-items-center">  
                         <h3>Name: <%=customerDetail.username%></h3>

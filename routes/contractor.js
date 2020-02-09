@@ -183,10 +183,21 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               res.redirect("/contractor/dashboard");
             }
             else{
+              contractor.customer.pop(customer);
+              contractor.active_proj_cust.push(customer);
+              contractor.save(function(err,data){
+                if(err){
+                  console.log(err)
+                  req.flash('error','Error while saving and sending data please try again');
+                  res.redirect("/contractor/dashboard");
+                }
+                else{
               req.flash('success','Successfully accepted the customer');
               res.redirect("/contractor/dashboard");            
             }
           });
+        }
+      });
         }
       });
     }
@@ -209,7 +220,6 @@ router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,f
         }
         else{
           contractor.customer.pop(customer);
-          contractor.active_proj_cust.push(customer);
           contractor.save(function(err,data){
             if(err){
               console.log(err);
@@ -218,7 +228,7 @@ router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,f
             }
             else{
               console.log("Need to send notification to customer");
-              customer.status.push("False");
+              customer.contractor.pop(contractor);
               customer.save(function(err,savedata){
                 if(err){
                   console.log(err)

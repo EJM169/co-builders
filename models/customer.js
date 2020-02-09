@@ -24,6 +24,10 @@ var customerSchema = new mongoose.Schema({
     utilityroomreq: Boolean,
     carporchreq: Boolean,
     additionalreq: {type:String,default:null},
+    contractor:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"contractor"
+    }],
     active_proj_cont:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"

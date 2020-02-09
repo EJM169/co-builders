@@ -196,10 +196,20 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
               res.redirect("/customer/dashboard");
             }
             else{
-              req.flash('success','Successfully contacted the contractor');
-              res.redirect("/customer/dashboard");
+              customer.contractor.push(contractor);
+              customer.save(function(err,data){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while saving and sending data please try again');
+                  res.redirect("/customer/dashboard");
+                }
+                else{
+                  req.flash('success','Successfully contacted the contractor');
+                  res.redirect("/customer/dashboard");
             }
           });
+        }
+      }); 
         }
       });
     }
