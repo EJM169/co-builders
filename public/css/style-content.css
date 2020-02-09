@@ -295,6 +295,7 @@ ul {
     padding: 0 35px;
     padding: 0 ;
     z-index:3;
+    display: flex;
   }
   
   .contractor_dash_content .dash_button{

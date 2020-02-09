@@ -137,13 +137,9 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-          // console.log(contractor.project[0]);
-          contractor.project.forEach(function(customer){
-            if(customer==" "){
-              res.render("contractor-dash",{currentUser:contractor,customerDetail:"" });
-
-            }
-            else{
+       
+          if(contractor.project.length>0){
+            contractor.project.forEach(function(customer){
               customerUser.findById(customer,function(err,customer){
                 if(err){
                   console.log(err);
@@ -152,12 +148,15 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
                 else{
                   res.render("contractor-dash",{currentUser:contractor,customerDetail:customer});
                 }
-              });
-            }
-            
+              });           
           });
+           
+          }
+          else{
+           
+            res.render("contractor-dash",{currentUser:contractor,customerDetail:[]});
         }
-
+          }
     });
 });
 
