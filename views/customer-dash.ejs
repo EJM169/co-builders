@@ -2,13 +2,14 @@
 
 <section id="Dashboard" class="dash_banner_area">
     <div class="container">
-        <h1>List of contractors</h1>
         <% if(currentUser.requirements==null){%>
             <div class="jumbotron ">
                 <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
                 <a class="btn btn-primary btn-lg" href="/customer/<%=currentUser._id%>/profile/edit" role="button">Edit</a>
             </div>
         <%} else{%>
+        <h1>List of contractors</h1>
+      
         <% contractoreDetail.forEach(function(contractor){ %>
         <div class=" card dash_content">
             <div class="card-body align-items-center">

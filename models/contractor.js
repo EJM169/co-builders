@@ -13,7 +13,11 @@ var contractorSchema = new mongoose.Schema({
     criteria:{type:String,default:null},
     dateOfJoin:{type:Date , default:Date.now},
     role:{type:String, default:"Contractor"},
-    project:[{
+    customer:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"customer"
+    }],
+    active_proj_cust:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"customer"
     }]

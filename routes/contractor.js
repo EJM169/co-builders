@@ -138,8 +138,8 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             res.redirect("/");
         } else {
        
-          if(contractor.project.length>0){
-            contractor.project.forEach(function(customer){
+          if(contractor.customer.length>0){
+            contractor.customer.forEach(function(customer){
               customerUser.findById(customer,function(err,customer){
                 if(err){
                   console.log(err);
@@ -175,7 +175,7 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
           res.redirect("/contractor/dashoard");
         }
         else{
-          customer.project.push(contractor);
+          customer.active_proj_cont.push(contractor);
           customer.save(function(err,data){
             if(err){
               console.log(err)
@@ -208,7 +208,8 @@ router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,f
           res.redirect("/contractor/dashoard");
         }
         else{
-          contractor.project.pop(customer);
+          contractor.customer.pop(customer);
+          contractor.active_proj_cust.push(customer);
           contractor.save(function(err,data){
             if(err){
               console.log(err);

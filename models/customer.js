@@ -24,12 +24,10 @@ var customerSchema = new mongoose.Schema({
     utilityroomreq: Boolean,
     carporchreq: Boolean,
     additionalreq: {type:String,default:null},
-    project:[{
+    active_proj_cont:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"
-    }],
-    status:Boolean
-
+    }]
 });
 
 customerSchema.plugin(passportLocalMongoose);

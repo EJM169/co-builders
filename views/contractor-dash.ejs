@@ -2,6 +2,12 @@
 <!--================Header Menu Area =================-->
 <section id="Dashboard" class="dash_banner_area">
         <div class="container">
+            <% if(currentUser.criteria==null){%>
+                <div class="jumbotron ">
+                    <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
+                    <a class="btn btn-primary btn-lg" href="/customer/<%=currentUser._id%>/profile/edit" role="button">Edit</a>
+                </div>
+            <%} else{%>
             <h1>List of Customers that contacted</h1>
          
             <% if(currentUser.project.length==0){ %>
