@@ -211,13 +211,13 @@ router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,f
           contractor.project.pop(customer);
           contractor.save(function(err,data){
             if(err){
-              console.log(err)
+              console.log(err);
               req.flash('error','Error while rejecting, please try again');
               res.redirect("/contractor/dashboard");
             }
             else{
               console.log("Need to send notification to customer");
-              customer.status.push(False);
+              customer.status.push("False");
               customer.save(function(err,savedata){
                 if(err){
                   console.log(err)
