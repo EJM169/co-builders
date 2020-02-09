@@ -138,7 +138,7 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
           contractorUser.find( function(conterr,contractor){
             if(conterr){
               console.log(conterr);
-              req.flash('error','Error whil loading dashboard');
+              req.flash('error','Error whil loading contractor details');
               res.redirect("/")
             }
             else{

@@ -9,7 +9,11 @@
             </div>
         <%} else{%>
         <h1>List of contractors</h1>
-      
+        <% if(contractoreDetail.length==0){ %>
+            <div class="jumbotron ">
+                <p class="lead">Sorry there are no contractor to display right now, come back later </p>
+            </div>
+        <%} else%>
         <% contractoreDetail.forEach(function(contractor){ %>
         <div class=" card dash_content">
             <div class="card-body align-items-center">
