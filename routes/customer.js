@@ -141,23 +141,10 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
               res.redirect("/")
             }
             else{
-              if(customer.contractor.length==0){
-                res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});
-              }else{
-                customer.contractor.forEach(function(custContid){
-                  contractor.forEach(function(cont){
-                  if(custContid!=cont._id){
-                    res.render("customer-dash",{currentUser:customer,contractoreDetail:[]});
-                  }
-                  else{
-                    res.render("customer-dash",{currentUser:customer,contractoreDetail:cont});
-
-                  }
-                });
-              });
-              }            }
+              res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});              
+            }            
           });
-        }      
+        }
 
     });
 });
@@ -200,6 +187,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
           res.redirect("/customer/dashboard");
         }
         else{
+          console.log(customer);
           contractor.customer.push(customer);
           contractor.save(function(err,data){
             if(err){
