@@ -31,7 +31,8 @@ var customerSchema = new mongoose.Schema({
     active_proj_cont:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"
-    }]
+    }],
+    sendStatus:{type:Boolean, default:false}
 });
 
 customerSchema.plugin(passportLocalMongoose);

@@ -137,13 +137,25 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
         else{
           contractorUser.find( function(conterr,contractor){
             if(conterr){
-              console.log(conterr);
               req.flash('error','Error whil loading contractor details');
               res.redirect("/")
             }
             else{
-              res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});
-            }
+              if(customer.contractor.length==0){
+                res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});
+              }else{
+                customer.contractor.forEach(function(custContid){
+                  contractor.forEach(function(cont){
+                  if(custContid!=cont._id){
+                    res.render("customer-dash",{currentUser:customer,contractoreDetail:[]});
+                  }
+                  else{
+                    res.render("customer-dash",{currentUser:customer,contractoreDetail:cont});
+
+                  }
+                });
+              });
+              }            }
           });
         }      
 
@@ -196,6 +208,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
               res.redirect("/customer/dashboard");
             }
             else{
+              customer.sendStatus=!customer.sendStatus;
               customer.contractor.push(contractor);
               customer.save(function(err,data){
                 if(err){

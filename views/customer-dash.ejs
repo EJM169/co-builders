@@ -28,13 +28,7 @@
                     </div>
                 </div>   
             <%}else{%>
-            <% currentUser.contractor.forEach(function(cont){  console.log("2")%>
-                <% console.log(contractor._id)%>
-                <% console.log(cont)%>
-                <% if(contractor._id===cont){%>
-                
-            
-            <%}else{%>
+           
                 <div class=" card dash_content">
                     <div class="card-body align-items-center">
                         <h3>Name: <%=contractor.username%></h3>
@@ -45,8 +39,7 @@
                         </a>
                     </div>
                 </div>   
-            <%} });}%>      
            
-        <%}); }%>
+        <%}}); }%>
     </div>
 </section>

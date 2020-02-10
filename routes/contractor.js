@@ -229,6 +229,7 @@ router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,f
             else{
               console.log("Need to send notification to customer");
               customer.contractor.pop(contractor);
+              customer.sendStatus=!customer.sendStatus;
               customer.save(function(err,savedata){
                 if(err){
                   console.log(err)
