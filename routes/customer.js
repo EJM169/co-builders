@@ -187,7 +187,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
           res.redirect("/customer/dashboard");
         }
         else{
-          console.log(customer);
+         
           contractor.customer.push(customer);
           contractor.save(function(err,data){
             if(err){

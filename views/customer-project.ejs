@@ -1,21 +1,37 @@
 <% include ./partials/customerHeader %>
-<section id="project-customer" class="project_area">
-    <div class="project-container">
+<section id="project" class="project_area">
+    <div class="container">
         <div class="project_header">
-            <h3><a href="/customer/<%=currentUser._id%>/project/edit"><i class="fas fa-edit1"></i></a>Project</h3>
+            <h3><a href="/customer/<%=currentUser._id%>/project/edit"><i class="fas fa-edit"></i></a>Project</h3>
         </div>
         <div class=" card project_content">
-                <div class="project-card-body  row profile_details align-items-center">
+                <div class="card-body  profile_details align-items-center">
                     
-                        <h4>Projcet Requirements</h4>
+                        <h4>Project Requirements</h4>
                         <div class="project-bedroom">
-                            <p>Naumber of Bedroom:<%= currentUser.bedroomreq ;%></p>
+                            <p>Number of Bedroom:<%= currentUser.bedroomreq ;%></p>
                         </div>
                     
                    
                             
                             <p>Number of Hall:</p> <%= currentUser.hallreq ;%>
                             <p>Number of Kitchen:<%= currentUser.kitchenreq ;%></p> 
+                            <% if(currentUser.location){ %>
+                                <p>Location of Construction site:<%= currentUser.location; %></p>    
+                            <%} %>
+                            <% if(currentUser.budget){ %>
+                                <p>Budget range:<%= currentUser.budget; %></p>    
+                            <%} %>
+                            <% if(currentUser.area){ %>
+                                <p>Total area:<%= currentUser.area; %></p>    
+                            <%} %>
+                            <% if(currentUser.requirements){ %>
+                                <p>Requirement Details:<%= currentUser.requirements; %></p>    
+                            <%} %>
+                            <% if(currentUser.reqselect){ %>
+                                <p>Budget range:<%= currentUser.reqselect; %></p>    
+                            <%} %>
+                          
                            <!---<p>Study Room:<%= currentUser.dateOfJoin.toDateString() ;%></p>       
                             <% if(currentUser.location){ %>
                                 <p>Location of Construction site:<%= currentUser.location; %></p>    

@@ -313,3 +313,9 @@ ul {
     width:50px;
   } 
   
+  .project_area{
+    margin-left: 350px;
+    position: relative;
+    z-index: 1;
+    min-height: 770px;
+  }
