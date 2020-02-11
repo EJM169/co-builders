@@ -168,6 +168,10 @@ ul {
   #check-btn:checked ~ #contractor_details{
     margin-left: 0;
   }
+  
+  #check-btn:checked ~ #project{
+    margin-left: 0;
+  }
   .dash_banner_area {
     margin-left: 350px;
     position: relative;
@@ -314,6 +318,13 @@ ul {
   } 
   
   .project_area{
+    margin-left: 350px;
+    position: relative;
+    z-index: 1;
+    min-height: 770px;
+  }
+  
+  .project_edit_area{
     margin-left: 350px;
     position: relative;
     z-index: 1;

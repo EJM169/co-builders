@@ -263,13 +263,26 @@ router.get("/customer/:id/project/",middleware.isCustomerLoggedIn,function(req,r
     if(err){
       console.log(err);
       req.flash('error','Error while loading the project page. Please try again');
-      res.redirect("/customer/:id/profile");
+      res.redirect("/customer/dashboard");
     }
     else{
       res.render("customer-project",{currentUser:customer});
     }
   });
 });
+
+router.get("/customer/:id/project/edit",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the project page. Please try again');
+      res.redirect("/customer/:id/project");
+    }
+    else{
+      res.render("customer-project-edit",{currentUser:customer});
+    }
+  });
+})
 
 router.get("/customer/logout",function(req,res){
   req.logout();
