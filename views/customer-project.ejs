@@ -4,6 +4,12 @@
         <div class="project_header">
             <h3><a href="/customer/<%=currentUser._id%>/project/edit"><i class="fas fa-edit"></i></a>Project</h3>
         </div>
+        <% if(currentUser.requirements==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
+                <a class="btn btn-primary btn-lg" href="/customer/<%=currentUser._id%>/project/edit" role="button">Edit</a>
+            </div>
+            <%} else {%>
         <div class=" card project_content">
                 <div class="card-body  profile_details align-items-center">
                     
@@ -86,6 +92,7 @@
                             -->
                     </div>
                 </div>
+            <%}%>    
         </div>
     </div>
 </section>

@@ -18,6 +18,10 @@
                     <input type="tel" class="form-control" name="mobile" pattern="[1-9]{3}[0-9]{3}[0-9]{4}" placeholder="Enter your Mobile No." maxlength="10" required="required">
                 </div>
                 <div class="form-group">
+                    <label>Home Address</label>
+                       <textarea class="form-control" name="customer[address]" rows="5" minlength="20" maxlength="1000"  ><%= currentUser.address %></textarea>
+                </div>
+                <div class="form-group">
                     <input type="password" class="form-control" id="cust_pass1" name="password" minlength="8" maxlength="30" placeholder="Enter your Password" required="required">
                 </div> 
                 <div class="form-group">

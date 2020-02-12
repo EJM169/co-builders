@@ -5,7 +5,7 @@ var customerSchema = new mongoose.Schema({
     password:String,
     email:String,
     mobile:Number,
-    // address:String,
+    address:String,
     location:String,
     budget:String,
     area:String,
