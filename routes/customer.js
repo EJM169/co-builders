@@ -284,6 +284,43 @@ router.get("/customer/:id/project/edit",middleware.isCustomerLoggedIn,function(r
   });
 })
 
+router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','error while updating profile. Please try again');
+      res.redirect("/customer/"+req.params.id+"/project/edit");
+    }
+    else{
+      if(req.body.customer[prayerRoomreq]){
+        customer.prayerRoomreq=!customer.prayerRoomreq;
+      }
+      if(req.body.customer[studyRoomreq]){
+        customer.studyRoomreq=!customer.studyRoomreq;
+      }
+      if(req.body.customer[diningRoomreq]){
+        customer.diningRoomreq=!customer.diningRoomreq;
+      }
+      if(req.body.customer[workAreareq]){
+        customer.workAreareq=!customer.workAreareq;
+      }
+      if(req.body.customer[utilityRoomreq]){
+        customer.utilityRoomreq=!customer.utilityRoomreq;
+      }
+      if(req.body.customer[carPorchreq]){
+        customer.carPorchreq=!customer.carPorchreq;
+      }
+      customer.location=req.body.customer[location];
+      customer.budget=req.body.customer[budget];
+      customer.area=req.body.customer[area];
+      customer.requirements=req.body.customer[requirements];
+      customer.additionalreq=req.body.customer[additionalreq];
+
+      req.flash('success','Profile Updation successful');
+      res.redirect("/customer/"+req.params.id+"/profile"); 
+    }
+  });
+});
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

@@ -33,82 +33,94 @@
                     <label>Give a description about your project</label>
                     <textarea class="form-control" name="customer[requirements]" rows="5" minlength="20" maxlength="100"  ><%= currentUser.requirements %></textarea>
                 </div>
-                <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                   <label  for="inlineFormCustomSelect">Requirements</label>
-                   
-                   <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[reqselect]" >
-                       <option value="1-BHK" >1-BHK</option>
-                       <option value="2-BHK">2-BHK</option>
-                       <option value="3-BHK">3-BHK</option>
-                   </select>
-                   </div>
-               </div>
-           
-                <div class=bedroomreqgroup>
-                <label>Bed Room</label>
-                 <select class="bedroom#requirement" id="bedroomid" name="customer[bedroomreq]">
-                 <option value="1">1</option>
-                 <option value="2">2</option>
-                 <option value="3">3</option>
-                 <option value="4">4</option>
-                 <option value="4+">4+</option>
-                 </select> 
+                <div class="container">
+                    <div class="edit_additional">
+                        <h3>Specify your requirements</h3>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                <label  for="inlineFormCustomSelect">Requirements</label>
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[reqselect]" value="<%=currentUser.reqselect%>" >
+                                    <option value="1-BHK" >1-BHK</option>
+                                    <option value="2-BHK">2-BHK</option>
+                                    <option value="3-BHK">3-BHK</option>
+                                </select>
+                               </div>
+                           </div>
+                        </div>
+                       
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <label>Bathroom</label> 
+                                    <select class="custom-select mr-sm-2" id="bathroomid" name="customer[bathRoomreq]" value="<%=currentUser.bathRoomreq%>"> 
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="3+">3+</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="hallreqgroup">
-                <label>Hall</label>
-                <select class="hall#requirement" id="hallid" name="customer[hallreq]">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="4+">4+</option>
-                </select>
+   
+            <div class="container">
+                <div class="edit_additional">
+                    <h3>Additional Requirements</h3>
                 </div>
-                <div class="kitchenreqgroup">
-                <label>Kitchen</label>
-                <select class="kitchen#requirement" id="kitchenid" name="customer[kitchenreq]">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="2+">2+</option>
-                </select>
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" name="customer[prayerRoomreq]" checked>
+                            <label class="custom-control-label" for="defaultChecked1">Prayer Room</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="customer[studyRoomreq]" >
+                            <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked3" name="customer[diningRoomreq]" checked>
+                            <label class="custom-control-label" for="defaultChecked3">Dining Room</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked4" name="customer[workAreareq]" checked>
+                            <label class="custom-control-label" for="defaultChecked4">Work Area</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked5" name="customer[utilityRoomreq]" >
+                            <label class="custom-control-label" for="defaultChecked5">Utility Room</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-2">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="defaultChecked6" name="customer[carPorchreq]" >
+                            <label class="custom-control-label" for="defaultChecked6">Car Porch</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="bathroom#group">
-                <label>Bathroom</label> 
-                <select class="bathroom#requirement" id="bathroomid" name="customer[bathroomreq]"> 
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="3+">3+</option>
-                </select>
-            </div>
-            <div class="prayerroom#group">
-                <label>Prayer Room <input type="checkbox" name="prayerroomreq"></label>
-            </div>
-            <div class="studyroom#group">
-                <label>Study Room<input type="checkbox" name="studyroomreq"></label>
-            </div> 
-            <div class="diningroom#group">
-                <label>Dining Room<input type="checkbox"name="diningroomreq"></label>
-            </div>
-            
-            <div class="workarea#group">
-                    <label>Work Area<input type="checkbox" name="workareareq"> </label>
-                </div>
-                <div class="utilityroom#group">
-                    <label>Utility Room<input type="checkbox" name="utilityroomreq"> </label>
-                </div>
-                <div class="carporch#group">
-                    <label>Car Porch<input type="checkbox" name="carporchreq"></label>
-                </div>
-                <div class="additional#group">
-                    <label>Additional Discription</label>
-                    <!-- TEXT AREA EDIT NEEDED IN FORMAT -->
-                    <textarea class="additional#requirement" name="additionalreq"  width="10" rows="5"></textarea>
-                </div>
-                <div class="formbutton">
-                    <input type="button" value="Submit" id="form-submit-button">
-
+          
+          
+            <div class="form-group shadow-textarea">
+                <label for="exampleFormControlTextarea6">Additional Discription</label>
+                <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" name="customer[additionalreq]" placeholder="Write something here..."><%= currentUser.additionalreq %></textarea>
+              </div>
+    
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg">Update</button>
                 </div>
            </form>
         </div>
