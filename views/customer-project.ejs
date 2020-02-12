@@ -8,12 +8,7 @@
                 <div class="card-body  profile_details align-items-center">
                     
                         <h4>Project Requirements</h4>
-                        <div class="project-bedroom">
-                            <p>Number of Bedroom:<%= currentUser.bedroomreq ;%></p>
-                        </div>            
-                            
-                            <p>Number of Hall:</p> <%= currentUser.hallreq ;%>
-                            <p>Number of Kitchen:<%= currentUser.kitchenreq ;%></p> 
+               
                             <% if(currentUser.location){ %>
                                 <p>Location of Construction site:<%= currentUser.location; %></p>    
                             <%} %>
@@ -29,7 +24,48 @@
                             <% if(currentUser.reqselect){ %>
                                 <p>Budget range:<%= currentUser.reqselect; %></p>    
                             <%} %>
-                          
+                            <% if(currentUser.bathRoomreq){ %>
+                                <p>Budget range:<%= currentUser.bathRoomreq; %></p>    
+                            <%} %>
+                            <% if(currentUser.prayerRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Prayer Room</label>
+                                </div>
+                            <%} %>
+                            <% if(currentUser.studyRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.diningRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Dining Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.workAreareq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Work Area</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.utilityRoomreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Utility Room</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.carPorchreq){ %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                                    <label class="custom-control-label" for="defaultChecked2">Car Porch</label>
+                                </div>                           
+                            <%} %>
+                            <% if(currentUser.additionalreq){ %>
+                                <p>Other additional requirement:<%= currentUser.additionalreq; %></p>    
+                            <%} %>
                            <!---<p>Study Room:<%= currentUser.dateOfJoin.toDateString() ;%></p>       
                             <% if(currentUser.location){ %>
                                 <p>Location of Construction site:<%= currentUser.location; %></p>    
