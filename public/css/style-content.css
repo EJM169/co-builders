@@ -86,7 +86,10 @@ ul {
         font-weight: 700;
         user-select: none;
   }
-  
+  .sidebar ul li{
+    list-style: none;
+    position: relative;
+  }
   .sidebar ul a{
     display: block;
     height: 100%;
@@ -100,12 +103,35 @@ ul {
     border-bottom: 1px solid black;
     transition: .4s ;
   }
+  .sidebar ul li ul{
+    background: none;
+    display: none;
+    position: absolute;
+  }
+  .sidebar ul li ul li a{
+    transition: .4s ;
+    line-height: 69px;
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    color: white;
+    padding-left: 85px;
+    box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255,255,.1);
+    border-bottom: 1px solid black;
+  }
   
   .sidebar ul li:hover a{
       padding-left: 65px;
-      color: #007bff;
-      text-decoration: underline;
+      color: #f8d22b;
   }
+  .sidebar ul li ul li:hover a{
+    padding-left: 85px;
+    color: #f8d22b;
+  }
+  .sidebar ul li:hover ul{
+    display: block;
+}
   
   #check-btn{
     display: none;
@@ -321,14 +347,14 @@ ul {
   .contractor_dash_content{
     width: auto;
     margin: 0 10%;
-    padding: 0 35px;
+    padding: 30px 10%;
     padding: 0 ;
     z-index:3;
     display: flex;
+    justify-content: center;
   }
   
   .contractor_dash_content .dash_button{
-    margin: 0;
     margin-left: 650px;
     margin-top:15px;
     z-index: 6;
