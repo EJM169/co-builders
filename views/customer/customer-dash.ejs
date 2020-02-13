@@ -1,4 +1,4 @@
-<% include ./partials/customerHeader %>
+<% include ../partials/customerHeader %>
 
 <section id="Dashboard" class="dash_banner_area">
     <div class="container">
@@ -61,17 +61,47 @@
                     <% if(cont.toString()==contractor._id.toString()){%>
                        
                      <%} else {%>
-                        <div class=" card customer_dash_content">
-                            <div class="card-body align-items-center">
-                                <h3>Name: <%=contractor.username%></h3>
-                                <p>Contractor Id: <%=contractor.contractorid%></p>
-                                <p>Email: <%=contractor.email%></p>
-                                <p>Experience: <%=contractor.experience%></p>
-                                <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
-                                </a>
-                            </div>
-                        </div>   
+                        <% if(currentUser.active_proj_cont.length==0){ %>
+                            <div class=" card customer_dash_content">
+                                <div class="card-body align-items-center">
+                                    <h3>Name: <%=contractor.username%></h3>
+                                    <p>Contractor Id: <%=contractor.contractorid%></p>
+                                    <p>Email: <%=contractor.email%></p>
+                                    <p>Experience: <%=contractor.experience%></p>
+                                    <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
+                                    </a>
+                                </div>
+                            </div>   
+                        <%}else if(currentUser.active_proj_cont.length!=0){%>
+                            <% currentUser.active_proj_cont.forEach(function(activcont){ %>
+                                <% if(activcont.toString()==contractor._id.toString()){%>
+                                    <div class=" card customer_dash_content">
+                                        <div class="card-body align-items-center">
+                                            <h3>Name: <%=contractor.username%></h3>
+                                            <p>Contractor Id: <%=contractor.contractorid%></p>
+                                            <p>Email: <%=contractor.email%></p>
+                                            <p>Experience: <%=contractor.experience%></p>
+                                            
+                                        </div>
+                                        <div class="cont-accept">
+                                            <p class=" text-success"><i class="far fa-check-square"></i>Contractor Accepted</p>
+                                        </div>
+                                    </div> 
+                            <%} else {%>
+
+                            <div class=" card customer_dash_content">
+                                <div class="card-body align-items-center">
+                                    <h3>Name: <%=contractor.username%></h3>
+                                    <p>Contractor Id: <%=contractor.contractorid%></p>
+                                    <p>Email: <%=contractor.email%></p>
+                                    <p>Experience: <%=contractor.experience%></p>
+                                    <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
+                                    </a>
+                                </div>
+                            </div>   
                     <%} });%>
+                <%}%> 
+            <%} });%>
         <%}}); }%>
     </div>
 </section>

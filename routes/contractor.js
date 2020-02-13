@@ -114,7 +114,7 @@ var createHash = function(password){
    }
 
    router.get("/contractor-signup",function(req,res){
-    res.render("contractor-signup");
+    res.render("contractor/contractor-signup");
 });
 
 router.post("/contractor-signup",passport.authenticate('contractor-signup', {
@@ -146,7 +146,7 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
                   req.flash('error','Error while loading customer data');
                 }
                 else{
-                  res.render("contractor-dash",{currentUser:contractor,customerDetail:customer});
+                  res.render("contractor/contractor-dash",{currentUser:contractor,customerDetail:customer});
                 }
               });           
           });
@@ -154,7 +154,7 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
           }
           else{
            
-            res.render("contractor-dash",{currentUser:contractor,customerDetail:[]});
+            res.render("contractor/contractor-dash",{currentUser:contractor,customerDetail:[]});
         }
           }
     });
@@ -258,7 +258,7 @@ router.get("/contractor/:id/profile",middleware.isContractorLoggedIn,function(re
           res.redirect("/contractor/dashoard");
     }
     else{
-      res.render("contractor-profile",{currentUser:contractor});
+      res.render("contractor/contractor-profile",{currentUser:contractor});
     }
   });
 });
@@ -271,7 +271,7 @@ router.get("/contractor/:id/profile/edit",middleware.isContractorLoggedIn,functi
       res.redirect("/contractor/:id/profile");
     }
     else{
-      res.render("contractor-profile-edit",{currentUser:contractor});
+      res.render("contractor/contractor-profile-edit",{currentUser:contractor});
     }
   });
 });

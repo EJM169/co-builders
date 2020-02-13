@@ -112,7 +112,7 @@ passport.use("customer-signup", new LocalStrategy({
    }
 
    router.get("/customer-signup",function(req,res){
-    res.render("customer-signup");
+    res.render("customer/customer-signup");
 });
 router.post("/customer-signup",passport.authenticate('customer-signup', {
     successRedirect: "/customer/dashboard",
@@ -141,7 +141,7 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
               res.redirect("/")
             }
             else{
-              res.render("customer-dash",{currentUser:customer,contractoreDetail:contractor});              
+              res.render("customer/customer-dash",{currentUser:customer,contractoreDetail:contractor});              
             }            
           });
         }
@@ -164,7 +164,7 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
           res.redirect("/customer/dashboard");
         }
         else{
-          res.render("cust_cont-details",{currentUser:customer,contractorDetail:contractor});
+          res.render("customer/cust_cont-details",{currentUser:customer,contractorDetail:contractor});
         }
       });
     }
@@ -248,7 +248,7 @@ router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/dashoard");
     }
     else{
-      res.render("customer-profile",{currentUser:customer});
+      res.render("customer/customer-profile",{currentUser:customer});
     }
   });
 });
@@ -261,7 +261,7 @@ router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(r
       res.redirect("/customer/:id/profile");
     }
     else{
-      res.render("customer-profile-edit",{currentUser:customer});
+      res.render("customer/customer-profile-edit",{currentUser:customer});
     }
   });
 });
@@ -290,7 +290,7 @@ router.get("/customer/:id/project/",middleware.isCustomerLoggedIn,function(req,r
       res.redirect("/customer/dashboard");
     }
     else{
-      res.render("customer-project",{currentUser:customer});
+      res.render("customer/customer-project",{currentUser:customer});
     }
   });
 });
@@ -303,7 +303,7 @@ router.get("/customer/:id/project/edit",middleware.isCustomerLoggedIn,function(r
       res.redirect("/customer/:id/project");
     }
     else{
-      res.render("customer-project-edit",{currentUser:customer});
+      res.render("customer/customer-project-edit",{currentUser:customer});
     }
   });
 })
