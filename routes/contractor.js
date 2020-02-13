@@ -175,6 +175,7 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
           res.redirect("/contractor/dashoard");
         }
         else{
+          customer.contractor.pop(contractor);
           customer.active_proj_cont.push(contractor);
           customer.save(function(err,data){
             if(err){
