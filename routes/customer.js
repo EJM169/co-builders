@@ -187,30 +187,54 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
           res.redirect("/customer/dashboard");
         }
         else{
-         
-          contractor.customer.push(customer);
-          contractor.save(function(err,data){
+          contractorUser.findOne({'customer':customer._id},function(err,user){
             if(err){
-              console.log(err);
-              req.flash('error','Error while saving and sending data please try again');
+              req.flash('error','Error while retreiving data');
+              res.redirect("/customer/dashboard");
+            }
+            if(user){
+              req.flash('error','Error already sent request to this contractor');
               res.redirect("/customer/dashboard");
             }
             else{
-              customer.sendStatus=!customer.sendStatus;
-              customer.contractor.push(contractor);
-              customer.save(function(err,data){
-                if(err){
-                  console.log(err);
-                  req.flash('error','Error while saving and sending data please try again');
-                  res.redirect("/customer/dashboard");
-                }
-                else{
-                  req.flash('success','Successfully contacted the contractor');
-                  res.redirect("/customer/dashboard");
+                    contractor.customer.push(customer);
+                    contractor.save(function(err,data){
+                      if(err){
+                        console.log(err);
+                        req.flash('error','Error while saving and sending data please try again');
+                        res.redirect("/customer/dashboard");
+                      }
+                      else{
+                        customerUser.findOne({'contractor':customer._id},function(err,user){
+                          if(err){
+                            req.flash('error','Error while customer retreiving data');
+                            res.redirect("/customer/dashboard");
+                          }
+                          if(user){
+                            req.flash('error','Error already sent request to this contractor');
+                            res.redirect("/customer/dashboard");
+                          }
+                          else{
+                              customer.sendStatus=!customer.sendStatus;
+                              customer.contractor.push(contractor);
+                              customer.save(function(err,data){
+                                  if(err){
+                                    console.log(err);
+                                    req.flash('error','Error while saving and sending data please try again');
+                                    res.redirect("/customer/dashboard");
+                                  }
+                                  else{
+                                    req.flash('success','Successfully contacted the contractor');
+                                    res.redirect("/customer/dashboard");
+                                  }
+                              });
+                            }
+                          });    
+                      }
+                }); 
             }
-          });
-        }
-      }); 
+          })
+          
         }
       });
     }

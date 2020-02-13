@@ -177,6 +177,31 @@ ul {
     position: relative;
     z-index: 1;
     min-height: 770px; }
+  
+    .customer_dash_content{    
+    width: auto;
+    margin: 15px 10%;
+    padding: 0 35px;
+    padding: 0 ;
+    z-index:3;
+    display: flex;
+    }
+    .customer_dash_content .cont-accept{
+      margin: 0;
+      margin-left: 525px;
+      margin-top:25px;
+      z-index: 6;
+      position: absolute;
+    }
+    .customer_dash_content .cont-accept i {
+      font-size: 20px;
+    }
+    .customer_dash_content .cont-accept p{
+      line-height: 25px;
+      text-transform: uppercase;
+      font-size: 18px ;
+      font-weight: bold;
+    }
   .details_banner_area{
     margin-left: 350px;
   }
