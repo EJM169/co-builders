@@ -88,7 +88,7 @@ ul {
   }
   .sidebar ul li{
     list-style: none;
-    position: relative;
+    
   }
   .sidebar ul a{
     display: block;
@@ -104,18 +104,23 @@ ul {
     transition: .4s ;
   }
   .sidebar ul li ul{
-    background: none;
+    background: #031c27;
     display: none;
     position: absolute;
+  }
+  .sidebar ul li ul li{
+    margin-left: 25%;
+    height: 100%;
+    width: 100%;
+    background: #031c27;
+
   }
   .sidebar ul li ul li a{
     transition: .4s ;
     line-height: 69px;
     font-size: 20px;
-    height: 100%;
-    width: 100%;
+    padding-right: 45px;
     color: white;
-    padding-left: 85px;
     box-sizing: border-box;
     border-top: 1px solid rgba(255, 255,255,.1);
     border-bottom: 1px solid black;
@@ -126,8 +131,9 @@ ul {
       color: #f8d22b;
   }
   .sidebar ul li ul li:hover a{
-    padding-left: 85px;
-    color: #f8d22b;
+   
+    color: #9e8204;
+    display: block;
   }
   .sidebar ul li:hover ul{
     display: block;
