@@ -309,7 +309,6 @@ router.get("/customer/:id/project/edit",middleware.isCustomerLoggedIn,function(r
 })
 
 router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,res){
- 
       if(req.body.customer.prayerRoomreq){
         req.body.customer.prayerRoomreq=true;
       }

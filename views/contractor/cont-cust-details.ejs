@@ -1,0 +1,57 @@
+<% include ../partials/contractorHeader %>
+<section id="contractor_details" class="details_banner_area">
+    <div class="container">
+        <h1>Contractor Details</h1>
+        <div class=" card dash_content">
+            <div class="card-body align-items-center">
+                <h3>Name: <%=contractorDetail.username%></h3>
+                <p>Email: <%=contractorDetail.email%></p>
+                <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
+                <p>Home Address:<%= contractorDetail.address; %></p>    
+                <p>Requirement Details:<%= contractorDetail.requirements; %></p>   
+                <p>Budget range:<%= contractorDetail.budget; %></p>   
+                <p>Home Type:<%=  contractorDetail.reqselect; %></p>    
+                <p>Bathroom Specification:<%=  contractorDetail.bathRoomreq; %></p>    
+                <% if( contractorDetail.prayerRoomreq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Prayer Room</label>
+                    </div>
+                <%} %>
+                <% if( contractorDetail.studyRoomreq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                    </div>                           
+                <%} %>
+                <% if( contractorDetail.diningRoomreq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Dining Room</label>
+                    </div>                           
+                <%} %>
+                <% if( contractorDetail.workAreareq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Work Area</label>
+                    </div>                           
+                <%} %>
+                <% if( contractorDetail.utilityRoomreq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Utility Room</label>
+                    </div>                           
+                <%} %>
+                <% if( contractorDetail.carPorchreq){ %>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>
+                        <label class="custom-control-label" for="defaultChecked2">Car Porch</label>
+                    </div>                           
+                <%} %>
+                <% if( contractorDetail.additionalreq){ %>
+                    <p>Other additional requirement:<%=  contractorDetail.additionalreq; %></p>    
+                <%} %>  
+            </div>
+        </div>   
+    </div>
+</section>

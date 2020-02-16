@@ -289,6 +289,28 @@ router.put("/contractor/:id/profile",middleware.isContractorLoggedIn,function(re
     }
   });
 });
+
+router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+      customerUser.findById(req.params.id,function(err,customer){
+        if(err){
+          console.log("err");
+          req.flash('error','Error while loading contractor details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          res.render("contractor/cont-cust-details",{currentUser:contractor,contractorDetail:customer});
+        }
+      });
+    }
+  });
+});
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
