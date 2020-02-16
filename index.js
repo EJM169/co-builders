@@ -10,6 +10,7 @@ var express                 = require("express"),
     LocalStrategy           = require("passport-local"),
     contractorUser          = require("./models/contractor"),
     customerUser            = require("./models/customer"),
+    project                 = require("./models/project"),
     contractorRoute         = require("./routes/contractor"),
     customerRoute           = require("./routes/customer");
     
