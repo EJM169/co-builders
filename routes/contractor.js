@@ -1,8 +1,9 @@
 var express             = require("express"),
+    async               = require("async"),
     router              = express.Router({mergeParams:true}),
     contractorUser      = require("../models/contractor"),
     customerUser        = require("../models/customer"),
-    project             = require("./models/project"),
+    projectC            = require("../models/project"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -176,34 +177,53 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
           res.redirect("/contractor/dashoard");
         }
         else{
-          customer.contractor.pop(contractor);
-          customer.active_proj_cont.push(contractor);
-          customer.save(function(err,data){
-            if(err){
-              console.log(err)
-              req.flash('error','Error while saving and sending data please try again');
-              res.redirect("/contractor/dashboard");
-            }
-            else{
+          async.series([
+            function(callback){
+              customer.contractor.pop(contractor);
+              customer.active_proj_cont.push(contractor);
+              customer.save(function(err,data){
+                if(err){
+                  console.log(err)
+                  callback(err);
+                }
+                callback();
+              });
+            },
+            function(callback){
               contractor.customer.pop(customer);
               contractor.active_proj_cust.push(customer);
               contractor.save(function(err,data){
                 if(err){
                   console.log(err)
-                  req.flash('error','Error while saving and sending data please try again');
-                  res.redirect("/contractor/dashboard");
+                  callback(err);
                 }
-                else{
-              req.flash('success','Successfully accepted the customer');
-              res.redirect("/contractor/dashboard");            
+                callback();
+              });
+            },
+            function(callback){
+              var newData = new projectC();
+              newData.customer=customer._id;
+              newData.contractor=contractor._id;
+              newData.save(function(err){
+                if(err){
+                  console.log(err);
+                  callback(err);
+                }
+                callback();
+              });
             }
+          ], function(err) {
+            if(err) {
+                req.flash('error','Error while saving data');
+                res.redirect("/contractor/dashboard");
+            }
+            req.flash('success','succesfully accepted the customer');
+            res.redirect("/contractor/dashboard");  
           });
         }
       });
         }
       });
-    }
-  });
 });
 
 router.post("/contractor/dashboard/:id/reject",middleware.isContractorLoggedIn,function(req,res){
