@@ -11,12 +11,23 @@
                 <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
                 <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
                 <p>Office Address:<%= contractorDetail.address; %></p>    
-                <p>Criteria Details:<%= contractorDetail.criteria; %></p>    
+                <p>Criteria Details:<%= contractorDetail.criteria; %></p>   
+                <% if(contractorDetail.active_proj_cust.length!=0){ %>
+                    <% contractorDetail.active_proj_cust.forEach(function(activcust){ %>
+                        <% if(activcust.toString()==currentUser._id.toString()){ %>
+                        
+                        <%}else{%>
+                            <form action="/customer/contractor/<%=contractorDetail._id%>" method="post">
+                                <input type="submit" class="btn btn-primary btn-lg" value="Submit"> 
+            
+                            </form>
+                        <%}%>    
+                <%});}else{%> 
                 <form action="/customer/contractor/<%=contractorDetail._id%>" method="post">
                     <input type="submit" class="btn btn-primary btn-lg" value="Submit"> 
 
                 </form>
-                </a>
+                <%}%>
             </div>
         </div>   
     </div>

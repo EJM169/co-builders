@@ -119,7 +119,8 @@ ul {
     transition: .4s ;
     line-height: 69px;
     font-size: 20px;
-    padding-right: 45px;
+    padding-right: 35px;
+    align-items: center;
     color: white;
     box-sizing: border-box;
     border-top: 1px solid rgba(255, 255,255,.1);
@@ -131,7 +132,6 @@ ul {
       color: #f8d22b;
   }
   .sidebar ul li ul li:hover a{
-   
     color: #9e8204;
     display: block;
   }
@@ -236,6 +236,9 @@ ul {
     }
   .details_banner_area{
     margin-left: 350px;
+    position: relative;
+    z-index: 1;
+    min-height: 770px;
   }
   .profile_area{
     margin-right: 30px;

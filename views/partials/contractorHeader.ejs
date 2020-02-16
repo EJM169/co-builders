@@ -32,8 +32,13 @@
             <li><a href="/contractor/<%=currentUser._id %>/profile">Profile</a></li>
             <li><a href="#">Project <i class="fa fa-caret-down"></i></b></a>
                 <ul>
-                    <li><a href="#">Customer Details</a></li>
-                    <li><a href="#">Project Plan</a></li>
+                    <% if(currentUser.active_proj_cust.length==0){%>
+
+                        <%} else {%>
+                            <% currentUser.active_proj_cust.forEach(function(activcust){ %>
+                                <li><a href="/contractor/customer/<%=activcust%>">Customer Details</a></li>
+                                <li><a href="#">Project Plan</a></li>
+                            <%})}%>    
                 </ul>
             </li>
             <li><a href="/contractor/logout">Logout</a></li>
