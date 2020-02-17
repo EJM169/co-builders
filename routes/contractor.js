@@ -155,7 +155,6 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
            
           }
           else{
-           
             res.render("contractor/contractor-dash",{currentUser:contractor,customerDetail:[]});
         }
           }
@@ -331,6 +330,67 @@ router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(r
       });
     }
   });
+});
+
+router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+      projectC.findOne({'contractor':contractor},function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dash");
+        }   
+        else{
+          if(project){
+            customerUser.findById(project.customer,function(err,customer){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/customer/dash");
+              }
+              else{
+                res.render("contractor/project-plan",{currentUser:contractor,project:project,customer:customer});
+              }
+            });
+          }
+          else{
+              res.render("contractor/project-plan",{currentUser:contractor,project:null,customer:null});
+
+          }
+        }
+      });
+    }
+  });    
+});
+
+router.post("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,res){
+  projectC.findById(req.params.id,function(err,project){
+    if(err){
+      console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/contractor/"+project.contractor+"/plan")
+              }
+    else{
+      project.overallPlan=req.body.project.overallPlan;
+      project.contractorStatus=!project.contractorStatus;
+      project.save(function(err,savedata){
+        if(err){
+          console.log(err);
+          req.flash('error','Error while saving')
+        }
+        else{
+          req.flash('success','Successfully saved the data');
+          res.redirect("/contractor/"+project.contractor+"/plan")
+        }
+      })
+    }
+  })
 });
 router.get("/contractor/logout",function(req,res){
     req.logout();

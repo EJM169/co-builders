@@ -390,3 +390,19 @@ ul {
     z-index: 1;
     min-height: 770px;
   }
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+  .plan_area{
+    margin-left: 350px;
+    position: relative;
+    z-index: 1;
+    min-height: 770px;
+  }
+  /* .plan_content{
+
+  } */
+  
