@@ -435,4 +435,27 @@ ul {
       font-weight: bold;
     }
   
-  
+    .plan_content_area{
+      width: auto;
+      min-height: 150px;
+      margin: 0 10%;
+      padding: 30px 10%;
+      padding: 0 ;
+      z-index:3;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .plan_content_area .dash_button{
+      margin-left: 650px;
+      margin-top:15px;
+      z-index: 6;
+      position: absolute;
+    }
+    .plan_content_area .dash_button >form {
+      display: inline-block;
+    }
+    
+    .plan_content_area .dash_button .btn{
+      width:50px;
+    } 

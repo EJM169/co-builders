@@ -1,4 +1,5 @@
 var express             = require("express"),
+    async               = require("async"),
     router              = express.Router({mergeParams:true}),
     customerUser        = require("../models/customer"),
     contractorUser        = require("../models/contractor"),
@@ -216,7 +217,6 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
                             res.redirect("/customer/dashboard");
                           }
                           else{
-                              customer.sendStatus=!customer.sendStatus;
                               customer.contractor.push(contractor);
                               customer.save(function(err,data){
                                   if(err){
@@ -377,11 +377,11 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
             }   
             else{
               if(project){
-                customerUser.findById(project.contractor,function(err,contractor){
+                contractorUser.findById(project.contractor,function(err,contractor){
                   if(err){
                     console.log(err);
                     req.flash('error','Error whil loading details');
-                    res.redirect("/customer/dash");
+                    res.redirect("/customer/dashboard");
                   }
                   else{
                     res.render("customer/project-plan",{currentUser:customer,project:project,contractor:contractor});
@@ -397,7 +397,94 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
         }
       });    
     });
-      
+
+    router.post("/customer/:id/plan/accept",middleware.isCustomerLoggedIn,function(req,res){
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          req.flash('error','Error whil loading project details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          customerUser.findById(project.customer,function(err,customer){
+            if(err){
+              req.flash('error','Error whil loading customer details');
+              res.redirect("/customer/"+projectC.customer+"/plan");
+            }
+            else{
+              contractorUser.findById(project.contractor,function(err,contractor){
+                if(err){
+                  req.flash('error','Error whil loading contractor details');
+                  res.redirect("/customer/"+projectC.customer+"/plan");
+                }
+                else{
+                  async.series([
+                    function(callback){
+                      customer.projectStatus=!customer.projectStatus;
+                      customer.save(function(err,data){
+                        if(err){
+                          console.log(err)
+                          callback(err);
+                        }
+                        callback();
+                      });
+                    },
+                    function(callback){
+                      contractor.projectStatus=!contractor.projectStatus;
+                      contractor.save(function(err,data){
+                        if(err){
+                          console.log(err)
+                          callback(err);
+                        }
+                        callback();
+                      });
+                    },
+                    function(callback){
+                      project.customerStatus=!project.customerStatus;
+                      project.projectStart=! project.projectStart;
+                      project.save(function(err){
+                        if(err){
+                          console.log(err);
+                          callback(err);
+                        }
+                        callback();
+                      });
+                    }
+                  ], function(err) {
+                    if(err) {
+                        req.flash('error','Error while saving data');
+                        res.redirect("/customer/"+projectC.customer+"/plan");
+                    }
+                    req.flash('success','succesfully accepted the plan');
+                    res.redirect("/customer/"+projectC.customer+"/plan");  
+                  });
+                }
+              });
+            }
+          });
+        }
+      });
+    });
+    router.post("/customer/:id/plan/accept",middleware.isCustomerLoggedIn,function(req,res){
+      projectC.findById(req.params,function(err,project){
+        if(err){
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          project.contractorStatus=!project.contractorStatus;
+          project.save(function(err,savedata){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving')
+            }
+            else{
+              req.flash('success','Successfully rejected the plan');
+              res.redirect("/customer/"+project.customer+"/plan")
+            }
+          })
+        }
+      })
+    });    
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

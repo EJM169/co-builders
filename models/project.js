@@ -12,6 +12,8 @@ var projectSchema = new mongoose.Schema({
                         default:false},
     customerStatus:{type:Boolean,
                         default:false},
+    projectStart:{type:Boolean,
+                    default:false},
     planDate:{
         day:Date,
         plan:String

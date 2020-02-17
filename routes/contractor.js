@@ -374,7 +374,7 @@ router.post("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,
     if(err){
       console.log(err);
                 req.flash('error','Error whil loading details');
-                res.redirect("/contractor/"+project.contractor+"/plan")
+                res.redirect("/contractor/dashboard");
               }
     else{
       project.overallPlan=req.body.project.overallPlan;

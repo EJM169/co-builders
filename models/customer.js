@@ -29,7 +29,7 @@ var customerSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"
     }],
-    sendStatus:{type:Boolean, default:false}
+    projectStatus:{type:Boolean, default:false}
 });
 
 customerSchema.plugin(passportLocalMongoose);

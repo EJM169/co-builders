@@ -6,32 +6,32 @@
                 <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
             </div>
        <%} else{%>
-        <div class="plan_content">
-            <%if(!project.contractorStatus){%>
-                <div class="jumbotron">
-                    <p class="lead"><%=contractor.username%></p>
-                    <hr class="my-4">
-                    <form action="/contractor/<%=project._id%>/plan" method="POST">
-                        <div class="form-group shadow-textarea">
-                            <label for="exampleFormControlTextarea6">Project Plan</label>
-                            <textarea class="form-control z-depth-1" id="exampleFormControlTextarea6" rows="3" name="project[overallPlan]" placeholder="Write something here..."><%= project.overallPlan %></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                        </div>
-                    </form>
-                </div>
+       
+            <%if(!project.customerStatus){%>
+                <div class=" card plan_content_area">
+                    <div class="card-body align-items-center">  
+                       <p><%=project.overallPlan%></p>
+                    </div>
+                    <div class="dash_button ">  
+                        <form action="/customer/<%=project._id%>/plan/accept" method="post">          
+                            <button type="submit" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>
+                        </form>
+                        <form action="/customer/<%=project._id%>/plan/reject" method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-reject"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </div> 
             <%}else{%>
-                <div class="container">
-                    <p class="lead"><%=customer.username%></p>
-                    <hr class="my-4">
-                    <p><%=project.overallPlan%></p>
-                    <div class="cont-send">
-                        <p class=" text-success"><i class="far fa-check-square"></i>Plan has been sent</p>
+                <div class=" card customer_dash_content">
+                    <div class="card-body align-items-center">
+                        <p><%=project.overallPlan%></p>
+                    </div>
+                    <div class="cont-accept">
+                        <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
                     </div>
                 </div>    
             <%}%>    
         </div>   
         <%}%>
-    </div>
+ 
 </section>
