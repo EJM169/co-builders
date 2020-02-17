@@ -1,7 +1,7 @@
-<% include ../partials/contractorHeader %>
-<section id="contractor" class="plan_area">
+<% include ../partials/customerHeader %>
+<section id="customer" class="plan_area">
     <div class="container">
-        <%if(project==null||customer==null){%>
+        <%if(project==null||contractor==null){%>
             <div class="jumbotron ">
                 <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
             </div>
@@ -9,7 +9,7 @@
         <div class="plan_content">
             <%if(!project.contractorStatus){%>
                 <div class="jumbotron">
-                    <p class="lead"><%=customer.username%></p>
+                    <p class="lead"><%=contractor.username%></p>
                     <hr class="my-4">
                     <form action="/contractor/<%=project._id%>/plan" method="POST">
                         <div class="form-group shadow-textarea">

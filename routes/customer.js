@@ -2,7 +2,7 @@ var express             = require("express"),
     router              = express.Router({mergeParams:true}),
     customerUser        = require("../models/customer"),
     contractorUser        = require("../models/contractor"),
-    project                 = require("../models/project"),
+    projectC                 = require("../models/project"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -361,6 +361,43 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
       });
      
     });
+    router.get("/customer/:id/plan",middleware.isCustomerLoggedIn,function(req,res){
+      customerUser.findById(req.user,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dash");
+        }
+        else{
+          projectC.findOne({'customer':customer},function(err,project){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/dash");
+            }   
+            else{
+              if(project){
+                customerUser.findById(project.contractor,function(err,contractor){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error whil loading details');
+                    res.redirect("/customer/dash");
+                  }
+                  else{
+                    res.render("customer/project-plan",{currentUser:customer,project:project,contractor:contractor});
+                  }
+                });
+              }
+              else{
+                  res.render("customer/project-plan",{currentUser:customer,project:null,contractor:null});
+    
+              }
+            }
+          });
+        }
+      });    
+    });
+      
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

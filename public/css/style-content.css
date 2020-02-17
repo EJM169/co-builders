@@ -204,6 +204,14 @@ ul {
   #check-btn:checked ~ #project{
     margin-left: 0;
   }
+  
+  #check-btn:checked ~ #contractor{
+    margin-left: 0;
+  }
+  #check-btn:checked ~ #customer{
+    margin-left: 0;
+  }
+
   .dash_banner_area {
     margin-left: 350px;
     position: relative;
@@ -402,7 +410,29 @@ ul {
     z-index: 1;
     min-height: 770px;
   }
-  /* .plan_content{
-
-  } */
+  .plan_content{
+    background: white;
+    width: auto;
+    margin: 15px 10%;
+    padding: 5% 35px;
+    z-index:3;
+    display: flex;
+    justify-content: center; 
+   }
+    .plan_content .cont-send{
+      margin: 0;
+      float: right;
+      z-index: 6;
+      position: relative;
+    }
+    .plan_content .cont-send i {
+      font-size: 20px;
+    }
+    .plan_content .cont-send p{
+      line-height: 25px;
+      text-transform: uppercase;
+      font-size: 18px ;
+      font-weight: bold;
+    }
+  
   
