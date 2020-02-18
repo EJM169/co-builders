@@ -7,7 +7,7 @@
             </div>
        <%} else{%>
        
-            <%if(!project.customerStatus){%>
+            <%if(project.contractorStatus){%>
                 <div class=" card plan_content_area">
                     <div class="card-body align-items-center">  
                        <p><%=project.overallPlan%></p>
@@ -21,7 +21,16 @@
                         </form>
                     </div>
                 </div> 
-            <%}else{%>
+            <%}else if(!(project.customerStatus)&&!(project.contractorStatus)){%>
+                <div class=" card customer_dash_content">
+                    <div class="card-body align-items-center">
+                        <p><%=project.overallPlan%></p>
+                    </div>
+                    <div class="cont-accept">
+                        <p class=" text-danger"><i class="far fa-check-square"></i>Plan Rejected waiting for further updation</p>
+                    </div>
+                </div>    
+            <%} else  if(project.customerStatus){%>
                 <div class=" card customer_dash_content">
                     <div class="card-body align-items-center">
                         <p><%=project.overallPlan%></p>
@@ -29,8 +38,8 @@
                     <div class="cont-accept">
                         <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
                     </div>
-                </div>    
-            <%}%>    
+                </div>
+            <%}%>            
         </div>   
         <%}%>
  

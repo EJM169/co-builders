@@ -8,7 +8,7 @@
        <%} else{%>
         <div class="plan_content">
             <%if(!project.contractorStatus){%>
-                <div class="jumbotron">
+                <div class="container">
                     <p class="lead"><%=customer.username%></p>
                     <hr class="my-4">
                     <form action="/contractor/<%=project._id%>/plan" method="POST">

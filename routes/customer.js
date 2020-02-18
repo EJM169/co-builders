@@ -464,8 +464,8 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
         }
       });
     });
-    router.post("/customer/:id/plan/accept",middleware.isCustomerLoggedIn,function(req,res){
-      projectC.findById(req.params,function(err,project){
+    router.post("/customer/:id/plan/reject",middleware.isCustomerLoggedIn,function(req,res){
+      projectC.findById(req.params.id,function(err,project){
         if(err){
           req.flash('error','Error whil loading details');
           res.redirect("/customer/dashboard");
