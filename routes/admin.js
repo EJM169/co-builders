@@ -58,6 +58,6 @@ var express             = require("express"),
       }));
     router.get("/panel/169/admin/dashboard",function(req,res){
         
-
+      console.log("Success")
     })  
 module.exports = router;
