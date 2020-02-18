@@ -114,7 +114,7 @@ passport.use("customer-signup", new LocalStrategy({
    }
 
    router.get("/customer-signup",function(req,res){
-    res.render("customer/customer-signup");
+    res.render("customer/signup");
 });
 router.post("/customer-signup",passport.authenticate('customer-signup', {
     successRedirect: "/customer/dashboard",
@@ -143,7 +143,7 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
               res.redirect("/")
             }
             else{
-              res.render("customer/customer-dash",{currentUser:customer,contractoreDetail:contractor});              
+              res.render("customer/dash",{currentUser:customer,contractoreDetail:contractor});              
             }            
           });
         }
