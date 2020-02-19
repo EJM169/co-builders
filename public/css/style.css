@@ -3870,3 +3870,27 @@ input[type=number]::-webkit-outer-spin-button {
  .contractor_dash_content .dash_button .btn{
   width:50px;
 } 
+.admin_login{
+  position: relative;
+  z-index: 1;
+  min-height: 770px;
+}
+.admin_login_area{
+  
+  position: relative;
+  padding: 10% 30%;
+  line-height: 25px;
+  text-transform: uppercase;
+  font-size: 18px ;
+  font-weight: bold;
+}
+.admin_login_area h1{
+  color: black;
+  padding: 0 35%;
+  font-size: 45px;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
+  line-height: 30px;
+  margin-bottom: 15px;
+  cursor: default;
+}

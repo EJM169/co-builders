@@ -14,5 +14,10 @@ var express             = require("express"),
     router.get("/panel/169/admin",function(req,res){
         res.render("admin");
     });
-
+    
+    router.post("/panel/169/admin",passport.authenticate('admin-login', {
+        successRedirect: "/panel/169/admin/dashboard",
+        failureRedirect:"/panel/169/admin",
+        failureFlash : true 
+      }));
 module.exports = router;
