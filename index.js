@@ -12,7 +12,8 @@ var express                 = require("express"),
     customerUser            = require("./models/customer"),
     project                 = require("./models/project"),
     contractorRoute         = require("./routes/contractor"),
-    customerRoute           = require("./routes/customer");
+    customerRoute           = require("./routes/customer"),
+    adminRoute              = require("./routes/admin");
     
 
 mongoose.connect("mongodb://localhost:27017/construction");
@@ -54,7 +55,7 @@ passport.serializeUser(function(user, done) {
   
 app.use(contractorRoute);
 app.use(customerRoute);
-
+app.use(adminRoute);
 
 app.get("/",function(req,res){
     req.logout();

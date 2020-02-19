@@ -256,7 +256,7 @@ ul {
     position: relative;
     z-index: 2;
     min-height: 700px;
-    background: none;
+    background: rgb(182, 174, 174);
   }
   
   .profile_area .profile_header{
