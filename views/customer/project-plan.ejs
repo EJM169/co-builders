@@ -5,7 +5,12 @@
             <div class="jumbotron ">
                 <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
             </div>
-       <%} else{%>
+       <%}else if(project.overallPlan==null){%>
+    
+        <div class="jumbotron ">
+            <p class="lead">Sorry, <%=contractor.username%> has not made a plan yet, please contact him  </p>
+        </div>
+        <%} else{%>
        
             <%if(project.contractorStatus){%>
                 <div class=" card plan_content_area">
