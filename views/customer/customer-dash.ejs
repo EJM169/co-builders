@@ -59,7 +59,17 @@
             <%} else if(currentUser.contractor.length!=0){ %> 
                 <%currentUser.contractor.forEach(function(cont){ %>
                     <% if(cont.toString()==contractor._id.toString()){%>
-                       
+                        <div class=" card customer_dash_content">
+                            <div class="card-body align-items-center">
+                                <h3>Name: <%=contractor.username%></h3>
+                                <p>Contractor Id: <%=contractor.contractorid%></p>
+                                <p>Email: <%=contractor.email%></p>
+                                <p>Experience: <%=contractor.experience%></p>
+                                
+                            </div>
+                            <div class="cont-accept">
+                                <p class=" text-warning"><i class="far fa-check-square"></i>Sent Request</p>
+                            </div>
                      <%} else {%>
                         <% if(currentUser.active_proj_cont.length==0){ %>
                             <div class=" card customer_dash_content">
