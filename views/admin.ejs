@@ -17,6 +17,19 @@
     <link rel="stylesheet" href="/css/responsive.css">
 </head>
 <body>
+    <div class="container mt-1 " style="width:550px;">
+        <% if(error && error.length>0){ %>
+          <div class="alert alert-danger text-center " role="alert">
+              <%=error%>
+            </div>
+        <%} %>
+        <% if(success && success.length>0){ %>
+          <div class="alert alert-success text-center " role="alert">
+              <%=success%>
+            </div>
+        <%} %>
+        
+      </div>
     <section id="admin" class="admin_login">
         <div class="jumbotron">
             <div class="container admin_login_area">
