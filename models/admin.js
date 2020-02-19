@@ -3,6 +3,7 @@ var passportLocalMongoose = require("passport-local-mongoose");
 var adminSchema = new mongoose.Schema({
     username:String,
     password:String,
+    role:{type:String, default:"Admin"},
     contractorList:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"

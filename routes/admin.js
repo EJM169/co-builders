@@ -56,8 +56,16 @@ var express             = require("express"),
         failureRedirect:"/panel/169/admin",
         failureFlash : true 
       }));
-    router.get("/panel/169/admin/dashboard",function(req,res){
-        
+    router.get("/panel/169/admin/dashboard",middleware.isAdminLoggedIn,function(req,res){
+        res.render("admin_dash");
+    });
+    
+    
+router.get("/admin/logout",function(req,res){
+    req.logout();
+    req.flash('success','Bye..');
+    // req.session.destroy();
+    res.redirect("/");
+});
 
-    })  
 module.exports = router;

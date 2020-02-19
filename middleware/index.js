@@ -30,6 +30,19 @@ middlewareObject.isContractorLoggedIn=function(req,res,next){
     res.redirect("/");
 } 
 
+middlewareObject.isAdminLoggedIn=function(req,res,next){
+    if(req.isAuthenticated()){
+        if(req.user.role==="Admin"){
+            return next();
+        }
+        else{
+            req.flash("error","Invalid access");
+            res.redirect("/panel/169/admin")
+        }
+    }
+    req.flash("error","Hi  Please Login First")
+    res.redirect("/");
+} 
  
 //won't work until user database is set
 middlewareObject.isUserLogged=function(req,res,next){
