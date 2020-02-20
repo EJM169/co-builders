@@ -15,7 +15,8 @@
             <%if(project.contractorStatus){%>
                 <div class=" card plan_content_area">
                     <div class="card-body align-items-center">  
-                       <p><%=project.overallPlan%></p>
+                        <h3><%=contractor.username%> Plan:</h3>
+                        <p><%=project.overallPlan%></p>
                     </div>
                     <div class="dash_button ">  
                         <form action="/customer/<%=project._id%>/plan/accept" method="post">          
@@ -29,6 +30,7 @@
             <%}else if(!(project.customerStatus)&&!(project.contractorStatus)){%>
                 <div class=" card customer_dash_content">
                     <div class="card-body align-items-center">
+                        <h3><%=contractor.username%> Plan:</h3>
                         <p><%=project.overallPlan%></p>
                     </div>
                     <div class="cont-accept">
@@ -38,6 +40,7 @@
             <%} else  if(project.customerStatus){%>
                 <div class=" card customer_dash_content">
                     <div class="card-body align-items-center">
+                        <h3><%=contractor.username%> Plan:</h3>
                         <p><%=project.overallPlan%></p>
                     </div>
                     <div class="cont-accept">

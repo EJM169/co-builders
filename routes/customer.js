@@ -396,7 +396,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/dash");
         }
         else{
-          projectC.findOne({'customer':customer},function(err,project){
+          projectC.findOne({'contractor':req.params.id},function(err,project){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
