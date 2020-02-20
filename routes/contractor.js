@@ -364,7 +364,7 @@ router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,r
       res.redirect("/customer/dash");
     }
     else{
-      projectC.findOne({'contractor':contractor},function(err,project){
+      projectC.findOne({'customer':req.params.id},function(err,project){
         if(err){
           console.log(err);
           req.flash('error','Error whil loading details');
@@ -410,7 +410,7 @@ router.post("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,
         }
         else{
           req.flash('success','Successfully saved the data');
-          res.redirect("/contractor/"+project.contractor+"/plan")
+          res.redirect("/contractor/"+project.customer+"/plan")
         }
       })
     }
