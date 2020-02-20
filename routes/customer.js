@@ -151,6 +151,46 @@ router.get("/customer/dashboard",middleware.isCustomerLoggedIn,function(req,res)
     });
 });
 
+router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err)
+        req.flash('error','Error while loading profile please try again');
+          res.redirect("/customer/dashoard");
+    }
+    else{
+      res.render("customer/profile",{currentUser:customer});
+    }
+  });
+});
+
+router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the edit page. Please try again');
+      res.redirect("/customer/:id/profile");
+    }
+    else{
+      res.render("customer/profile-edit",{currentUser:customer});
+    }
+  });
+});
+
+router.put("/customer/:id/profile",function(req,res){
+  customerUser.findByIdAndUpdate(req.params.id,req.body.customer, function(err,updateProfile){
+    if(err){
+      console.log(err);
+      req.flash('error','error while updating profile. Please try again');
+      res.redirect("/customer/"+req.params.id+"/profile");
+    }
+    else{
+      req.flash('success','Profile Updation successful');
+      res.redirect("/customer/"+req.params.id+"/profile"); 
+    }
+  });
+});
+
 router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
@@ -166,7 +206,7 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
           res.redirect("/customer/dashboard");
         }
         else{
-          res.render("customer/cust_cont-details",{currentUser:customer,contractorDetail:contractor});
+          res.render("customer/cont-details",{currentUser:customer,contractorDetail:contractor});
         }
       });
     }
@@ -241,44 +281,31 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
     }
   }); 
 });
-router.get("/customer/:id/profile",middleware.isCustomerLoggedIn,function(req,res){
-  customerUser.findById(req.params.id,function(err,customer){
-    if(err){
-      console.log(err)
-        req.flash('error','Error while loading profile please try again');
-          res.redirect("/customer/dashoard");
-    }
-    else{
-      res.render("customer/customer-profile",{currentUser:customer});
-    }
-  });
-});
 
-router.get("/customer/:id/profile/edit",middleware.isCustomerLoggedIn,function(req,res){
+router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err);
-      req.flash('error','Error while loading the edit page. Please try again');
-      res.redirect("/customer/:id/profile");
+      req.flash('error','Error while loading the page. Please try again');
+      res.redirect("/customer/dashboard");
     }
     else{
-      res.render("customer/customer-profile-edit",{currentUser:customer});
+      if(customer.active_proj_cont.length!=0){
+        customer.active_proj_cont.forEach(function(cont){
+          contractorUser.findById(cont,function(err,contractor){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor});
+            }
+          });
+        });
+      }
     }
-  });
-});
-
-router.put("/customer/:id/profile",function(req,res){
-  customerUser.findByIdAndUpdate(req.params.id,req.body.customer, function(err,updateProfile){
-    if(err){
-      console.log(err);
-      req.flash('error','error while updating profile. Please try again');
-      res.redirect("/customer/"+req.params.id+"/profile");
-    }
-    else{
-      req.flash('success','Profile Updation successful');
-      res.redirect("/customer/"+req.params.id+"/profile"); 
-    }
-  });
+  })
 });
 
 //Nidhilesh editing
@@ -291,7 +318,7 @@ router.get("/customer/:id/project/",middleware.isCustomerLoggedIn,function(req,r
       res.redirect("/customer/dashboard");
     }
     else{
-      res.render("customer/customer-project",{currentUser:customer});
+      res.render("customer/project",{currentUser:customer});
     }
   });
 });
@@ -304,7 +331,7 @@ router.get("/customer/:id/project/edit",middleware.isCustomerLoggedIn,function(r
       res.redirect("/customer/:id/project");
     }
     else{
-      res.render("customer/customer-project-edit",{currentUser:customer});
+      res.render("customer/project-edit",{currentUser:customer});
     }
   });
 })

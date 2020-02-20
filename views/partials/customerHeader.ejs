@@ -36,9 +36,9 @@
                     <% if(currentUser.active_proj_cont.length ==0){%>
 
                         <%} else {%>
-                            <% currentUser.active_proj_cont.forEach(function(activcont){ %>
-                                <li><a href="/customer/contractor/<%=activcont%>">Contractor Details</a></li>
-                                <li><a href="/customer/<%=currentUser._id%>/plan">Project Plan</a></li>  <%});}%>
+                            
+                                <li><a href="/customer/<%=currentUser._id%>/contractor">Contractor Details</a></li>
+                                <li><a href="/customer/<%=currentUser._id%>/plan">Project Plan</a></li>  <%}%>
                 </ul>
             </li>
             <li><a href="/customer/logout">Logout</a></li>

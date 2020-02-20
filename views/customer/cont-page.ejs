@@ -1,0 +1,35 @@
+<% include ../partials/customerHeader %>
+<section id="Dashboard" class="dash_banner_area">
+    <div class="container">
+
+        <% if(contractorDetail.length==0){ %>
+            <div class="jumbotron ">
+                <h1>List of contractors</h1>
+                <p class="lead">Sorry there are no contractor to display right now, come back later </p>
+            </div>
+        <%} else if(contractorDetail.length==1){%>
+                <h1>List of contractors</h1>
+                <% contractorDetail.forEach(function(contractor){ %>   
+                    <div class=" card customer_dash_content">
+                        <div class="card-body align-items-center">
+                            <h3>Name: <%=contractor.username%></h3>
+                            <p>Contractor Id: <%=contractor.contractorid%></p>
+                            <p>Email: <%=contractor.email%></p>
+                            <p>Experience: <%=contractor.experience%></p>
+                            <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                        </div>
+                    </div>   
+        <%})} else{%>   
+            <h1>List of contractors</h1>
+            <div class=" card customer_dash_content">
+                <div class="card-body align-items-center">
+                    <h3>Name: <%=contractorDetail.username%></h3>
+                    <p>Contractor Id: <%=contractorDetail.contractorid%></p>
+                    <p>Email: <%=contractorDetail.email%></p>
+                    <p>Experience: <%=contractorDetail.experience%></p>
+                    <a href="/customer/contractor/<%=contractorDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                </div>
+            </div> 
+        <%}%>    
+    </div>
+</section>        
