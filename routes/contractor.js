@@ -309,7 +309,31 @@ router.put("/contractor/:id/profile",middleware.isContractorLoggedIn,function(re
     }
   });
 });
-
+router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the page. Please try again');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      if(contractor.active_proj_cust.length!=0){
+        contractor.active_proj_cust.forEach(function(cust){
+          customerUser.findById(cust,function(err,customer){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer});
+            }
+          });
+        });
+      }
+    }
+  })
+});
 router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.user,function(err,contractor){
     if(err){

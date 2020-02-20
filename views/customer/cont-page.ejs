@@ -7,7 +7,7 @@
                 <h1>List of contractors</h1>
                 <p class="lead">Sorry there are no contractor to display right now, come back later </p>
             </div>
-        <%} else if(contractorDetail.length==1){%>
+        <%} else if(contractorDetail.length>1){%>
                 <h1>List of contractors</h1>
                 <% contractorDetail.forEach(function(contractor){ %>   
                     <div class=" card customer_dash_content">
@@ -17,6 +17,8 @@
                             <p>Email: <%=contractor.email%></p>
                             <p>Experience: <%=contractor.experience%></p>
                             <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                            <a href="/customer/<%=contractorDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
                         </div>
                     </div>   
         <%})} else{%>   

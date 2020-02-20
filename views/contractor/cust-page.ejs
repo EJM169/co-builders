@@ -1,0 +1,41 @@
+<% include ../partials/contractorHeader %>
+<section id="Dashboard" class="dash_banner_area">
+    <div class="container">
+        <% console.log(customerDetail)%>
+        <% if(customerDetail.length==0){ %>
+            <div class="jumbotron ">
+                <p class="lead">Sorry there are no customers to display right now, come back later </p>
+            </div>
+           
+            <%} else if(customerDetail.length>1){%>
+                <h1>List of customers</h1>
+                <% customerDetail.forEach(function(customer){ %>   
+                    <div class=" card customer_dash_content">
+                        <div class="card-body align-items-center">
+                            <h3>Name: <%=customer.username%></h3>
+                            <p>Email: <%=customer.email%></p>
+                            <p>Mobile: <%=customer.mobile%></p>
+                            <p>Requirements: <%=customer.requirements%></p>
+                            <a href="/customer/contractor/<%=customer._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                            <a href="/customer/<%=contractorDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
+                        </div>
+                    </div>   
+        <%})} else{%>   
+            <h1>List of contractors</h1>
+            <div class=" card customer_dash_content">
+                <div class="card-body align-items-center">
+                    <h3>Name: <%=customerDetail.username%></h3>
+                    <p>Email: <%=customerDetail.email%></p>
+                    <p>Mobile: <%=customerDetail.mobile%></p>
+                    <p>Requirements: <%=customerDetail.requirements%></p>
+                    <a href="/customer/contractor/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                    <a href="/customer/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                    <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
+                    
+                </div>
+            </div> 
+        <%}%>    
+            
+    </div>
+</section>

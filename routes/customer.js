@@ -388,9 +388,10 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
       });
      
     });
-    router.get("/customer/:id/plan",middleware.isCustomerLoggedIn,function(req,res){
-      customerUser.findById(req.user,function(err,customer){
-        if(err){
+  
+   router.get("/customer/:id/plan",middleware.isCustomerLoggedIn,function(req,res){
+    customerUser.findById(req.user,function(err,customer){
+      if(err){
           console.log(err);
           req.flash('error','Error whil loading details');
           res.redirect("/customer/dash");
