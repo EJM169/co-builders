@@ -54,7 +54,7 @@ var express             = require("express"),
     router.post("/panel/169/admin",passport.authenticate('admin-login', {
         successRedirect: "/panel/169/admin/dashboard",
         failureRedirect:"/panel/169/admin",
-        failureFlash : true 
+        failureFlash : true  
       }));
 
     router.get("/panel/169/admin/dashboard",middleware.isAdminLoggedIn,function(req,res){
