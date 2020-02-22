@@ -17,10 +17,26 @@
                     <label  for="inlineFormCustomSelect">Budget for the construction</label>
                     
                     <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[budget]" >
-                        <option value="5,00,000 to 10,00,000" n>5,00,000 to 10,00,000</option>
-                        <option value="10,00,000 to 20,00,000">10,00,000 to 20,00,000</option>
-                        <option value="20,00,000 to 30,00,000">20,00,000 to 30,00,000</option>
-                        <option value="30,00,000+">30,00,000+</option>
+                        <% if(currentUser.budget.toString()=="5,00,000 to 10,00,000"){%>
+                            <option value="5,00,000 to 10,00,000" selected>5,00,000 to 10,00,000</option> 
+                        <%}else{%>
+                            <option value="5,00,000 to 10,00,000" >5,00,000 to 10,00,000</option>    
+                        <%}%>
+                        <% if(currentUser.budget.toString()=="10,00,000 to 20,00,000"){%>
+                            <option value="10,00,000 to 20,00,000" selected>10,00,000 to 20,00,000</option>
+                        <%}else{%>
+                            <option value="10,00,000 to 20,00,000">10,00,000 to 20,00,000</option>
+                        <%}%>
+                        <% if(currentUser.budget.toString()=="20,00,000 to 30,00,000"){%>
+                            <option value="20,00,000 to 30,00,000" selected>20,00,000 to 30,00,000</option>
+                        <%}else{%>
+                            <option value="20,00,000 to 30,00,000" >20,00,000 to 30,00,000</option>
+                        <%}%>
+                        <% if(currentUser.budget.toString()=="30,00,000+"){%>
+                            <option value="30,00,000+" selected>30,00,000+</option>
+                        <%}else{%>
+                            <option value="30,00,000+">30,00,000+</option>
+                        <%}%>
                     </select>
                     </div>
                 </div>
@@ -43,9 +59,21 @@
                                 <div class="col-auto my-1">
                                 <label  for="inlineFormCustomSelect">Requirements</label>
                                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[reqselect]" value="<%=currentUser.reqselect%>" >
-                                    <option value="1-BHK" >1-BHK</option>
-                                    <option value="2-BHK">2-BHK</option>
-                                    <option value="3-BHK">3-BHK</option>
+                                    <% if(currentUser.reqselect.toString()=="1-BHK"){%>
+                                        <option value="1-BHK" selected>1-BHK</option>
+                                    <%}else{%>
+                                        <option value="1-BHK">1-BHK</option>
+                                    <%}%>
+                                    <% if(currentUser.reqselect.toString()=="2-BHK"){%>
+                                        <option value="2-BHK" selected>2-BHK</option>
+                                    <%}else{%>
+                                        <option value="2-BHK">2-BHK</option>
+                                    <%}%>
+                                    <% if(currentUser.reqselect.toString()=="3-BHK"){%>
+                                        <option value="3-BHK" selected>3-BHK</option>
+                                    <%}else{%>
+                                        <option value="3-BHK">3-BHK</option>
+                                    <%}%>
                                 </select>
                                </div>
                            </div>
@@ -56,8 +84,27 @@
                                 <div class="col-auto my-1">
                                     <label>Bathroom</label> 
                                     <select class="custom-select mr-sm-2" id="bathroomid" name="customer[bathRoomreq]" value="<%=currentUser.bathRoomreq%>"> 
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
+                                    <% if(currentUser.bathRoomreq.toString()=="1"){%>
+                                        <option value="1" selected>1</option>
+                                    <%}else{%>
+                                        <option value="1">1</option>
+                                    <%}%>
+                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
+                                        <option value="2">2</option>
+                                    <%}else{%>
+                                        <option value="1-BHK">1-BHK</option>
+                                    <%}%>
+                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
+                                        <option value="1-BHK" selected>1-BHK</option>
+                                    <%}else{%>
+                                        <option value="1-BHK">1-BHK</option>
+                                    <%}%>
+                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
+                                        <option value="1-BHK" selected>1-BHK</option>
+                                    <%}else{%>
+                                        <option value="1-BHK">1-BHK</option>
+                                    <%}%>
+                                   
                                     <option value="3">3</option>
                                     <option value="3+">3+</option>
                                     </select>
