@@ -103,7 +103,7 @@
                                             <option value="3+" selected>3+</option>
                                         <%}else{%>
                                             <option value="3+">3+</option>
-                                        <%}%
+                                        <%}%>
                                     </select>
                                 </div>
                             </div>
@@ -129,34 +129,59 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="customer[studyRoomreq]" >
-                            <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                            <% if(currentUser.studyRoomreq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="customer[studyRoomreq]" checked>
+                                <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked2" name="customer[studyRoomreq]" >
+                                <label class="custom-control-label" for="defaultChecked2">Study Room</label>
+                            <%}%>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked3" name="customer[diningRoomreq]" checked>
-                            <label class="custom-control-label" for="defaultChecked3">Dining Room</label>
+                            <% if(currentUser.diningRoomreq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked3" name="customer[diningRoomreq]" checked>
+                                <label class="custom-control-label" for="defaultChecked3">Dining Room</label>
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked3" name="customer[diningRoomreq]" >
+                                <label class="custom-control-label" for="defaultChecked3">Dining Room</label>
+                            <%}%>
                         </div>
                     </div>
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked4" name="customer[workAreareq]" checked>
-                            <label class="custom-control-label" for="defaultChecked4">Work Area</label>
+                            <% if(currentUser.workAreareq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked4" name="customer[workAreareq]" checked>
+                                <label class="custom-control-label" for="defaultChecked4">Work Area</label>
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked4" name="customer[workAreareq]" >
+                                <label class="custom-control-label" for="defaultChecked4">Work Area</label>
+                            <%}%>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked5" name="customer[utilityRoomreq]" >
-                            <label class="custom-control-label" for="defaultChecked5">Utility Room</label>
+                            <% if(currentUser.utilityRoomreq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked5" name="customer[utilityRoomreq]" checked>
+                                <label class="custom-control-label" for="defaultChecked5">Utility Room</label>   
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked5" name="customer[utilityRoomreq]" >
+                                <label class="custom-control-label" for="defaultChecked5">Utility Room</label>
+                            <%}%>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked6" name="customer[carPorchreq]" >
-                            <label class="custom-control-label" for="defaultChecked6">Car Porch</label>
+                            <% if(currentUser.carPorchreq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked6" name="customer[carPorchreq]" checked>
+                                <label class="custom-control-label" for="defaultChecked6">Car Porch</label>
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked6" name="customer[carPorchreq]" >
+                                <label class="custom-control-label" for="defaultChecked6">Car Porch</label>
+                            <%}%>
                         </div>
                     </div>
                 </div>
