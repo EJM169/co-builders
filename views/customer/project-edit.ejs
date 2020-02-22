@@ -84,29 +84,26 @@
                                 <div class="col-auto my-1">
                                     <label>Bathroom</label> 
                                     <select class="custom-select mr-sm-2" id="bathroomid" name="customer[bathRoomreq]" value="<%=currentUser.bathRoomreq%>"> 
-                                    <% if(currentUser.bathRoomreq.toString()=="1"){%>
-                                        <option value="1" selected>1</option>
-                                    <%}else{%>
-                                        <option value="1">1</option>
-                                    <%}%>
-                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
-                                        <option value="2">2</option>
-                                    <%}else{%>
-                                        <option value="1-BHK">1-BHK</option>
-                                    <%}%>
-                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
-                                        <option value="1-BHK" selected>1-BHK</option>
-                                    <%}else{%>
-                                        <option value="1-BHK">1-BHK</option>
-                                    <%}%>
-                                    <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
-                                        <option value="1-BHK" selected>1-BHK</option>
-                                    <%}else{%>
-                                        <option value="1-BHK">1-BHK</option>
-                                    <%}%>
-                                   
-                                    <option value="3">3</option>
-                                    <option value="3+">3+</option>
+                                        <% if(currentUser.bathRoomreq.toString()=="1"){%>
+                                            <option value="1" selected>1</option>
+                                        <%}else{%>
+                                            <option value="1">1</option>
+                                        <%}%>
+                                        <% if(currentUser.bathRoomreq.toString()=="2"){%>
+                                            <option value="2" selected>2</option>
+                                        <%}else{%>
+                                            <option value="2">2</option>
+                                        <%}%>
+                                        <% if(currentUser.bathRoomreq.toString()=="3"){%>
+                                            <option value="3" selected>3</option>
+                                        <%}else{%>
+                                            <option value="3">3</option>
+                                            <%}%>
+                                        <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
+                                            <option value="3+" selected>3+</option>
+                                        <%}else{%>
+                                            <option value="3+">3+</option>
+                                        <%}%
                                     </select>
                                 </div>
                             </div>
@@ -121,8 +118,13 @@
                 <div class="row justify-content-md-center">
                     <div class="col-lg-4 col-md-4 col-sm-2">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="defaultChecked1" name="customer[prayerRoomreq]" checked>
-                            <label class="custom-control-label" for="defaultChecked1">Prayer Room</label>
+                            <% if(currentUser.prayerRoomreq){%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" name="customer[prayerRoomreq]" checked>
+                                <label class="custom-control-label" for="defaultChecked1">Prayer Room</label>                            
+                            <%} else{%>
+                                <input type="checkbox" class="custom-control-input" id="defaultChecked1" name="customer[prayerRoomreq]">
+                                <label class="custom-control-label" for="defaultChecked1">Prayer Room</label>
+                            <%}%>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-2">
