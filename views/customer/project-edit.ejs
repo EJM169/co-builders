@@ -66,21 +66,27 @@
                                 <div class="col-auto my-1">
                                 <label  for="inlineFormCustomSelect">Requirements</label>
                                 <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[reqselect]" value="<%=currentUser.reqselect%>" >
-                                    <% if(currentUser.reqselect.toString()=="1-BHK"){%>
+                                    <% if(currentUser.reqselect){%>
+                                        <% if(currentUser.reqselect.toString()=="1-BHK"){%>
+                                            <option value="1-BHK" selected>1-BHK</option>
+                                        <%}else{%>
+                                            <option value="1-BHK">1-BHK</option>
+                                        <%}%>
+                                        <% if(currentUser.reqselect.toString()=="2-BHK"){%>
+                                            <option value="2-BHK" selected>2-BHK</option>
+                                        <%}else{%>
+                                            <option value="2-BHK">2-BHK</option>
+                                        <%}%>
+                                        <% if(currentUser.reqselect.toString()=="3-BHK"){%>
+                                            <option value="3-BHK" selected>3-BHK</option>
+                                        <%}else{%>
+                                            <option value="3-BHK">3-BHK</option>
+                                        <%}%>
+                                    <%} else{%>
                                         <option value="1-BHK" selected>1-BHK</option>
-                                    <%}else{%>
-                                        <option value="1-BHK">1-BHK</option>
-                                    <%}%>
-                                    <% if(currentUser.reqselect.toString()=="2-BHK"){%>
-                                        <option value="2-BHK" selected>2-BHK</option>
-                                    <%}else{%>
                                         <option value="2-BHK">2-BHK</option>
-                                    <%}%>
-                                    <% if(currentUser.reqselect.toString()=="3-BHK"){%>
-                                        <option value="3-BHK" selected>3-BHK</option>
-                                    <%}else{%>
                                         <option value="3-BHK">3-BHK</option>
-                                    <%}%>
+                                    <%}%>  
                                 </select>
                                </div>
                            </div>
@@ -91,24 +97,31 @@
                                 <div class="col-auto my-1">
                                     <label>Bathroom</label> 
                                     <select class="custom-select mr-sm-2" id="bathroomid" name="customer[bathRoomreq]" value="<%=currentUser.bathRoomreq%>"> 
-                                        <% if(currentUser.bathRoomreq.toString()=="1"){%>
-                                            <option value="1" selected>1</option>
-                                        <%}else{%>
-                                            <option value="1">1</option>
-                                        <%}%>
-                                        <% if(currentUser.bathRoomreq.toString()=="2"){%>
-                                            <option value="2" selected>2</option>
-                                        <%}else{%>
-                                            <option value="2">2</option>
-                                        <%}%>
-                                        <% if(currentUser.bathRoomreq.toString()=="3"){%>
-                                            <option value="3" selected>3</option>
-                                        <%}else{%>
-                                            <option value="3">3</option>
+                                        <% if(currentUser.bathRoomreq){%>
+                                            <% if(currentUser.bathRoomreq.toString()=="1"){%>
+                                                <option value="1" selected>1</option>
+                                            <%}else{%>
+                                                <option value="1">1</option>
                                             <%}%>
-                                        <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
-                                            <option value="3+" selected>3+</option>
-                                        <%}else{%>
+                                            <% if(currentUser.bathRoomreq.toString()=="2"){%>
+                                                <option value="2" selected>2</option>
+                                            <%}else{%>
+                                                <option value="2">2</option>
+                                            <%}%>
+                                            <% if(currentUser.bathRoomreq.toString()=="3"){%>
+                                                <option value="3" selected>3</option>
+                                            <%}else{%>
+                                                <option value="3">3</option>
+                                                <%}%>
+                                            <% if(currentUser.bathRoomreq.toString()=="1-BHK"){%>
+                                                <option value="3+" selected>3+</option>
+                                            <%}else{%>
+                                                <option value="3+">3+</option>
+                                            <%}%>
+                                        <%} else{%>
+                                            <option value="1" selected>1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
                                             <option value="3+">3+</option>
                                         <%}%>
                                     </select>
