@@ -17,26 +17,33 @@
                     <label  for="inlineFormCustomSelect">Budget for the construction</label>
                     
                     <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="customer[budget]" >
-                        <% if(currentUser.budget.toString()=="5,00,000 to 10,00,000"){%>
-                            <option value="5,00,000 to 10,00,000" selected>5,00,000 to 10,00,000</option> 
-                        <%}else{%>
-                            <option value="5,00,000 to 10,00,000" >5,00,000 to 10,00,000</option>    
-                        <%}%>
-                        <% if(currentUser.budget.toString()=="10,00,000 to 20,00,000"){%>
-                            <option value="10,00,000 to 20,00,000" selected>10,00,000 to 20,00,000</option>
-                        <%}else{%>
+                        <%if(currentUser.budget){%>
+                            <% if(currentUser.budget.toString()=="5,00,000 to 10,00,000"){%>
+                                <option value="5,00,000 to 10,00,000" selected>5,00,000 to 10,00,000</option> 
+                            <%}else{%>
+                                <option value="5,00,000 to 10,00,000" >5,00,000 to 10,00,000</option>    
+                            <%}%>
+                            <% if(currentUser.budget.toString()=="10,00,000 to 20,00,000"){%>
+                                <option value="10,00,000 to 20,00,000" selected>10,00,000 to 20,00,000</option>
+                            <%}else{%>
+                                <option value="10,00,000 to 20,00,000">10,00,000 to 20,00,000</option>
+                            <%}%>
+                            <% if(currentUser.budget.toString()=="20,00,000 to 30,00,000"){%>
+                                <option value="20,00,000 to 30,00,000" selected>20,00,000 to 30,00,000</option>
+                            <%}else{%>
+                                <option value="20,00,000 to 30,00,000" >20,00,000 to 30,00,000</option>
+                            <%}%>
+                            <% if(currentUser.budget.toString()=="30,00,000+"){%>
+                                <option value="30,00,000+" selected>30,00,000+</option>
+                            <%}else{%>
+                                <option value="30,00,000+">30,00,000+</option>
+                            <%}%>
+                        <%} else{%>
+                            <option value="5,00,000 to 10,00,000" selected>5,00,000 to 10,00,000</option>    
                             <option value="10,00,000 to 20,00,000">10,00,000 to 20,00,000</option>
-                        <%}%>
-                        <% if(currentUser.budget.toString()=="20,00,000 to 30,00,000"){%>
-                            <option value="20,00,000 to 30,00,000" selected>20,00,000 to 30,00,000</option>
-                        <%}else{%>
                             <option value="20,00,000 to 30,00,000" >20,00,000 to 30,00,000</option>
-                        <%}%>
-                        <% if(currentUser.budget.toString()=="30,00,000+"){%>
-                            <option value="30,00,000+" selected>30,00,000+</option>
-                        <%}else{%>
                             <option value="30,00,000+">30,00,000+</option>
-                        <%}%>
+                        <%}%>    
                     </select>
                     </div>
                 </div>

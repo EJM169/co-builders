@@ -4,6 +4,7 @@ var express             = require("express"),
     contractorUser      = require("../models/contractor"),
     customerUser        = require("../models/customer"),
     projectC            = require("../models/project"),
+    chat                = require("../models/chat"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -201,6 +202,18 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
             },
             function(callback){
               var newData = new projectC();
+              newData.customer=customer._id;
+              newData.contractor=contractor._id;
+              newData.save(function(err){
+                if(err){
+                  console.log(err);
+                  callback(err);
+                }
+                callback();
+              });
+            },
+            function(callback){
+              var newData = new chat();
               newData.customer=customer._id;
               newData.contractor=contractor._id;
               newData.save(function(err){
