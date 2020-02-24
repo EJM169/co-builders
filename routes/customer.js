@@ -523,7 +523,30 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
       res.redirect("/customer/dash");
     }
     else{
-        res.render("customer/chat",{currentUser:customer});
+      chat.findOne({'contractor':req.params.id},function(err,chatLog){
+          if(err){
+            console.log(err);
+            req.flash('error','Error whil loading details');
+            res.redirect("/customer/dash");
+          }   
+          else{
+            if(chatLog){
+              contractorUser.findById(project.contractor,function(err,contractor){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }
+                else{
+                  res.render("customer/chat",{currentUser:customer,message:chat,contractor:contractor});
+                }
+              });
+            }
+            else{
+                res.render("customer/chat",{currentUser:customer,message:null,contractor:null});
+            }
+          }
+      });
     }
   })
 }); 
