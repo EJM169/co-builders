@@ -427,7 +427,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
       });    
     });
 
-    router.post("/customer/:id/plan/accept",middleware.isCustomerLoggedIn,function(req,res){
+  router.post("/customer/:id/plan/accept",middleware.isCustomerLoggedIn,function(req,res){
       projectC.findById(req.params.id,function(err,project){
         if(err){
           req.flash('error','Error whil loading project details');
@@ -493,7 +493,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
         }
       });
     });
-    router.post("/customer/:id/plan/reject",middleware.isCustomerLoggedIn,function(req,res){
+  router.post("/customer/:id/plan/reject",middleware.isCustomerLoggedIn,function(req,res){
       projectC.findById(req.params.id,function(err,project){
         if(err){
           req.flash('error','Error whil loading details');
@@ -513,7 +513,20 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           })
         }
       })
-    });    
+    });   
+
+router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      onsole.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+        res.render("customer/chat",{currentUser:customer});
+    }
+  })
+}); 
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');
