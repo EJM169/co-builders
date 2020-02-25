@@ -15,6 +15,8 @@ var express                 = require("express"),
     customerRoute           = require("./routes/customer"),
     adminRoute              = require("./routes/admin");
     
+    const PORT = process.env.PORT || 1690    
+
 
 mongoose.connect("mongodb://localhost:27017/construction");
 // mongoose.set('useFindAndModify', false);
@@ -63,15 +65,8 @@ app.get("/",function(req,res){
 });
 
 
-// function isContractorLoggedIn(req,res,next){
-//         if(req.isAuthenticated()){
-//             console.log("Middleware");
-//             return next();
-//         }
-//         console.log("Middleware error");
-//         req.flash("error","Hi Contractor Please Login First")
-//         res.redirect("/");
-//     } 
-app.listen(1690,function(){
-    console.log("Runnning on 1690");
-});
+// app.listen(1690,function(){
+//     console.log("Runnning on 1690");
+// });
+
+server=app.listen(PORT);
