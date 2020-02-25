@@ -70,3 +70,4 @@ app.get("/",function(req,res){
 // });
 
 server=app.listen(PORT);
+const io = require("socket.io")(server);
