@@ -4,7 +4,6 @@ var express                 = require("express"),
     io                      = require('socket.io')(http),
     mongoose                = require("mongoose"),
     bodyParser              =require("body-parser"),
-    passportLocalMongoose   = require("passport-local-mongoose"),
     passport                = require("passport"),
     methodOverride          = require("method-override"),
     flash                   = require("connect-flash"),
@@ -13,8 +12,8 @@ var express                 = require("express"),
     contractorUser          = require("./models/contractor"),
     customerUser            = require("./models/customer"),
     project                 = require("./models/project"),
-    contractorRoute         = require("./routes/contractor"),
-    customerRoute           = require("./routes/customer"),
+    // contractorRoute         = require("./routes/contractor")(io),
+    // customerRoute           = require("./routes/customer")(io),
     adminRoute              = require("./routes/admin");
     
     const PORT = process.env.PORT || 1690    
@@ -69,8 +68,8 @@ server=http.listen(PORT,function(){
 
 
   
-app.use(contractorRoute);
-app.use(customerRoute);
+// app.use(require("./routes/contractor")(io));
+app.use(require("./routes/customer")(io));
 app.use(adminRoute);
 
 app.get("/",function(req,res){
