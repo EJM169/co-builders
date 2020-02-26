@@ -1,5 +1,7 @@
 var express                 = require("express"),
     app                     = express(),
+    http                    = require('http').Server(app),
+    io                      = require('socket.io')(http),
     mongoose                = require("mongoose"),
     bodyParser              =require("body-parser"),
     passportLocalMongoose   = require("passport-local-mongoose"),
@@ -54,6 +56,18 @@ passport.serializeUser(function(user, done) {
     if(user!=null)
       done(null,user);
   });
+
+
+// app.listen(1690,function(){
+//     console.log("Runnning on 1690");
+// });
+
+server=http.listen(PORT,function(){
+    console.log("Runnning on 1690");
+});
+// const io = require("socket.io")(server);
+
+
   
 app.use(contractorRoute);
 app.use(customerRoute);
@@ -64,10 +78,3 @@ app.get("/",function(req,res){
     res.render("index");
 });
 
-
-// app.listen(1690,function(){
-//     console.log("Runnning on 1690");
-// });
-
-server=app.listen(PORT);
-const io = require("socket.io")(server);

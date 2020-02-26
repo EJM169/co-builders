@@ -531,7 +531,7 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
           }   
           else{
             if(chatLog){
-              contractorUser.findById(project.contractor,function(err,contractor){
+              contractorUser.findById(chatLog.contractor,function(err,contractor){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
@@ -553,8 +553,8 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');
-  // req.session.destroy();
   res.redirect("/");
 });
+
 
 module.exports = router;
