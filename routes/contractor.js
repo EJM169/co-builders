@@ -13,6 +13,7 @@ var express             = require("express"),
 
 //<-----------Passport configuration------------------->
 
+module.exports = function (io) {
 
 var isValidPassword = function(user, password){
     return bCrypt.compareSync(password, user.password);
@@ -436,4 +437,14 @@ router.get("/contractor/logout",function(req,res){
     res.redirect("/");
 });
 
-module.exports = router;
+
+  //Socket.IO
+  io.on('connection', function (socket) {
+    console.log('User has connected to Index');
+    //ON Events
+   
+    //End ON Events
+});
+
+return router;
+};

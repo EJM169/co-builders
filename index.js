@@ -68,7 +68,7 @@ server=http.listen(PORT,function(){
 
 
   
-// app.use(require("./routes/contractor")(io));
+app.use(require("./routes/contractor")(io));
 app.use(require("./routes/customer")(io));
 app.use(adminRoute);
 

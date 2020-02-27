@@ -13,7 +13,7 @@ var express             = require("express"),
 
 //<-----------Passport configuration------------------->
 
-
+module.exports = function (io) {
 var isValidPassword = function(user, password){
     return bCrypt.compareSync(password, user.password);
   }
@@ -114,7 +114,7 @@ passport.use("customer-signup", new LocalStrategy({
     return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
    }
 
-   router.get("/customer-signup",function(req,res){
+router.get("/customer-signup",function(req,res){
     res.render("customer/signup");
 });
 router.post("/customer-signup",passport.authenticate('customer-signup', {
@@ -557,7 +557,6 @@ router.get("/customer/logout",function(req,res){
 });
 
 
-module.exports = function (io) {
   //Socket.IO
   io.on('connection', function (socket) {
       console.log('User has connected to Index');
@@ -565,5 +564,6 @@ module.exports = function (io) {
      
       //End ON Events
   });
+  
   return router;
 };
