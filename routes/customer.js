@@ -550,6 +550,10 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
     }
   })
 }); 
+
+router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
+  
+});
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');
