@@ -518,7 +518,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
 router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
-      onsole.log(err);
+      console.log(err);
       req.flash('error','Error whil loading details');
       res.redirect("/customer/dash");
     }
@@ -552,23 +552,41 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
 }); 
 
 router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
-  chat.findById(req.params.id,function(err,chatData){
+  customerUser.findById(req.user,function(err,customer){
     if(err){
       console.log(err);
-      sendStatus(500);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/chat/");
     }
-    else {
-      var newChat= new chat(req.body);
-      console.log("body"+req.body)
-      newChat=req.body;
-    console.log(newChat);
-    //  chat.save((err) =>{
-    //   if(err)
-    //     sendStatus(500);
-    //   res.sendStatus(200);
-    // })
+    else{
+          chat.findById(req.params.id,function(err,chatData){
+            if(err){
+              console.log(err);
+              sendStatus(500);
+            }
+            else {
+             
+              chatData.sender = customer.username;
+              chatData.messages = req.body.chat.messages.toString();
+              // newChat=req.body;
+            console.log(chatData);
+            chatData.save(function(err,data){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error whil saving');
+
+                    res.redirect("/customer/chat/"+chatData.contractor);
+                  }
+                  else{
+
+                    res.redirect("/customer/chat/"+chatData.contractor);
+
+                  }
+                });
+            }
+          })
     }
-  })
+  });
 });
 router.get("/customer/logout",function(req,res){
   req.logout();

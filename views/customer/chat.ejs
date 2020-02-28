@@ -17,14 +17,15 @@
               <%}%>
             </div>
             <br>
-            <p class="lead" name="chat[sender]"><%= currentUser.username %></p>
-
-            <br>
-            <textarea id = "message" class="form-control" name="chat[messages]" placeholder="Your Message Here">
-            </textarea>
-            <br>
             <form action="/customer/chat/<%=message._id%>" method="POST">
-              <button id="send" class="btn btn-success">Send</button>
+
+              <p class="lead" ><%= currentUser.username %></p>
+
+              <br>
+              <textarea id = "message" class="form-control" name="chat[messages]" placeholder="Your Message Here">
+              </textarea>
+              <br>
+                <button id="send" class="btn btn-success">Send</button>
             </form>
         </div>
        
