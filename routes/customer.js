@@ -538,7 +538,7 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
                   res.redirect("/customer/dashboard");
                 }
                 else{
-                  res.render("customer/chat",{currentUser:customer,message:chat,contractor:contractor});
+                  res.render("customer/chat",{currentUser:customer,message:chatLog,contractor:contractor});
                 }
               });
             }
@@ -552,17 +552,19 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
 }); 
 
 router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
-  chat.findOne(req.params.id,function(err,chat){
+  chat.findById(req.params.id,function(err,chat){
     if(err){
       console.log(err);
       sendStatus(500);
     }
     else {
-     chat=req.body.chat;
-     chat.save((err) =>{
-      if(err)
-        sendStatus(500);
-      res.sendStatus(200);
+      var chat= new chat;
+     chat=req.body;
+    console.log(chat);
+    //  chat.save((err) =>{
+    //   if(err)
+    //     sendStatus(500);
+    //   res.sendStatus(200);
     })
     }
   })
