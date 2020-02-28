@@ -552,20 +552,21 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
 }); 
 
 router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
-  chat.findById(req.params.id,function(err,chat){
+  chat.findById(req.params.id,function(err,chatData){
     if(err){
       console.log(err);
       sendStatus(500);
     }
     else {
-      var chat= new chat;
-     chat=req.body;
-    console.log(chat);
+      var newChat= new chat(req.body);
+      console.log("body"+req.body)
+      newChat=req.body;
+    console.log(newChat);
     //  chat.save((err) =>{
     //   if(err)
     //     sendStatus(500);
     //   res.sendStatus(200);
-    })
+    // })
     }
   })
 });
