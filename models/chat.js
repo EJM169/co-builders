@@ -8,8 +8,12 @@ var chatSchema = new mongoose.Schema({
     contractor:{
                 type:mongoose.Schema.Types.ObjectId,
                 ref:"contractor"},
-    // username:String,
-    message:String
+    sender:String,
+    messages:String
+    // messages:[{
+    //     messages:String,
+        
+    // }]
 });
 
 chatSchema.plugin(passportLocalMongoose);

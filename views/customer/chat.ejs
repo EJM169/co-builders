@@ -17,10 +17,10 @@
               <%}%>
             </div>
             <br>
-            <!-- <p class="lead"><%= currentUser.username %></p> -->
+            <p class="lead" name="chat[sender]"><%= currentUser.username %></p>
 
             <br>
-            <textarea id = "message" class="form-control" name="chat[message]" placeholder="Your Message Here">
+            <textarea id = "message" class="form-control" name="chat[messages]" placeholder="Your Message Here">
             </textarea>
             <br>
             <form action="/customer/chat/<%=message._id%>" method="POST">

@@ -552,7 +552,20 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
 }); 
 
 router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
-  
+  chat.findOne(req.params.id,function(err,chat){
+    if(err){
+      console.log(err);
+      sendStatus(500);
+    }
+    else {
+     chat=req.body.chat;
+     chat.save((err) =>{
+      if(err)
+        sendStatus(500);
+      res.sendStatus(200);
+    })
+    }
+  })
 });
 router.get("/customer/logout",function(req,res){
   req.logout();
