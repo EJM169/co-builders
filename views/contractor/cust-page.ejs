@@ -1,7 +1,6 @@
 <% include ../partials/contractorHeader %>
 <section id="Dashboard" class="dash_banner_area">
     <div class="container">
-        <% console.log(customerDetail)%>
         <% if(customerDetail.length==0){ %>
             <div class="jumbotron ">
                 <p class="lead">Sorry there are no customers to display right now, come back later </p>
@@ -18,6 +17,7 @@
                             <p>Requirements: <%=customer.requirements%></p>
                             <a href="/contractor/customer/<%=customer._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
                             <a href="/contractor/<%=customer._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            <a href="/contractor/chat/<%=customer._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
                             <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
                         </div>
                     </div>   
@@ -31,6 +31,7 @@
                     <p>Requirements: <%=customerDetail.requirements%></p>
                     <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
                     <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                    <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
                     <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
                     
                 </div>

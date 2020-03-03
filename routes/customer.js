@@ -567,9 +567,7 @@ router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res)
             else {
              
               chatData.sender = customer.username;
-              chatData.messages = req.body.chat.messages.toString();
-              // newChat=req.body;
-            console.log(chatData);
+              chatData.messages = req.body.chat.messages.toString();            
             chatData.save(function(err,data){
                   if(err){
                     console.log(err);
@@ -588,6 +586,7 @@ router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res)
     }
   });
 });
+
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

@@ -9,9 +9,8 @@
             <hr class="my-4">
             <br>
             <div id="messages">
-              <% if(message.message){%>
-                <h4> message.name </h4>
-                <p>  message.message </p>
+              <% if(message.messages){%>
+                <p><%=message.sender%>: <%=message.messages%> </p>
               <%} else {%>
               
               <%}%>

@@ -358,7 +358,7 @@ router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(r
     else{
       customerUser.findById(req.params.id,function(err,customer){
         if(err){
-          console.log("err");
+          console.log(err);
           req.flash('error','Error while loading contractor details');
           res.redirect("/customer/dashboard");
         }
@@ -430,6 +430,83 @@ router.post("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,
     }
   })
 });
+
+
+router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/contractor/dash");
+    }
+    else{
+      console.log("requesting user"+req.user);
+      chat.findOne({'customer':req.params.id},function(err,chatLog){
+          if(err){
+            console.log(err);
+            req.flash('error','Error whil loading details');
+            res.redirect("/contractor/dash");
+          }   
+          else{
+            console.log(chatLog);
+            if(chatLog){
+              customerUser.findById(chatLog.customer,function(err,customer){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/contractor/dash");
+                }
+                else{
+                  res.render("contractor/chat",{currentUser:contractor,message:chatLog,customer:customer});
+                }
+              });
+            }
+            else{
+                res.render("contractor/chat",{currentUser:contractor,message:null,contractor:null});
+            }
+          }
+      });
+    }
+  })
+}); 
+
+router.post("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/contractor/chat/");
+    }
+    else{
+          chat.findById(req.params.id,function(err,chatData){
+            if(err){
+              console.log(err);
+              sendStatus(500);
+            }
+            else {
+             
+              chatData.sender = contractor.username;
+              chatData.messages = req.body.chat.messages.toString();
+              // newChat=req.body;
+            chatData.save(function(err,data){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error whil saving');
+
+                    res.redirect("/contractor/chat/"+chatData.customer);
+                  }
+                  else{
+
+                    res.redirect("/contractor/chat/"+chatData.customer);
+
+                  }
+                });
+            }
+          })
+    }
+  });
+});
+
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
