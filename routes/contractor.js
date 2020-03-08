@@ -141,7 +141,7 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-       
+       s
           if(contractor.customer.length>0){
             contractor.customer.forEach(function(customer){
               customerUser.findById(customer,function(err,customer){
@@ -150,14 +150,14 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
                   req.flash('error','Error while loading customer data');
                 }
                 else{
-                  res.render("contractor/contractor-dash",{currentUser:contractor,customerDetail:customer});
+                  res.render("contractor/dashboard",{currentUser:contractor,customerDetail:customer});
                 }
               });           
           });
            
           }
           else{
-            res.render("contractor/contractor-dash",{currentUser:contractor,customerDetail:[]});
+            res.render("contractor/dashboard",{currentUser:contractor,customerDetail:[]});
         }
           }
     });
@@ -292,7 +292,7 @@ router.get("/contractor/:id/profile",middleware.isContractorLoggedIn,function(re
           res.redirect("/contractor/dashoard");
     }
     else{
-      res.render("contractor/contractor-profile",{currentUser:contractor});
+      res.render("contractor/profile",{currentUser:contractor});
     }
   });
 });
@@ -305,7 +305,7 @@ router.get("/contractor/:id/profile/edit",middleware.isContractorLoggedIn,functi
       res.redirect("/contractor/:id/profile");
     }
     else{
-      res.render("contractor/contractor-profile-edit",{currentUser:contractor});
+      res.render("contractor/profile-edit",{currentUser:contractor});
     }
   });
 });
@@ -328,7 +328,7 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
     if(err){
       console.log(err);
       req.flash('error','Error while loading the page. Please try again');
-      res.redirect("/customer/dashboard");
+      res.redirect("/contractor/dashboard");
     }
     else{
       if(contractor.active_proj_cust.length!=0){
@@ -337,7 +337,7 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
             if(err){
               console.log(err);
               req.flash('error','Error while loading the page. Please try again');
-              res.redirect("/customer/dashboard");
+              res.redirect("/contractor/dashboard");
             }
             else{
               res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer});
@@ -360,7 +360,7 @@ router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(r
         if(err){
           console.log(err);
           req.flash('error','Error while loading contractor details');
-          res.redirect("/customer/dashboard");
+          res.redirect("/contractor/dashboard");
         }
         else{
           res.render("contractor/cust-details",{currentUser:contractor,contractorDetail:customer});
