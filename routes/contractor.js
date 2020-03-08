@@ -118,7 +118,7 @@ var createHash = function(password){
    }
 
    router.get("/contractor-signup",function(req,res){
-    res.render("contractor/contractor-signup");
+    res.render("contractor/signup");
 });
 
 router.post("/contractor-signup",passport.authenticate('contractor-signup', {
@@ -363,7 +363,7 @@ router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(r
           res.redirect("/customer/dashboard");
         }
         else{
-          res.render("contractor/cont-cust-details",{currentUser:contractor,contractorDetail:customer});
+          res.render("contractor/cust-details",{currentUser:contractor,contractorDetail:customer});
         }
       });
     }
