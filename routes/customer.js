@@ -538,12 +538,12 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
                   res.redirect("/customer/dashboard");
                 }
                 else{
-                  res.render("chat",{currentUser:customer,message:chatLog,contractor:contractor});
+                  res.render("chat",{currentUser:customer,message:chatLog,otherUser:contractor});
                 }
               });
             }
             else{
-                res.render("chat",{currentUser:customer,message:null,contractor:null});
+                res.render("chat",{currentUser:customer,message:null,otherUser:null});
             }
           }
       });
