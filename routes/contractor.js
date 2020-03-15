@@ -457,12 +457,12 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
                   res.redirect("/contractor/dash");
                 }
                 else{
-                  res.render("chat",{currentUser:contractor,message:chatLog,customer:customer});
+                  res.render("chat",{currentUser:contractor,message:chatLog,otherUser:customer});
                 }
               });
             }
             else{
-                res.render("chat",{currentUser:contractor,message:null,contractor:null});
+                res.render("chat",{currentUser:contractor,message:null,otherUser:null});
             }
           }
       });
