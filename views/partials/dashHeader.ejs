@@ -31,7 +31,7 @@
             <li><a href="/customer/dashboard">Dashboard</a></li>
             <li><a href="/customer/<%=currentUser._id %>/profile">Profile</a></li>
             <li><a href="#">Project <i class="fa fa-caret-down"></i></b></a>
-       <%if(currentUser.role="customer"){%>         <ul>
+            <ul>
                     <li><a href="/customer/<%=currentUser._id %>/project">Requirements</a></li>
                     <% if(currentUser.active_proj_cont.length ==0){%>
 
