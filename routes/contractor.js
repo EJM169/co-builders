@@ -470,42 +470,42 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
   })
 }); 
 
-router.post("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,res){
-  contractorUser.findById(req.user,function(err,contractor){
-    if(err){
-      console.log(err);
-      req.flash('error','Error whil loading details');
-      res.redirect("/contractor/chat/");
-    }
-    else{
-          chat.findById(req.params.id,function(err,chatData){
-            if(err){
-              console.log(err);
-              sendStatus(500);
-            }
-            else {
+// router.post("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,res){
+//   contractorUser.findById(req.user,function(err,contractor){
+//     if(err){
+//       console.log(err);
+//       req.flash('error','Error whil loading details');
+//       res.redirect("/contractor/chat/");
+//     }
+//     else{
+//           chat.findById(req.params.id,function(err,chatData){
+//             if(err){
+//               console.log(err);
+//               sendStatus(500);
+//             }
+//             else {
              
-              chatData.sender = contractor.username;
-              chatData.messages = req.body.chat.messages.toString();
-              // newChat=req.body;
-            chatData.save(function(err,data){
-                  if(err){
-                    console.log(err);
-                    req.flash('error','Error whil saving');
+//               chatData.sender = contractor.username;
+//               chatData.messages = req.body.chat.messages.toString();
+//               // newChat=req.body;
+//             chatData.save(function(err,data){
+//                   if(err){
+//                     console.log(err);
+//                     req.flash('error','Error whil saving');
 
-                    res.redirect("/contractor/chat/"+chatData.customer);
-                  }
-                  else{
+//                     res.redirect("/contractor/chat/"+chatData.customer);
+//                   }
+//                   else{
 
-                    res.redirect("/contractor/chat/"+chatData.customer);
+//                     res.redirect("/contractor/chat/"+chatData.customer);
 
-                  }
-                });
-            }
-          })
-    }
-  });
-});
+//                   }
+//                 });
+//             }
+//           })
+//     }
+//   });
+// });
 
 router.get("/contractor/logout",function(req,res){
     req.logout();
