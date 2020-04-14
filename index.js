@@ -61,9 +61,7 @@ passport.serializeUser(function(user, done) {
 //     console.log("Runnning on 1690");
 // });
 
-server=http.listen(PORT,function(){
-    console.log("Runnning on 1690");
-});
+
 // const io = require("socket.io")(server);
 
 
@@ -71,6 +69,15 @@ server=http.listen(PORT,function(){
 app.use(require("./routes/contractor")(io));
 app.use(require("./routes/customer")(io));
 app.use(adminRoute);
+
+server=http.listen(PORT,function(){
+    console.log("Runnning on 1690");
+});
+
+io.on('connection', socket =>{
+    console.log("New chat")
+});
+
 
 app.get("/",function(req,res){
     req.logout();

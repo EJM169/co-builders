@@ -141,7 +141,6 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             req.flash('error','Error whil loading dashboard');
             res.redirect("/");
         } else {
-       s
           if(contractor.customer.length>0){
             contractor.customer.forEach(function(customer){
               customerUser.findById(customer,function(err,customer){
@@ -517,7 +516,7 @@ router.get("/contractor/logout",function(req,res){
 
   //Socket.IO
   io.on('connection', function (socket) {
-    console.log('User has connected to Index');
+    console.log('Contractor has connected to Index');
     //ON Events
    
     //End ON Events

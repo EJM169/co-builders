@@ -596,7 +596,7 @@ router.get("/customer/logout",function(req,res){
 
   //Socket.IO
   io.on('connection', function (socket) {
-      console.log('User has connected to Index');
+      console.log('Customer has connected to Index');
       //ON Events
      
       //End ON Events
