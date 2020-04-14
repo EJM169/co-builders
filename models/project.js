@@ -2,21 +2,28 @@ var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 var projectSchema = new mongoose.Schema({
     customer:{type:mongoose.Schema.Types.ObjectId,
-                ref:"customer"},
+                ref:"customer",
+                unique: true 
+    },
     contractor:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"contractor"
+        ref:"contractor",
+        unique: true 
     },
-    overallPlan:String,
+    overallPlan:{type:String, sparse:true},
     contractorStatus:{type:Boolean,
-                        default:false},
+                        default:false,
+                        sparse:true},
     customerStatus:{type:Boolean,
-                        default:false},
+                        default:false,
+                        sparse:true},
     projectStart:{type:Boolean,
-                    default:false},
+                    default:false,
+                    sparse:true},
     planDate:{
         day:Date,
-        plan:String
+        plan:{type:String,
+            sparse:true} 
     }
 });
 

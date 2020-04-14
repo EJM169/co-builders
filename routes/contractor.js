@@ -201,11 +201,15 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               });
             },
             function(callback){
-              var newData = new projectC();
+              console.log("Project area");
+              var newData =  projectC();
+     
               newData.customer=customer._id;
               newData.contractor=contractor._id;
+              console.log(newData._id);
               newData.save(function(err){
-                if(err){
+              console.log("save area");
+                if(err){                  
                   console.log(err);
                   callback(err);
                 }
@@ -213,7 +217,8 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               });
             },
             function(callback){
-              var newData = new chat();
+              console.log("chat area");
+              var newData =  chat();
               newData.customer=customer._id;
               newData.contractor=contractor._id;
               newData.save(function(err){

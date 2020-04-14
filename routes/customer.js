@@ -375,8 +375,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
         req.body.customer.carPorchreq=false;
       }
     
-
-      customerUser.findOneAndUpdate(req.params.id,req.body.customer,{upsert: true},function(err,updateProfile){
+      customerUser.findByIdAndUpdate(req.params.id,req.body.customer,{upsert: true},function(err,updateProfile){
         if(err){
           console.log(err);
           req.flash('error','error while updating profile. Please try again');
