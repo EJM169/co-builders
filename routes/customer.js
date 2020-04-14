@@ -598,8 +598,9 @@ router.get("/customer/logout",function(req,res){
   io.on('connection', function (socket) {
       console.log('Customer has connected to Index');
       //ON Events
-     
-      //End ON Events
+     socket.on('chatMessage', msg =>{
+      io.emit('message', msg);
+    });
   });
   
   return router;
