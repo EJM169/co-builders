@@ -5,6 +5,7 @@ var express             = require("express"),
     contractorUser      = require("../models/contractor"),
     projectC            = require("../models/project"),
     chat                = require("../models/chat"),
+    formatMessage       = require("../utils/messages"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
@@ -592,14 +593,19 @@ router.get("/customer/logout",function(req,res){
   res.redirect("/");
 });
 
-
+var botName = "System";
   //Socket.IO
   io.on('connection', function (socket) {
       console.log('Customer has connected to Index');
+      socket.emit('message', formatMessage(botName,"Welcome"));
+
+      socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
       //ON Events
      socket.on('chatMessage', msg =>{
       io.emit('message', msg);
     });
+
+    socket.on
   });
   
   return router;
