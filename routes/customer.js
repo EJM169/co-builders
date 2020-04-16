@@ -597,15 +597,15 @@ var botName = "System";
   //Socket.IO
   io.on('connection', function (socket) {
       console.log('Customer has connected to Index');
-      socket.emit('message', formatMessage(botName,"Welcome"));
+      // socket.emit('message', formatMessage(botName,"Welcome"));
 
-      socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
+      // socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
       //ON Events
      socket.on('chatMessage', msg =>{
       io.emit('message', msg);
     });
 
-    socket.on
+    
   });
   
   return router;

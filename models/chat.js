@@ -4,12 +4,12 @@ var mongoose = require("mongoose"),
 var chatSchema = new mongoose.Schema({
     customer:{
                 type:mongoose.Schema.Types.ObjectId,
-                ref:"customer"},
+                ref:"customer", index: { sparse: true}},
     contractor:{
                 type:mongoose.Schema.Types.ObjectId,
-                ref:"contractor"},
-    sender:String,
-    messages:String
+                ref:"contractor", index: { sparse: true}},
+    // sender:String,
+    // messages:String
     // messages:[{
     //     messages:String,
         

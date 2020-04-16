@@ -201,14 +201,11 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               });
             },
             function(callback){
-              console.log("Project area");
               var newData =  projectC();
      
               newData.customer=customer._id;
               newData.contractor=contractor._id;
-              console.log(newData._id);
               newData.save(function(err){
-              console.log("save area");
                 if(err){                  
                   console.log(err);
                   callback(err);
@@ -217,7 +214,6 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               });
             },
             function(callback){
-              console.log("chat area");
               var newData =  chat();
               newData.customer=customer._id;
               newData.contractor=contractor._id;
@@ -474,42 +470,6 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
   })
 }); 
 
-// router.post("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,res){
-//   contractorUser.findById(req.user,function(err,contractor){
-//     if(err){
-//       console.log(err);
-//       req.flash('error','Error whil loading details');
-//       res.redirect("/contractor/chat/");
-//     }
-//     else{
-//           chat.findById(req.params.id,function(err,chatData){
-//             if(err){
-//               console.log(err);
-//               sendStatus(500);
-//             }
-//             else {
-             
-//               chatData.sender = contractor.username;
-//               chatData.messages = req.body.chat.messages.toString();
-//               // newChat=req.body;
-//             chatData.save(function(err,data){
-//                   if(err){
-//                     console.log(err);
-//                     req.flash('error','Error whil saving');
-
-//                     res.redirect("/contractor/chat/"+chatData.customer);
-//                   }
-//                   else{
-
-//                     res.redirect("/contractor/chat/"+chatData.customer);
-
-//                   }
-//                 });
-//             }
-//           })
-//     }
-//   });
-// });
 
 router.get("/contractor/logout",function(req,res){
     req.logout();
