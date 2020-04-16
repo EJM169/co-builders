@@ -551,41 +551,7 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   })
 }); 
 
-// router.post("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
-//   customerUser.findById(req.user,function(err,customer){
-//     if(err){
-//       console.log(err);
-//       req.flash('error','Error whil loading details');
-//       res.redirect("/customer/chat/");
-//     }
-//     else{
-//           chat.findById(req.params.id,function(err,chatData){
-//             if(err){
-//               console.log(err);
-//               sendStatus(500);
-//             }
-//             else {
-             
-//               chatData.sender = customer.username;
-//               chatData.messages = req.body.chat.messages.toString();            
-//             chatData.save(function(err,data){
-//                   if(err){
-//                     console.log(err);
-//                     req.flash('error','Error whil saving');
 
-//                     res.redirect("/customer/chat/"+chatData.contractor);
-//                   }
-//                   else{
-
-//                     res.redirect("/customer/chat/"+chatData.contractor);
-
-//                   }
-//                 });
-//             }
-//           })
-//     }
-//   });
-// });
 
 router.get("/customer/logout",function(req,res){
   req.logout();
