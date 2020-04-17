@@ -483,9 +483,9 @@ router.get("/contractor/logout",function(req,res){
   io.on('connection', function (socket) {
     console.log('Contractor has connected to Index');
    
-    socket.on('chatMessage', msg =>{
-      io.emit('message', msg);
-    });
+    // socket.on('chatMessage', msg =>{
+    //   io.emit('message', msg);
+    // });
 
 });
 
