@@ -12,7 +12,7 @@
         </div>
         <%} else{%>
        
-            <%if(project.contractorStatus){%>
+            <%if(project.contractorStatus && !project.customerStatus){%>
                 <div class=" card plan_content_area">
                     <div class="card-body align-items-center">  
                         <h3><%=contractor.username%> Plan:</h3>

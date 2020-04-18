@@ -353,7 +353,7 @@ router.get("/contractor/customer/:id",middleware.isContractorLoggedIn,function(r
     if(err){
       console.log(err);
       req.flash('error','Error whil loading details');
-      res.redirect("/customer/dash");
+      res.redirect("/contractor/dashboard");
     }
     else{
       customerUser.findById(req.params.id,function(err,customer){

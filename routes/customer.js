@@ -198,7 +198,7 @@ router.get("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(req
     if(err){
       console.log(err);
       req.flash('error','Error whil loading details');
-      res.redirect("/customer/dash");
+      res.redirect("/customer/dashboard");
     }
     else{
       contractorUser.findById(req.params.id,function(err,contractor){
@@ -312,7 +312,7 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
 
 //Nidhilesh editing
 
-router.get("/customer/:id/project/",middleware.isCustomerLoggedIn,function(req,res){
+router.get("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.params.id,function(err,customer){
     if(err){
       console.log(err);
@@ -394,15 +394,15 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
     customerUser.findById(req.user,function(err,customer){
       if(err){
           console.log(err);
-          req.flash('error','Error whil loading details');
-          res.redirect("/customer/dash");
+          req.flash('error','Error whil loading customer details');
+          res.redirect("/customer/dashboard");
         }
         else{
           projectC.findOne({'contractor':req.params.id},function(err,project){
             if(err){
               console.log(err);
-              req.flash('error','Error whil loading details');
-              res.redirect("/customer/dash");
+              req.flash('error','Error whil loading project details');
+              res.redirect("/customer/dashboard");
             }   
             else{
               if(project){
@@ -481,10 +481,10 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
                   ], function(err) {
                     if(err) {
                         req.flash('error','Error while saving data');
-                        res.redirect("/customer/"+projectC.customer+"/plan");
+                        res.redirect("/customer/"+project.contractor+"/plan");
                     }
                     req.flash('success','succesfully accepted the plan');
-                    res.redirect("/customer/"+projectC.customer+"/plan");  
+                    res.redirect("/customer/"+project.contractor+"/plan");  
                   });
                 }
               });
@@ -520,14 +520,14 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
     if(err){
       console.log(err);
       req.flash('error','Error whil loading details');
-      res.redirect("/customer/dash");
+      res.redirect("/customer/dashboard");
     }
     else{
       chat.findOne({'contractor':req.params.id},function(err,chatLog){
           if(err){
             console.log(err);
             req.flash('error','Error whil loading details');
-            res.redirect("/customer/dash");
+            res.redirect("/customer/dashboard");
           }   
           else{
             if(chatLog){
