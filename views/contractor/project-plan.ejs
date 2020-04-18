@@ -21,7 +21,7 @@
                         </div>
                     </form>
                 </div>
-            <%}else{%>
+            <%}else if(project.contractorStatus && !currentUser.projectStatus){%>
                 <div class="container">
                     <p class="lead"><%=customer.username%></p>
                     <hr class="my-4">
@@ -30,7 +30,16 @@
                         <p class=" text-success"><i class="far fa-check-square"></i>Plan has been sent</p>
                     </div>
                 </div>    
-            <%}%>    
+            <%}else{%>
+                <div class="container">
+                <p class="lead"><%=customer.username%></p>
+                <hr class="my-4">
+                <p><%=project.overallPlan%></p>
+                <div class="cont-send">
+                        <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
+                </div>
+             <%}%>   
+            </div>         
         </div>   
         <%}%>
     </div>

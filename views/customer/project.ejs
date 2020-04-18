@@ -7,7 +7,7 @@
         <% if(currentUser.requirements==null){%>
             <div class="jumbotron ">
                 <p class="lead">Hi <%=currentUser.username%> please fill in your requirement details </p>
-                <a class="btn btn-primary btn-lg" href="/customer/<%=currentUser._id%>/project/edit" role="button">Edit</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Edit</a>
             </div>
             <%} else {%>
         <div class=" card project_content">
@@ -72,24 +72,11 @@
                             <% if(currentUser.additionalreq){ %>
                                 <p>Other additional requirement:<%= currentUser.additionalreq; %></p>    
                             <%} %>
-                           <!---<p>Study Room:<%= currentUser.dateOfJoin.toDateString() ;%></p>       
-                            <% if(currentUser.location){ %>
-                                <p>Location of Construction site:<%= currentUser.location; %></p>    
-                            <%} %>
-                            <% if(currentUser.budget){ %>
-                                <p>Budget range:<%= currentUser.budget; %></p>    
-                            <%} %>
-                            <% if(currentUser.area){ %>
-                                <p>Total area:<%= currentUser.area; %></p>    
-                            <%} %>
-                            <% if(currentUser.requirements){ %>
-                                <p>Requirement Details:<%= currentUser.requirements; %></p>    
-                            <%} %>
-                            <% if(currentUser.reqselect){ %>
-                                <p>Budget range:<%= currentUser.reqselect; %></p>    
-                            <%} %>
-                          
-                            -->
+                            <%if(currentUser.projectStatus){%>
+                                <a href=""><input type="submit" class="btn btn-primary btn-lg disabled"  value="Edit"></a>
+                            <%} else if(!currentUser.projectStatus){%>
+                                <a href="/customer/<%=currentUser._id%>/project/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
+                            <%}%>
                     </div>
                 </div>
             <%}%>    

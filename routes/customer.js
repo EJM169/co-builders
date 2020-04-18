@@ -437,13 +437,13 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           customerUser.findById(project.customer,function(err,customer){
             if(err){
               req.flash('error','Error whil loading customer details');
-              res.redirect("/customer/"+projectC.customer+"/plan");
+              res.redirect("/customer/"+project.customer+"/plan");
             }
             else{
               contractorUser.findById(project.contractor,function(err,contractor){
                 if(err){
                   req.flash('error','Error whil loading contractor details');
-                  res.redirect("/customer/"+projectC.customer+"/plan");
+                  res.redirect("/customer/"+project.customer+"/plan");
                 }
                 else{
                   async.series([
