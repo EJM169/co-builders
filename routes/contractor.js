@@ -393,6 +393,7 @@ router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,r
                 res.redirect("/customer/dash");
               }
               else{
+                console.log(project.planDate);
                 res.render("contractor/project-plan",{currentUser:contractor,project:project,customer:customer});
               }
             });
@@ -470,6 +471,18 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
   })
 }); 
 
+router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading edit page');
+      res.redirect("/contractor/:id/profile");
+    }
+    else{
+      res.render("contractor/schedule",{currentUser:contractor});
+    }
+  });
+});
 
 router.get("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.params.id,function(err,contractor){
@@ -484,6 +497,28 @@ router.get("/contractor/:id/project/schedule/edit",middleware.isContractorLogged
   });
 });
 
+router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading contractor details');
+          res.redirect("/contractor/dashboard");  
+    }
+    else{
+      projectC.findByIdAndUpdate({'contractor':contractor._id},req.body.planDate,{upsert: true},function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error while loading project details');
+          res.redirect("/contractor/dashboard");  
+        }
+        else{
+          req.flash('success','Updation successful');
+          res.redirect("/contractor/"+req.params.id+"/project/schedule"); 
+        }
+      });
+    }
+  })
+})
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');

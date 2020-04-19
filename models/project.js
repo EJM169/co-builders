@@ -16,10 +16,10 @@ var projectSchema = new mongoose.Schema({
     customerStatus:{type:Boolean,
                         default:false},
     projectStart:{type:Boolean},
-    planDate:{
+    planDate:[{
         day:Date,
         plan:{type:String} 
-    }
+    }]
 });
 
 projectSchema.plugin(passportLocalMongoose);

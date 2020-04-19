@@ -38,9 +38,9 @@
                 <div class="cont-send">
                         <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
                 </div>
-                <%if(project.planDate=="{}"){%>
+                <%console.log(project.planDate);%>
+                <%if(project.planDate=="[]"){%>
                     <a href="/contractor/<%=currentUser._id%>/project/schedule/edit"><input type="submit" class="btn btn-primary btn-lg" value="Create Schedule"></a>
-                
                 <%}else{%>
                     <a href="/contractor/<%=currentUser._id%>/project/schedule"><input type="submit" class="btn btn-primary btn-lg" value="View Schedule"></a>
                 <%}%>
