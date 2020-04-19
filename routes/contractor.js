@@ -471,6 +471,19 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
 }); 
 
 
+router.get("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading edit page');
+      res.redirect("/contractor/:id/profile");
+    }
+    else{
+      res.render("contractor/schedule-edit",{currentUser:contractor});
+    }
+  });
+});
+
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
