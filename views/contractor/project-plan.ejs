@@ -38,11 +38,8 @@
                 <div class="cont-send">
                         <p class=" text-success"><i class="far fa-check-square"></i>Plan Accepted</p>
                 </div>
-                <%if(project.planDate.length=="0"){%>
-                    <a href="/contractor/<%=project._id%>/project/schedule"><input type="submit" class="btn btn-primary btn-lg" value="Create Schedule"></a>
-                <%}else{%>
+                
                     <a href="/contractor/<%=project._id%>/project/schedule"><input type="submit" class="btn btn-primary btn-lg" value="View Schedule"></a>
-                <%}%>
 
              <%}%>   
             </div>         

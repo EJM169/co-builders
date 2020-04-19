@@ -1,0 +1,46 @@
+<% include ../partials/customerHeader %>
+<section id="customer" class="plan_area">
+    <div class="container">
+        <% if(!project.planDate.length){%>
+            <div class="jumbotron ">
+                <p class="lead">No Schedule so far please contact the contractor</p>
+            </div>
+        <%}%>
+            <div class="plan_fullcontent">
+                <div class="container ">
+
+                <p class="lead">Task Schedule <a id="add" href="#"></a></p>
+                    <hr class="my-4">  
+                    <div class="row plan_heading">
+                        <div class="col-lg-3">
+                            <h3>Date</h3>
+                        </div>
+                        <div class="col-lg-9">
+                            <h3>Task to Do</h3>
+                        </div>
+                    </div>
+                    <hr class="my-1">  
+                    
+                    <% project.planDate.forEach(function(plan){%>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <p><%=plan.day%></p>
+                        </div>
+                        <div class="col-lg-9">
+                            <p><%=plan.plan%></p>
+                        </div>
+                    </div>
+                    <%})%>
+                    <p class="text-muted">Contact the Contractor if you want to change something</p>
+
+                </div>    
+            </div>
+        
+    </div>
+</section>    
+
+
+<% include ../partials/footer %>
+
+
+

@@ -523,7 +523,7 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
                 }
                 else{
                   req.flash('success','Successfully saved the data');
-                  res.redirect("/contractor/"+project._id+"/plan")
+                  res.redirect("/contractor/"+project._id+"/project/schedule")
                 }
               })
             }

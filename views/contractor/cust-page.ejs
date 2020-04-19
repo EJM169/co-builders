@@ -22,7 +22,7 @@
                         </div>
                     </div>   
         <%})} else{%>   
-            <h1>List of contractors</h1>
+            <h1>List of customers</h1>
             <div class=" card customer_dash_content">
                 <div class="card-body align-items-center">
                     <h3>Name: <%=customerDetail.username%></h3>
@@ -32,6 +32,7 @@
                     <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
                     <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
                     <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                    <!-- <a href="/contractor/<%=//project._id%>/project/schedule"><input type="submit" class="btn btn-primary btn-lg" value="View Schedule"></a> -->
                     <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
                     
                 </div>

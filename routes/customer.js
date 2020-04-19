@@ -515,6 +515,28 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
       })
     });   
 
+  router.get("/customer/:id/project/schedule",middleware.isCustomerLoggedIn,function(req,res){
+      customerUser.findById(req.user,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error while loading edit page');
+          res.redirect("/contractor/:id/profile");
+        }
+        else{
+          projectC.findById(req.params.id,function(err,project){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading project details');
+              res.redirect("/customer/dash");
+            }   
+            else{
+              res.render("customer/schedule",{currentUser:customer,project:project});
+          }
+        });
+      }
+    });
+    });
+    
 router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
