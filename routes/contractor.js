@@ -393,7 +393,6 @@ router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,r
                 res.redirect("/customer/dash");
               }
               else{
-                console.log(project.planDate);
                 res.render("contractor/project-plan",{currentUser:contractor,project:project,customer:customer});
               }
             });
@@ -471,53 +470,64 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
   })
 }); 
 
-router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
-  contractorUser.findById(req.params.id,function(err,contractor){
-    if(err){
-      console.log(err);
-      req.flash('error','Error while loading edit page');
-      res.redirect("/contractor/:id/profile");
-    }
-    else{
-      res.render("contractor/schedule",{currentUser:contractor});
-    }
-  });
-});
+// router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+//   contractorUser.findById(req.params.id,function(err,contractor){
+//     if(err){
+//       console.log(err);
+//       req.flash('error','Error while loading edit page');
+//       res.redirect("/contractor/:id/profile");
+//     }
+//     else{
+//       res.render("contractor/schedule",{currentUser:contractor});
+//     }
+//   });
+// });
 
-router.get("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
-  contractorUser.findById(req.params.id,function(err,contractor){
+router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
     if(err){
       console.log(err);
       req.flash('error','Error while loading edit page');
       res.redirect("/contractor/:id/profile");
     }
     else{
-      res.render("contractor/schedule-edit",{currentUser:contractor});
-    }
-  });
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading project details');
+          res.redirect("/customer/dash");
+        }   
+        else{
+          res.render("contractor/schedule",{currentUser:contractor,project:project});
+      }
+    });
+  }
+});
 });
 
 router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
-  contractorUser.findById(req.params.id,function(err,contractor){
-    if(err){
-      console.log(err);
-      req.flash('error','Error while loading contractor details');
-          res.redirect("/contractor/dashboard");  
-    }
-    else{
-      projectC.findByIdAndUpdate({'contractor':contractor._id},req.body.planDate,{upsert: true},function(err,project){
+       projectC.findById(req.params.id,function(err,project){
         if(err){
           console.log(err);
           req.flash('error','Error while loading project details');
           res.redirect("/contractor/dashboard");  
         }
         else{
-          req.flash('success','Updation successful');
-          res.redirect("/contractor/"+req.params.id+"/project/schedule"); 
-        }
+                console.log(project.planDate);
+              project.planDate.push(req.body.planDate);
+              // project.planDate.plan.push(req.body.planDate.plan);
+              project.save(function(err,savedata){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while saving')
+                }
+                else{
+                  req.flash('success','Successfully saved the data');
+                  res.redirect("/contractor/"+project._id+"/plan")
+                }
+              })
+            }
       });
-    }
-  })
 })
 router.get("/contractor/logout",function(req,res){
     req.logout();

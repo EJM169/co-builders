@@ -17,7 +17,7 @@ var projectSchema = new mongoose.Schema({
                         default:false},
     projectStart:{type:Boolean},
     planDate:[{
-        day:Date,
+        day:{type:String},
         plan:{type:String} 
     }]
 });
