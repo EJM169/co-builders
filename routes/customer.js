@@ -588,10 +588,13 @@ var botName = "System";
       // socket.emit('message', formatMessage(botName,"Welcome"));
 
       // socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
-      //ON Events
-     socket.on('chatMessage', msg =>{
-      io.emit('message', msg);
-    });
+      //ON Events 
+    socket.on('username',username=>{
+      socket.on('chatMessage', msg =>{
+        io.emit('message', formatMessage(username,msg));
+      });
+    })
+     
 
     
   });

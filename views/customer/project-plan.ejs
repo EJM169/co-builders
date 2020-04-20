@@ -18,6 +18,8 @@
                         <h3><%=contractor.username%> Plan:</h3>
                         <p><%=project.overallPlan%></p>
                     </div>
+                    <p class="text-muted">Please make sure that you meetup with the contractor before finalising and accepting the plan</p>
+
                     <div class="dash_button ">  
                         <form action="/customer/<%=project._id%>/plan/accept" method="post">          
                             <button type="submit" class="btn btn-outline-success btn-accept"><i class="far fa-check-circle"></i></button>

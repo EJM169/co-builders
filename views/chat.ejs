@@ -6,7 +6,7 @@
     <div class="container">
         <br>
         <div class="jumbotron">
-            <h1 class="display-4"><%= otherUser.username %> Chat</h1>
+            <h3 class="display-7"><%= otherUser.username %> Chat</h3>
             <hr class="my-4">
             <br>
             <dvi class="chat-messages">
@@ -21,7 +21,7 @@
             <br>
             <form id="chat-form" action="" method="">
 
-              <p class="lead" ><%= currentUser.username %></p>
+              <p id="username" class="lead" ><%= currentUser.username %></p>
 
                 <br>
                 <textarea id = "message" class="form-control" name="chat[messages]" placeholder="Your Message Here">
@@ -35,6 +35,7 @@
 </section>
     
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.3/qs.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/chat.js"></script>
 <!-- <script>

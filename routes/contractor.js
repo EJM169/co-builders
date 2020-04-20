@@ -544,6 +544,11 @@ router.get("/contractor/logout",function(req,res){
     // socket.on('chatMessage', msg =>{
     //   io.emit('message', msg);
     // });
+    // socket.on('username',username=>{
+    //   socket.on('chatMessage', msg =>{
+    //     io.emit('message', formatMessage(username,msg));
+    //   });
+    // })
 
 });
 
