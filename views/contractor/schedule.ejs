@@ -59,29 +59,27 @@
     </div>
 </section>    
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 <% include ../partials/contractorFooter %>
-
 <script>
+    
     var planDate= document.querySelectorAll("#date");
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    console.log(date);
-    console.log(project);
+    console.log(moment().format());
+
     dateChecker();
     function dateChecker(){
-        project.planDate.day.forEach(function(planDate){
+        planDate.forEach(function(planDate){
            
-            console.log(planDate);
-
-        //    if(planday.toString < date.){
-        //        console.log("late");
-        //    }
-        //    if( planday.toString > date.toString){
-        //        console.log("There is time")
-        //    }
-        })
-    }
+            console.log(planDate.innerHTML);
+            console.log(moment(planDate.innerHTML, "YYYYMMDD").fromNow());
+            if(moment(planDate.innerHTML, "YYYYMMDD").fromNow()<"12 hours") // 8 years ago
+            {
+                console.log("working");
+            }
+       
+    });
+}
 </script>
 
 
