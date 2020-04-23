@@ -292,6 +292,7 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
       res.redirect("/customer/dashboard");
     }
     else{
+    //may need to use project db for id  
       if(customer.active_proj_cont.length!=0){
         customer.active_proj_cont.forEach(function(cont){
           contractorUser.findById(cont,function(err,contractor){
