@@ -1,16 +1,17 @@
-var express             = require("express"),
-    async               = require("async"),
-    router              = express.Router({mergeParams:true}),
-    customerUser        = require("../models/customer"),
-    contractorUser      = require("../models/contractor"),
-    projectC            = require("../models/project"),
-    chat                = require("../models/chat"),
-    formatMessage       = require("../utils/messages"),
-    flash               = require("connect-flash"),
-    passport            = require("passport"),
-    LocalStrategy       = require("passport-local"),
-    bCrypt              = require('bcrypt'),
-    middleware          = require("../middleware");
+var express                         = require("express"),
+    async                           = require("async"),
+    router                          = express.Router({mergeParams:true}),
+    customerUser                    = require("../models/customer"),
+    contractorUser                  = require("../models/contractor"),
+    projectC                        = require("../models/project"),
+    chat                            = require("../models/chat"),
+    formatMessage                   = require("../utils/messages"),
+    {userJoin,getCurrentUser}       = require("../utils/users"),
+    flash                           = require("connect-flash"),
+    passport                        = require("passport"),
+    LocalStrategy                   = require("passport-local"),
+    bCrypt                          = require('bcrypt'),
+    middleware                      = require("../middleware");
 
 //<-----------Passport configuration------------------->
 
@@ -590,7 +591,7 @@ var botName = "System";
 
       // socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
       //ON Events 
-    socket.on('username',username=>{
+    socket.on('joinRoom',({username,room})=>{
       socket.on('chatMessage', msg =>{
         io.emit('message', formatMessage(username,msg));
       });

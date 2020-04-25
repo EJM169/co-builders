@@ -1,5 +1,5 @@
 const chatForm = document.getElementById("chat-form");
-const message_id = document.getElementById("chat_id").innerText;
+const room = document.getElementById("chat_id").innerText;
 const chatMessages = document.querySelector("chat-messages");
 var username = document.getElementById("username").innerText;
 
@@ -9,7 +9,7 @@ console.log(message_id);
 
 const socket = io();
 
-socket.emit("username",username);
+socket.emit("joinRoom",{username, room});
 socket.on('message', message =>{
     outputMessage(message);
     chatMessages.scrollTop = chatMessages.scrollHeight;
