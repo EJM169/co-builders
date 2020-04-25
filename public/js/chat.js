@@ -1,5 +1,5 @@
 const chatForm = document.getElementById("chat-form");
-const message_id = document.getElementById("chat_id");
+const message_id = document.getElementById("chat_id").innerText;
 const chatMessages = document.querySelector("chat-messages");
 var username = document.getElementById("username").innerText;
 
