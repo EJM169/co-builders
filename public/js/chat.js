@@ -1,10 +1,11 @@
 const chatForm = document.getElementById("chat-form");
+const message_id = document.getElementById("chat_id");
 const chatMessages = document.querySelector("chat-messages");
 var username = document.getElementById("username").innerText;
 
 // const {username}=Qs.parse(location.search);
 
-console.log(username)
+console.log(message_id);
 
 const socket = io();
 
