@@ -5,7 +5,7 @@ var username = document.getElementById("username").innerText;
 
 // const {username}=Qs.parse(location.search);
 
-console.log(message_id);
+console.log(room);
 
 const socket = io();
 

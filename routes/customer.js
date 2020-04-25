@@ -592,11 +592,17 @@ var botName = "System";
       // socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
       //ON Events 
     socket.on('joinRoom',({username,room})=>{
-      socket.on('chatMessage', msg =>{
-        io.emit('message', formatMessage(username,msg));
-      });
+      
+      const user = userJoin(socket.id, username,room);
+      socket.join(user.room);
+      // socket.on('chatMessage', msg =>{
+      //   io.emit('message', formatMessage(username,msg));
+      // });
     })
-     
+    socket.on('chatMessage', msg =>{
+      const user = getCurrentUser(socket.id);
+      io.to(user.room).emit('message', formatMessage(user.username,msg));
+    });
 
     
   });
