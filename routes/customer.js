@@ -1,17 +1,17 @@
-var express                         = require("express"),
-    async                           = require("async"),
-    router                          = express.Router({mergeParams:true}),
-    customerUser                    = require("../models/customer"),
-    contractorUser                  = require("../models/contractor"),
-    projectC                        = require("../models/project"),
-    chat                            = require("../models/chat"),
-    formatMessage                   = require("../utils/messages"),
-    {userJoin,getCurrentUser}       = require("../utils/users"),
-    flash                           = require("connect-flash"),
-    passport                        = require("passport"),
-    LocalStrategy                   = require("passport-local"),
-    bCrypt                          = require('bcrypt'),
-    middleware                      = require("../middleware");
+var express                                 = require("express"),
+    async                                   = require("async"),
+    router                                  = express.Router({mergeParams:true}),
+    customerUser                            = require("../models/customer"),
+    contractorUser                          = require("../models/contractor"),
+    projectC                                = require("../models/project"),
+    chat                                    = require("../models/chat"),
+    formatMessage                           = require("../utils/messages"),
+    {userJoin,getCurrentUser,userLeave}     = require("../utils/users"),
+    flash                                   = require("connect-flash"),
+    passport                                = require("passport"),
+    LocalStrategy                           = require("passport-local"),
+    bCrypt                                  = require('bcrypt'),
+    middleware                              = require("../middleware");
 
 //<-----------Passport configuration------------------->
 
@@ -586,7 +586,6 @@ router.get("/customer/logout",function(req,res){
 var botName = "System";
   //Socket.IO
   io.on('connection', function (socket) {
-      console.log('Customer has connected to Index');
       // socket.emit('message', formatMessage(botName,"Welcome"));
 
       // socket.broadcast.emit('message', formatMessage(botName,"A user has connectedd"));
@@ -604,6 +603,9 @@ var botName = "System";
       io.to(user.room).emit('message', formatMessage(user.username,msg));
     });
 
+    socket.on('disconnect',()=>{
+      userLeave(socket.id);
+    })
     
   });
   
