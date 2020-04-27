@@ -11,7 +11,8 @@ var chatSchema = new mongoose.Schema({
     // sender:String,
     // messages:String
     // messages:[{
-    //     messages:String,
+    //  username:String,   
+    //  messages:String
         
     // }]
 });
