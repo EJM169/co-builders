@@ -583,7 +583,6 @@ router.get("/customer/logout",function(req,res){
   res.redirect("/");
 });
 
-var botName = "System";
   //Socket.IO
   io.on('connection', function (socket) {
       // socket.emit('message', formatMessage(botName,"Welcome"));
@@ -600,6 +599,7 @@ var botName = "System";
     })
     socket.on('chatMessage', msg =>{
       const user = getCurrentUser(socket.id);
+      storeMessage(msg,user);
       io.to(user.room).emit('message', formatMessage(user.username,msg));
     });
 
@@ -609,5 +609,15 @@ var botName = "System";
     
   });
   
+  function storeMessage(msg,user){
+    chat.findById(user.room,function(err,chat){
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(chat);
+      }
+    })
+  }
   return router;
 };
