@@ -13,8 +13,10 @@
             <dvi class="chat-messages">
               <div id="messages">
                 <% if(message.messages){%>
-                  <p><%=message.sender%>: <%=message.messages%> </p>
-                <%} else {%>
+                  <%message.messages.forEach(function(message){ %>
+                    <p class="lead"><%=message.username%>: <%=message.messages%></p>
+                 <% })} else {%>
+                
                 
                 <%}%>
               </div>
