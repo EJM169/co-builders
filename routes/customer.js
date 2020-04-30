@@ -599,8 +599,8 @@ router.get("/customer/logout",function(req,res){
     })
     socket.on('chatMessage', msg =>{
       const user = getCurrentUser(socket.id);
-      storeMessage(msg,user);
       io.to(user.room).emit('message', formatMessage(user.username,msg));
+      storeMessage(msg,user);
     });
 
     socket.on('disconnect',()=>{
@@ -610,12 +610,22 @@ router.get("/customer/logout",function(req,res){
   });
   
   function storeMessage(msg,user){
+    var messages = {username:user.username,messages:msg};
     chat.findById(user.room,function(err,chat){
       if(err){
         console.log(err);
       }
       else{
-        console.log(chat);
+        chat.messages.push(messages);
+        chat.save(function(err,savedata){
+          if(err){
+            console.log(err);
+            return 0;
+          }
+          else{
+            return;
+          }
+        })
       }
     })
   }
