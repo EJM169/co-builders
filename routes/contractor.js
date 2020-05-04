@@ -513,7 +513,6 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
           res.redirect("/contractor/dashboard");  
         }
         else{
-                console.log(project.planDate);
               project.planDate.push(req.body.planDate);
               // project.planDate.plan.push(req.body.planDate.plan);
               project.save(function(err,savedata){
@@ -528,6 +527,32 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
               })
             }
       });
+});
+router.post("/contractor/:id/project/schedule/complete",middleware.isContractorLoggedIn,function(req,res){
+  console.log("working")
+  projectC.findById(req.params.id,function(err,project){
+   if(err){
+     console.log(err);
+     req.flash('error','Error while loading project details');
+     res.redirect("/contractor/dashboard");  
+   }
+   else{
+
+    console.log(req.body);
+      // project.planDate.push(req.body.planDate);
+      //    // project.planDate.plan.push(req.body.planDate.plan);
+      //    project.save(function(err,savedata){
+      //      if(err){
+      //        console.log(err);
+      //        req.flash('error','Error while saving')
+      //      }
+      //      else{
+      //        req.flash('success','Successfully saved the data');
+      //        res.redirect("/contractor/"+project._id+"/project/schedule")
+      //      }
+      //    })
+       }
+ });
 })
 router.get("/contractor/logout",function(req,res){
     req.logout();
