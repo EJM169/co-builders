@@ -26,14 +26,13 @@
                     
                     <% project.planDate.forEach(function(plan){%>
                         <div class="plan-content">
-                            <form action="/contractor/<%=project._id%>/project/schedule/complete" method="post">
 
                                 <div class="row">
                                     <div class="col-lg-3">
-                                        <p id="date" name="plan[day]" ><%=plan.day%></p>
+                                        <p id="date"><%=plan.day%></p>
                                     </div>
                                     <div class="col-lg-6">
-                                        <p name="plan[plan]"><%=plan.plan%></p>
+                                        <p ><%=plan.plan%></p>
                                     </div>
                                     <% if(!plan.Status){%>
 
@@ -54,7 +53,6 @@
                                         </div>
                                     <%}%>
                                 </div>
-                        </form>
 
                         </div>
                     <%})%>
