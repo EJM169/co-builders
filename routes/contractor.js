@@ -528,6 +528,7 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
             }
       });
 });
+// this is for updating schedule whether a task is completed or not
 router.post("/contractor/:id/project/schedule/complete",middleware.isContractorLoggedIn,function(req,res){
   console.log("working")
   projectC.findById(req.params.id,function(err,project){
