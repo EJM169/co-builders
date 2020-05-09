@@ -484,7 +484,6 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
 // });
 
 //Printing Schedule task page
-
 router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.user,function(err,contractor){
     if(err){
