@@ -4,6 +4,7 @@
         <% if(!project.planDate.length){%>
             <div class="jumbotron ">
                 <p class="lead">Hi please Create a Plan Schedule </p>
+                <a href="/contractor/<%=project._id%>/project/schedule/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
             </div>
         <%}%>
             <div class="plan_fullcontent">
@@ -36,12 +37,7 @@
                                     </div>
                                     <% if(!plan.Status){%>
 
-                                        <div class="col-lg-1">
-                                            <div class="form-group">
-
-                                                <button type="submit" class="btn btn-outline-success">Done</button>
-                                            </div>
-                                        </div>
+                                       
                                         <div class="col-lg-2">
                                         
                                             <div class="px-1 mb-1 bg-info text-white">Not Complete</div>
@@ -56,10 +52,13 @@
 
                         </div>
                     <%})%>
+                    <a href="/contractor/<%=project._id%>/project/schedule/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
+                  
+                       
                 </div>    
             </div>
             
-            <div class="container">
+            <!-- <div class="container">
                 <p class="lead">Create Task Schedule <a id="add" href="#"><i class="far fa-plus-square"></i></a></p>
                     <hr class="my-4">  
                     <form action="/contractor/<%=project._id%>/project/schedule" method="post">
@@ -79,7 +78,7 @@
                             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                         </div>
                     </form>
-            </div>
+            </div> -->
         
     </div>
 </section>    

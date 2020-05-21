@@ -496,10 +496,32 @@ router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,fu
         if(err){
           console.log(err);
           req.flash('error','Error whil loading project details');
-          res.redirect("/customer/dash");
+          res.redirect("/customer/dashboard");
         }   
         else{
           res.render("contractor/schedule",{currentUser:contractor,project:project});
+      }
+    });
+  }
+});
+});
+
+router.get("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading edit page');
+      res.redirect("/contractor/:id/profile");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading project details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          res.render("contractor/schedule_edit",{currentUser:contractor,project:project});
       }
     });
   }
@@ -532,8 +554,7 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
       });
 });
 // this is for updating schedule whether a task is completed or not
-router.post("/contractor/:id/project/schedule/complete",middleware.isContractorLoggedIn,function(req,res){
-  console.log("working")
+router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -541,8 +562,8 @@ router.post("/contractor/:id/project/schedule/complete",middleware.isContractorL
      res.redirect("/contractor/dashboard");  
    }
    else{
+      console.log(req.body);
 
-    console.log(req.body);
       // project.planDate.push(req.body.planDate);
       //    // project.planDate.plan.push(req.body.planDate.plan);
       //    project.save(function(err,savedata){
