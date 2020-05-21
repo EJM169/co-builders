@@ -26,9 +26,20 @@
                         <div class="col-lg-3">
                             <p><%=plan.day%></p>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-6">
                             <p><%=plan.plan%></p>
                         </div>
+                        <% if(!plan.status){%>
+                            <div class="col-lg-2">
+                            
+                                <div class="px-1 mb-1 bg-info text-white">Not Complete</div>
+                            </div>
+                        <%}else{%>
+                            <div class="col-lg-2">
+                                <div class="p-3 mb-2 bg-success text-white">Complete</div>
+
+                            </div>
+                        <%}%>
                     </div>
                     <%})%>
                     <p class="text-muted">Contact the Contractor if you want to change something</p>

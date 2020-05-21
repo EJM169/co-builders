@@ -566,7 +566,6 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
 
      project.planDate.forEach(function(planD){
       if(planD.plan==plan){
-        console.log(planD.plan);
         planD.status=!planD.status;
       }
     })
