@@ -4,7 +4,6 @@
         <% if(!project.planDate.length){%>
             <div class="jumbotron ">
                 <p class="lead">Hi please Create a Plan Schedule </p>
-                <a href="/contractor/<%=project._id%>/project/schedule/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
             </div>
         <%}%>
             <div class="plan_fullcontent">
@@ -26,7 +25,8 @@
                     <hr class="my-1">  
                     
                     <% project.planDate.forEach(function(plan){%>
-                        <div class="plan-content">
+                        <form id="schedule_edit-form" action="/contractor/<%=project._id%>/project/schedule/edit" method="POST">
+                            <div class="plan-content">
 
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -34,31 +34,36 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <p ><%=plan.plan%></p>
-                                    </div>
-                                    <% if(!plan.Status){%>
+                                    <input type="text" name="planDate[Complete]" type="hidden" value="<%=plan.plan%>" style="display: none;">
 
-                                       
+                                    </div>
+                                    <% if(!plan.status){%>
+
+                                        <div class="col-lg-1">
+                                            <div class="form-group">
+
+                                                <button type="submit" class="btn btn-outline-success">Done</button>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-2">
                                         
                                             <div class="px-1 mb-1 bg-info text-white">Not Complete</div>
                                         </div>
                                     <%}else{%>
                                         <div class="col-lg-3">
-                                            <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+                                            <div class="p-3 mb-2 bg-success text-white">Complete</div>
 
                                         </div>
                                     <%}%>
                                 </div>
 
                         </div>
+                        </form>
                     <%})%>
-                    <a href="/contractor/<%=project._id%>/project/schedule/edit"><input type="submit" class="btn btn-primary btn-lg" value="Edit"></a>
-                  
-                       
                 </div>    
             </div>
             
-            <!-- <div class="container">
+            <div class="container">
                 <p class="lead">Create Task Schedule <a id="add" href="#"><i class="far fa-plus-square"></i></a></p>
                     <hr class="my-4">  
                     <form action="/contractor/<%=project._id%>/project/schedule" method="post">
@@ -78,7 +83,7 @@
                             <button type="submit" class="btn btn-primary btn-lg">Submit</button>
                         </div>
                     </form>
-            </div> -->
+            </div>
         
     </div>
 </section>    

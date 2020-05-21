@@ -54,8 +54,8 @@
                                             <p ><%=plan.plan%></p>
                                         </div>
                                         <div class="col-lg-2">
-                                            <input type="checkbox" class="custom-control-input" id="<%=plan.plan%>" name="<%=plan.plan%>" onclick='buildlist("<%=plan.plan%>","<%=plan.plan%>");'>
-                                            <label class="custom-control-label" name="<%=plan.plan%>" for="<%=plan.plan%>"type="hidden" value="<%=plan.plan%>"></label>                            
+                                            <input type="checkbox" class="custom-control-input" id="<%=plan.plan%>" name="planDate[<%=plan.plan%>]" >
+                                            <label class="custom-control-label" name="plan[<%=plan.plan%>]" for="<%=plan.plan%>"type="hidden" value="plan.plan"></label>                            
                                             
                                         </div>
                                     </div>
@@ -100,17 +100,14 @@
 <% include ../partials/contractorFooter %>
 <script>
     
-    
-    
-    function buildlist(listName,labelName){
-        var controls = document.getElementsByName(listName);
-        var label = document.getElementsByName(labelName);
-        label.value = '';
-        for(var i=0;i<controls.length;i++){
-            label += controls[i].value.toString()+',';
-        }
-    }
+    // var edit_butt = document.getElementById("schedule_edit-form");
 
+    // edit_butt.addEventListener("submit",function(){
+    //     console.log("working");
+
+    // });
+    
+    var tick = document.getElementById("")
    
     var dnow     = moment().format("YYYY-MM-DD");
 

@@ -562,20 +562,26 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
      res.redirect("/contractor/dashboard");  
    }
    else{
-      console.log(req.body);
+     var plan = req.body.planDate.Complete;
 
+     project.planDate.forEach(function(planD){
+      if(planD.plan==plan){
+        console.log(planD.plan);
+        planD.status=!planD.status;
+      }
+    })
       // project.planDate.push(req.body.planDate);
       //    // project.planDate.plan.push(req.body.planDate.plan);
-      //    project.save(function(err,savedata){
-      //      if(err){
-      //        console.log(err);
-      //        req.flash('error','Error while saving')
-      //      }
-      //      else{
-      //        req.flash('success','Successfully saved the data');
-      //        res.redirect("/contractor/"+project._id+"/project/schedule")
-      //      }
-      //    })
+         project.save(function(err,savedata){
+           if(err){
+             console.log(err);
+             req.flash('error','Error while saving')
+           }
+           else{
+             req.flash('success','Successfully saved the data');
+             res.redirect("/contractor/"+project._id+"/project/schedule")
+           }
+         })
        }
  });
 })
