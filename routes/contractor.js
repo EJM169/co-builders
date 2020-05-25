@@ -555,7 +555,6 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
 });
 // this is for updating schedule whether a task is completed or not
 router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
-  console.log("working");
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -563,27 +562,50 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
      res.redirect("/contractor/dashboard");  
    }
    else{
-     console.log("body");
-     console.log(req.body);
-     var plan = req.body.planDate.Complete;
+        
+        if(req.body.button == "Done"){
+            var plan = req.body.planDate.Complete;
 
-     project.planDate.forEach(function(planD){
-      if(planD.plan==plan){
-        planD.status=!planD.status;
-      }
-    })
-      // project.planDate.push(req.body.planDate);
-      //    // project.planDate.plan.push(req.body.planDate.plan);
-         project.save(function(err,savedata){
-           if(err){
-             console.log(err);
-             req.flash('error','Error while saving')
-           }
-           else{
-             req.flash('success','Successfully saved the data');
-             res.redirect("/contractor/"+project._id+"/project/schedule")
-           }
-         })
+            project.planDate.forEach(function(planD){
+              if(planD.plan==plan){
+                planD.status=!planD.status;
+                  }
+                })
+              
+                project.save(function(err,savedata){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error while saving')
+                  }
+                  else{
+                    req.flash('success','Successfully saved the data');
+                    res.redirect("/contractor/"+project._id+"/project/schedule")
+                  }
+                })
+        }
+        else if(req.body.button =="Delete"){
+            var plan = req.body.planDate.Complete;
+            var i=0,u;
+              project.planDate.forEach(function(planD){
+               
+                if(planD.plan==plan){
+                  u =i;
+                }
+                ++i;
+              })
+              project.planDate.splice(u, 1);
+
+                  project.save(function(err,savedata){
+                    if(err){
+                      console.log(err);
+                      req.flash('error','Error while saving')
+                    }
+                    else{
+                      req.flash('success','Successfully saved the data');
+                      res.redirect("/contractor/"+project._id+"/project/schedule")
+                    }
+                  })
+        }
        }
  });
 })
