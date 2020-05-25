@@ -555,6 +555,7 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
 });
 // this is for updating schedule whether a task is completed or not
 router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,function(req,res){
+  console.log("working");
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -562,6 +563,7 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
      res.redirect("/contractor/dashboard");  
    }
    else{
+     console.log("body");
      console.log(req.body);
      var plan = req.body.planDate.Complete;
 
