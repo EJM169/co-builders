@@ -562,6 +562,7 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
      res.redirect("/contractor/dashboard");  
    }
    else{
+     console.log(req.body);
      var plan = req.body.planDate.Complete;
 
      project.planDate.forEach(function(planD){
