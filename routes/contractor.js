@@ -636,6 +636,31 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
   });    
 });
 
+
+router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req,res){
+  projectC.findById(req.params.id,function(err,project){
+   if(err){
+     console.log(err);
+     req.flash('error','Error while loading project details');
+     res.redirect("/contractor/dashboard");  
+   }
+   else{
+         project.budget.push(req.body.budget);
+         // project.planDate.plan.push(req.body.planDate.plan);
+         project.save(function(err,savedata){
+           if(err){
+             console.log(err);
+             req.flash('error','Error while saving')
+           }
+           else{
+             req.flash('success','Successfully saved the data');
+             res.redirect("/contractor/"+project.customer+"/budget")
+           }
+         })
+       }
+ });
+});
+
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
