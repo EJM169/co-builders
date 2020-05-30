@@ -470,18 +470,7 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
   })
 }); 
 
-// router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
-//   contractorUser.findById(req.params.id,function(err,contractor){
-//     if(err){
-//       console.log(err);
-//       req.flash('error','Error while loading edit page');
-//       res.redirect("/contractor/:id/profile");
-//     }
-//     else{
-//       res.render("contractor/schedule",{currentUser:contractor});
-//     }
-//   });
-// });
+
 
 //Printing Schedule task page
 router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
@@ -608,7 +597,45 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
         }
        }
  });
-})
+});
+
+router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findOne({'customer':req.params.id},function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          if(project){
+            customerUser.findById(project.customer,function(err,customer){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/customer/dashboard");
+              }
+              else{
+                res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer});
+              }
+            });
+          }
+          else{
+              res.render("contractor/budget",{currentUser:contractor,project:null,customer:null});
+
+          }
+        }
+      });
+    }
+  });    
+});
+
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
