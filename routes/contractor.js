@@ -604,14 +604,14 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
     if(err){
       console.log(err);
       req.flash('error','Error whil loading details');
-      res.redirect("/customer/dashboard");
+      res.redirect("/contractor/dashboard");
     }
     else{
       projectC.findOne({'customer':req.params.id},function(err,project){
         if(err){
           console.log(err);
           req.flash('error','Error whil loading details');
-          res.redirect("/customer/dashboard");
+          res.redirect("/contractor/dashboard");
         }   
         else{
           if(project){
@@ -619,7 +619,7 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
               if(err){
                 console.log(err);
                 req.flash('error','Error whil loading details');
-                res.redirect("/customer/dashboard");
+                res.redirect("/contractor/dashboard");
               }
               else{
                 res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer});

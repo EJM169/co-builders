@@ -539,6 +539,43 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
     });
     });
     
+    router.get("/customer/:id/budget",middleware.isCustomerLoggedIn,function(req,res){
+      customerUser.findById(req.user,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          projectC.findOne({'contractor':req.params.id},function(err,project){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/dashboard");
+            }   
+            else{
+              if(project){
+                contractorUser.findById(project.contractor,function(err,contractor){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error whil loading details');
+                    res.redirect("/customer/dashboard");
+                  }
+                  else{
+                    res.render("customer/budget",{currentUser:customer,project:project,contractor:contractor});
+                  }
+                });
+              }
+              else{
+                  res.render("contractor/budget",{currentUser:customer,project:null});
+    
+              }
+            }
+          });
+        }
+      });    
+    });
+    
 router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){

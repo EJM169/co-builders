@@ -1,0 +1,42 @@
+<% include ../partials/customerHeader %>
+<section id="Dashboard" class="dash_banner_area">
+    <div class="container">
+        <%if(project==null||contractor==null){%>
+            <div class="jumbotron ">
+                <p class="lead">Hi <%=currentUser.username%> Sorry there are no details right now, if this repeats please contact us </p>
+            </div>
+       <%} else{%>
+
+            <% if(!project.budget.length){%>
+                <div class="jumbotron ">
+                    <p class="lead">Please Contact your contractor</p>
+                </div>
+            <%} %>
+
+            <div class="container">
+                <h2>Budget Plan</h2> 
+                <hr class="my-4">
+                <% project.budget.forEach(function(budget){%>
+                 <div class="container">
+                     <div class="row">
+                         <div class="col-lg-3">
+                             <%if(budget.type==="Income"){%>
+                                 <h4 class="text-success">Type:<%=budget.type%></h4>
+                             <%} else{%>
+                                 <h4 class="text-danger">Type:<%=budget.type%></h4>
+                             <%}%>
+                         </div><div class="col-lg-5">
+                             <h4>Description:<%=budget.description%></h4>
+                         </div>
+                         <div class="col-lg-4">
+                             <h4>Value:<%=budget.value%></h4>
+                         </div>
+                     </div>
+                 </div>
+                <%})%>
+         </div>
+        <%}%>
+    </div>
+</section>        
+
+<% include ../partials/footer %>
