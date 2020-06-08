@@ -9,6 +9,7 @@ var express             = require("express"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
     bCrypt              = require('bcrypt'),
+    amountCalc          = require("../utils/calc")
     middleware          = require("../middleware");
 
 //<-----------Passport configuration------------------->
@@ -623,7 +624,7 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
               }
               else{
                 var amount = amountCalc(project.budget);
-                res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer});
+                res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer,amount:amount});
               }
             });
           }
@@ -684,8 +685,6 @@ router.get("/contractor/logout",function(req,res){
 
 });
 
-function amountCalc(budget){
-  
-}
+
 return router;
 };
