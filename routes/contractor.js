@@ -622,6 +622,7 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
                 res.redirect("/contractor/dashboard");
               }
               else{
+                var amount = amountCalc(project.budget);
                 res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer});
               }
             });
@@ -683,5 +684,8 @@ router.get("/contractor/logout",function(req,res){
 
 });
 
+function amountCalc(budget){
+  
+}
 return router;
 };
