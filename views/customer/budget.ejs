@@ -15,6 +15,14 @@
 
             <div class="container">
                 <h2>Budget Plan</h2> 
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="text-success">Total Investment:<%=amount.invest%></h3>
+                    </div>
+                    <div class="col-lg-6">
+                     <h3 class="text-danger">Total expense:<%=amount.expense%></h3>
+                 </div>
+                </div>
                 <hr class="my-4">
                 <% project.budget.forEach(function(budget){%>
                  <div class="container">
@@ -25,15 +33,20 @@
                              <%} else{%>
                                  <h4 class="text-danger">Type:<%=budget.type%></h4>
                              <%}%>
-                         </div><div class="col-lg-5">
+                         </div><div class="col-lg-4">
                              <h4>Description:<%=budget.description%></h4>
                          </div>
-                         <div class="col-lg-4">
+                         <div class="col-lg-3">
                              <h4>Value:<%=budget.value%></h4>
                          </div>
+                         <div class="col-lg-2">
+                             <a class="btn btn-primary" href="../<%=budget.budgetImage%>" role="button">Image</a>
+                         </div>    
                      </div>
+                <hr class="my-4">
                  </div>
                 <%})%>
+                <h3 class="text-success">Amount left:<%=amount.total%></h3>
          </div>
         <%}%>
     </div>

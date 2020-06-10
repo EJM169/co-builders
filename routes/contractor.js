@@ -648,7 +648,6 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
               }
               else{
                 var amount = amountCalc(project.budget);
-                console.log(project);
                 res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer,amount:amount});
               }
             });
