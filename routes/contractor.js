@@ -1,6 +1,7 @@
 var express             = require("express"),
     async               = require("async"),
     router              = express.Router({mergeParams:true}),
+    multer              = require("multer"),
     contractorUser      = require("../models/contractor"),
     customerUser        = require("../models/customer"),
     projectC            = require("../models/project"),
@@ -9,8 +10,31 @@ var express             = require("express"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
     bCrypt              = require('bcrypt'),
-    amountCalc          = require("../utils/calc")
+    amountCalc          = require("../utils/calc"),
     middleware          = require("../middleware");
+
+var storage = multer.diskStorage({
+  destination: function(req,file,cb){
+    cb(null,'./uploads/');
+  },
+  filename: function(req,file,cb){
+    cb(null,file.originalname);
+  }
+});
+var fileFilter = function(req,file,cb){
+  if(file.mimetype ==='image/png' || file.mimetype==='image/jpeg'){
+    cb(null,true);
+  }
+  else{
+    cb(null,false);
+  }
+}
+var uploads = multer({
+  storage:storage, limits:{
+  fieldSize: 1024*1024*5
+  },
+  fileFilter:fileFilter
+});
 
 //<-----------Passport configuration------------------->
 
@@ -639,7 +663,8 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
 });
 
 
-router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req,res){
+router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.single('budgetImage'),function(req,res){
+  console.log(req.file);
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -647,8 +672,13 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,function(re
      res.redirect("/contractor/dashboard");  
    }
    else{
+        req.body.budget.budgetImage = req.file.path;
+         console.log(req.body);
+        
          project.budget.push(req.body.budget);
-         // project.planDate.plan.push(req.body.planDate.plan);
+         console.log(project.budget);
+         
+         project.planDate.plan.push(req.body.planDate.plan);
          project.save(function(err,savedata){
            if(err){
              console.log(err);
