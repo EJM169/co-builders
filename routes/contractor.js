@@ -15,7 +15,7 @@ var express             = require("express"),
 
 var storage = multer.diskStorage({
   destination: function(req,file,cb){
-    cb(null,'./uploads/');
+    cb(null,'./uploads');
   },
   filename: function(req,file,cb){
     cb(null,file.originalname);
@@ -648,6 +648,7 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
               }
               else{
                 var amount = amountCalc(project.budget);
+                console.log(project);
                 res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer,amount:amount});
               }
             });
@@ -664,7 +665,6 @@ router.get("/contractor/:id/budget",middleware.isContractorLoggedIn,function(req
 
 
 router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.single('budgetImage'),function(req,res){
-  console.log(req.file);
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -673,12 +673,10 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.sin
    }
    else{
         req.body.budget.budgetImage = req.file.path;
-         console.log(req.body);
         
          project.budget.push(req.body.budget);
          console.log(project.budget);
          
-         project.planDate.plan.push(req.body.planDate.plan);
          project.save(function(err,savedata){
            if(err){
              console.log(err);
