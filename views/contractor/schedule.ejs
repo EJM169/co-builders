@@ -12,13 +12,13 @@
                 <h2>Task Schedule</h2>
                     <hr class="my-4">  
                     <div class="row plan_heading">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <h3>Date</h3>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-6">
                             <h3>Task to Do</h3>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-2">
                             <h3>Status</h3>
                         </div>
                     </div>
@@ -29,40 +29,47 @@
                             <div class="plan-content">
 
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <p id="date"><%=plan.day%></p>
+                                    <div class="col-lg-4">
+                                        <h4 id="date"><%=plan.day%></h4>
                                     </div>
-                                    <div class="col-lg-5">
-                                        <p ><%=plan.plan%></p>
+                                    <div class="col-lg-6">
+                                        <h4 ><%=plan.plan%></h4>
                                     <input type="text" name="planDate[Complete]" type="hidden" value="<%=plan.plan%>" style="display: none;">
 
                                     </div>
                                     <% if(!plan.status){%>
-
-                                        
                                         <div class="col-lg-2">
-                                        
-                                            <div class="px-1 mb-1 bg-info text-white">Not Complete</div>
-                                        </div>
-                                        <div class="col-lg-1">
-                                            <div class="form-group">
+                                            <span class="p-2 mb-2 badge badge-pill badge-danger">Not Complete</span>
 
-                                                <input type="submit" name="button" value="Done" class="btn btn-outline-success">
-                                            </div>
                                         </div>
-                                        <div class="col-lg-1">
-                                            <div class="form-group">
-                                                <input type="submit" name="button" value="Delete" class="btn btn-outline-success">
-                                            </div>
-                                        </div>
+                                        
                                     <%}else{%>
                                         <div class="col-lg-2">
-                                            <div class="p-3 mb-2 bg-success text-white">Complete</div>
-
+                                            <span class="p-3 mb-2 badge badge-pill badge-success">Complete</span>
                                         </div>
                                     <%}%>
                                 </div>
-
+                                <% if(!plan.status){%>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label for="scheduleImage">Upload Photo proof as work is completed</label>
+                                            <input type="file" class="form-control-file" id="scheduleImage" name="scheduleImage" required>
+                                          </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+    
+                                            <input type="submit" name="button" value="Done" class="btn btn-outline-success">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <input type="submit" name="button" value="Delete" class="btn btn-outline-success">
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
                         </div>
                         </form>
                     <%})%>

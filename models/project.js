@@ -20,7 +20,8 @@ var projectSchema = new mongoose.Schema({
         day:{type:String},
         plan:{type:String},
         status:{type:Boolean,
-            default:false} 
+            default:false},
+        budgetImage:{type:String}
     }],
     budget:[{
         type:{type:String},
