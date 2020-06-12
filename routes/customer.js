@@ -518,7 +518,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
       })
     });   
 
-  router.get("/customer/:id/project/schedule",middleware.isCustomerLoggedIn,function(req,res){
+  router.get("/customer/:id/schedule",middleware.isCustomerLoggedIn,function(req,res){
       customerUser.findById(req.user,function(err,customer){
         if(err){
           console.log(err);

@@ -15,7 +15,7 @@ var projectSchema = new mongoose.Schema({
                         default:false},
     customerStatus:{type:Boolean,
                         default:false},
-    projectStart:{type:Boolean},
+    projectStart:{type:Boolean,default:false},
     planDate:[{
         day:{type:String},
         plan:{type:String},
@@ -28,7 +28,13 @@ var projectSchema = new mongoose.Schema({
         description:{type:String},
         value:{type:Number},
         budgetImage:{type:String}
-    }]
+    }],
+    flags:{
+        contractorComplete:{type:Boolean,default:false},
+        customerComplete:{type:Boolean,default:false},
+        contractorCancel:{type:Boolean,default:false},
+        customerCancel:{type:Boolean,default:false}
+    }
 });
 
 projectSchema.plugin(passportLocalMongoose);
