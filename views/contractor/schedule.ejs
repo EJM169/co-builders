@@ -25,7 +25,6 @@
                     <hr class="my-1">  
                     
                     <% project.planDate.forEach(function(plan){%>
-                        <form action="/contractor/<%=project._id%>/schedule/edit" method="POST" enctype="multipart/form-data">
                             <div class="plan-content">
 
                                 <div class="row">
@@ -42,7 +41,13 @@
                                             <span class="p-2 mb-2 badge badge-pill badge-danger">Not Complete</span>
 
                                         </div>
-                                        
+                                        <form action="/contractor/<%=project._id%>/schedule/<%=plan._id%>/delete" method="POST" >
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <input type="submit" name="button" value="Delete" class="btn btn-outline-success">
+                                                </div>
+                                            </div>
+                                        </form>    
                                     <%}else{%>
                                         <div class="col-lg-2">
                                             <span class="p-3 mb-2 badge badge-pill badge-success">Complete</span>
@@ -56,29 +61,29 @@
                                     
                                 </div>
                                 <% if(!plan.status){%>
-                                <div class="row">
-                                    <div class="col-lg-8">
-                                        <div class="form-group">
-                                            <label for="scheduleImage">Upload Photo proof as work is completed</label>
-                                            <input type="file" class="form-control-file" id="scheduleImage" name="scheduleImage" required>
-                                          </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="form-group">
-    
-                                            <input type="submit" name="button" value="Done" class="btn btn-outline-success">
+                                    <form action="/contractor/<%=project._id%>/schedule/<%=plan._id%>/" method="POST" enctype="multipart/form-data">
+                                        <div class="row">
+                                        <div class="col-lg-5">
+                                            <div class="form-group">
+                                                <label for="scheduleImage">Upload Photo proof as work is completed</label>
+                                                <input type="file" class="form-control-file" id="scheduleImage" name="scheduleImage" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-2">
-                                        <div class="form-group">
-                                            <input type="submit" name="button" value="Delete" class="btn btn-outline-success">
+                                        <div class="col-lg-7">
+                                            <div class="form-group"> 
+                                                <input type="submit" name="button" value="Done" class="btn btn-outline-success">
+                                            </div>                                            
                                         </div>
-                                    </div>
+                                        </div>
+                                    </form>
+                                   
                                 </div>
                                 <%}%>
-                        </div>
-                        </form>
+               <hr class="my-4">
+
+                      
                     <%})%>
+                </div>
                 </div>    
             </div>
             

@@ -546,7 +546,7 @@ router.post("/contractor/:id/schedule",middleware.isContractorLoggedIn,function(
       });
 });
 // this is for updating schedule whether a task is completed or not
-router.post("/contractor/:id/schedule/edit",middleware.isContractorLoggedIn,uploads.single('scheduleImage'),function(req,res){
+router.post("/contractor/:id/schedule/:id1",middleware.isContractorLoggedIn,uploads.single('scheduleImage'),function(req,res){
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -554,12 +554,9 @@ router.post("/contractor/:id/schedule/edit",middleware.isContractorLoggedIn,uplo
      res.redirect("/contractor/dashboard");  
    }
    else{
-        
-        if(req.body.button == "Done"){
-            var plan = req.body.planDate.Complete;
 
             project.planDate.forEach(function(planD){
-              if(planD.plan==plan){
+              if(planD._id==req.params.id1){
                 planD.status=!planD.status;
                 planD.scheduleImage=req.file.path;
                   }
@@ -577,19 +574,22 @@ router.post("/contractor/:id/schedule/edit",middleware.isContractorLoggedIn,uplo
 
                   }
                 })
-        }
-        else if(req.body.button =="Delete"){
-            var plan = req.body.planDate.Complete;
-            var i=0,u;
-              project.planDate.forEach(function(planD){
-               
-                if(planD.plan==plan){
-                  u =i;
-                }
-                ++i;
-              })
-              project.planDate.splice(u, 1);
-
+      
+       }
+ });
+});
+router.post("/contractor/:id/schedule/:id1/delete",middleware.isContractorLoggedIn,function(req,res){
+  projectC.findById(req.params.id,function(err,project){
+   if(err){
+     console.log(err);
+     req.flash('error','Error while loading project details');
+     res.redirect("/contractor/dashboard");  
+   }
+   else{
+        
+        
+         
+            project.planDate.pull({_id:req.params.id1});
                   project.save(function(err,savedata){
                     if(err){
                       console.log(err);
@@ -600,7 +600,7 @@ router.post("/contractor/:id/schedule/edit",middleware.isContractorLoggedIn,uplo
                       res.redirect("/contractor/"+project._id+"/schedule")
                     }
                   })
-        }
+        
        }
  });
 });
