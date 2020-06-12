@@ -498,7 +498,7 @@ router.get("/contractor/chat/:id",middleware.isContractorLoggedIn,function(req,r
 
 
 //Printing Schedule task page
-router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+router.get("/contractor/:id/schedule",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.user,function(err,contractor){
     if(err){
       console.log(err);
@@ -522,7 +522,7 @@ router.get("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,fu
 
 
 // this is for creating schedule task
-router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,function(req,res){
+router.post("/contractor/:id/schedule",middleware.isContractorLoggedIn,function(req,res){
        projectC.findById(req.params.id,function(err,project){
         if(err){
           console.log(err);
@@ -539,14 +539,14 @@ router.post("/contractor/:id/project/schedule",middleware.isContractorLoggedIn,f
                 }
                 else{
                   req.flash('success','Successfully saved the data');
-                  res.redirect("/contractor/"+project._id+"/project/schedule")
+                  res.redirect("/contractor/"+project._id+"/schedule")
                 }
               })
             }
       });
 });
 // this is for updating schedule whether a task is completed or not
-router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLoggedIn,uploads.single('scheduleImage'),function(req,res){
+router.post("/contractor/:id/schedule/edit",middleware.isContractorLoggedIn,uploads.single('scheduleImage'),function(req,res){
   projectC.findById(req.params.id,function(err,project){
    if(err){
      console.log(err);
@@ -573,7 +573,7 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
                   }
                   else{
                     req.flash('success','Successfully saved the data');
-                    res.redirect("/contractor/"+project._id+"/project/schedule")
+                    res.redirect("/contractor/"+project._id+"/schedule")
 
                   }
                 })
@@ -597,7 +597,7 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
                     }
                     else{
                       req.flash('success','Successfully saved the data');
-                      res.redirect("/contractor/"+project._id+"/project/schedule")
+                      res.redirect("/contractor/"+project._id+"/schedule")
                     }
                   })
         }

@@ -25,7 +25,7 @@
                     <hr class="my-1">  
                     
                     <% project.planDate.forEach(function(plan){%>
-                        <form action="/contractor/<%=project._id%>/project/schedule/edit" method="POST" enctype="multipart/form-data">
+                        <form action="/contractor/<%=project._id%>/schedule/edit" method="POST" enctype="multipart/form-data">
                             <div class="plan-content">
 
                                 <div class="row">
@@ -50,8 +50,7 @@
                                     <%}%>
                                     <%if(plan.scheduleImage){%>
                                         <div class="col-lg-2">
-                                            <%console.log(plan.scheduleImage)%>
-                                            <a class="btn btn-primary" href="//<%=plan.scheduleImage%>" role="button">Image</a>
+                                            <a class="btn btn-primary" href="../<%=plan.scheduleImage%>" role="button">Image</a>
                                         </div>
                                     <%}%>
                                     
@@ -86,7 +85,7 @@
             <div class="container">
                 <p class="lead">Create Task Schedule <a id="add" href="#"><i class="far fa-plus-square"></i></a></p>
                     <hr class="my-4">  
-                    <form action="/contractor/<%=project._id%>/project/schedule" method="post">
+                    <form action="/contractor/<%=project._id%>/schedule" method="post">
                         <div class="plan">
                             <div class="plan-create">
                                 <div class="form-row justify-content-md-center">
