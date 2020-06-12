@@ -27,7 +27,7 @@ var projectSchema = new mongoose.Schema({
         type:{type:String},
         description:{type:String},
         value:{type:Number},
-        budgetImage:{type:String}
+        scheduleImage:{type:String}
     }]
 });
 

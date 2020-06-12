@@ -15,7 +15,7 @@
                         <div class="col-lg-4">
                             <h3>Date</h3>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
                             <h3>Task to Do</h3>
                         </div>
                         <div class="col-lg-2">
@@ -25,14 +25,14 @@
                     <hr class="my-1">  
                     
                     <% project.planDate.forEach(function(plan){%>
-                        <form action="/contractor/<%=project._id%>/project/schedule/edit" method="POST">
+                        <form action="/contractor/<%=project._id%>/project/schedule/edit" method="POST" enctype="multipart/form-data">
                             <div class="plan-content">
 
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <h4 id="date"><%=plan.day%></h4>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <h4 ><%=plan.plan%></h4>
                                     <input type="text" name="planDate[Complete]" type="hidden" value="<%=plan.plan%>" style="display: none;">
 
@@ -48,6 +48,13 @@
                                             <span class="p-3 mb-2 badge badge-pill badge-success">Complete</span>
                                         </div>
                                     <%}%>
+                                    <%if(plan.scheduleImage){%>
+                                        <div class="col-lg-2">
+                                            <%console.log(plan.scheduleImage)%>
+                                            <a class="btn btn-primary" href="//<%=plan.scheduleImage%>" role="button">Image</a>
+                                        </div>
+                                    <%}%>
+                                    
                                 </div>
                                 <% if(!plan.status){%>
                                 <div class="row">

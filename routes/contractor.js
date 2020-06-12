@@ -561,6 +561,7 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
             project.planDate.forEach(function(planD){
               if(planD.plan==plan){
                 planD.status=!planD.status;
+                planD.scheduleImage=req.file.path;
                   }
                 })
               
@@ -568,10 +569,12 @@ router.post("/contractor/:id/project/schedule/edit",middleware.isContractorLogge
                   if(err){
                     console.log(err);
                     req.flash('error','Error while saving')
+                    res.redirect("/contractor/dashboard");
                   }
                   else{
                     req.flash('success','Successfully saved the data');
                     res.redirect("/contractor/"+project._id+"/project/schedule")
+
                   }
                 })
         }
@@ -657,7 +660,9 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.sin
          project.save(function(err,savedata){
            if(err){
              console.log(err);
-             req.flash('error','Error while saving')
+             req.flash('error','Error while saving');
+             res.redirect("/contractor/dashboard");
+
            }
            else{
              req.flash('success','Successfully saved the data');
