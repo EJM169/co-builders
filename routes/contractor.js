@@ -652,11 +652,8 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.sin
      res.redirect("/contractor/dashboard");  
    }
    else{
-        req.body.budget.budgetImage = req.file.path;
-        
-         project.budget.push(req.body.budget);
-         console.log(project.budget);
-         
+         req.body.budget.budgetImage = req.file.path;
+         project.budget.push(req.body.budget);         
          project.save(function(err,savedata){
            if(err){
              console.log(err);

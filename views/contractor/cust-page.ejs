@@ -29,12 +29,35 @@
                     <p>Email: <%=customerDetail.email%></p>
                     <p>Mobile: <%=customerDetail.mobile%></p>
                     <p>Requirements: <%=customerDetail.requirements%></p>
-                    <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
-                    <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
-                    <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
-                    <a href="/contractor/<%=customerDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>
-                    <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
-                    
+                    <div class="container ">
+                        <div class="row pb-2">
+                            <div class="col-lg-3">
+                                <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/<%=customerDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>                            
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-3">
+                                <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="#"><input type="submit" class="btn btn-success btn-lg" value="Complete"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="#"><input type="submit" class="btn btn-danger btn-lg" value="Cancel"></a>
+                            </div>
+                            <div class="col-lg-3">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div> 
         <%}%>    
