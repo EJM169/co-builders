@@ -7,6 +7,13 @@
             </div>
            
             <%} else if(customerDetail.length>1){%>
+                <%if(project.flags.contractorComplete){%>
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Request Sent to Customer</h4>
+                        <p>Waiting for customer to accept the request. Message him to do so</p>
+                      </div>
+                <%}%>
+                
                 <h1>List of customers</h1>
                 <% customerDetail.forEach(function(customer){ %>   
                     <div class=" card customer_dash_content">
@@ -36,7 +43,9 @@
                                     </div>
                                     <%if(scheduleStatus){%>
                                         <div class="col-lg-3">
-                                            <a href="#"><input type="submit" class="btn btn-success btn-lg" value="Complete"></a>
+                                            <form action="/contractor/<%=project._id%>/complete" method="post">
+                                                <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                            </form>
                                         </div>
                                     <%}else{%> 
                                         <div class="col-lg-3">
@@ -51,9 +60,41 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="container">
+                                    <%if(project.flags.contractorComplete){%>
+                                        <div class="alert alert-success">
+                                            <h4 class="alert-heading">Project Complete</h4>
+                                            <p>Waiting for customer to accept the request. Message him to do so</p>
+                                        </div>
+                                    <%}else if(project.flags.customerComplete){%>
+                                        <div class="alert alert-success">
+                                            <h4 class="alert-heading">Project Complete</h4>
+                                            <p>Customer has sent request saying project has ended</p>
+                                            <p>Please Make sure <b>everything is complete</b> before clicking complete</p>
+                                            <div class="row">
+                                                <div class="m-1">
+                                                    <form action="/contractor/<%=project._id%>/complete" method="post">
+                                                        <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                                    </form>
+                                                </div>
+                                                <div class="m-1">
+                                                    <form action="/contractor/<%=project._id%>/incomplete" method="post">
+                                                        <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
+                                                    </form>
+                                                </div>                       
+                                            </div>
+                                        </div>
+                                    <%}else if(project.flags.complete){%>
+                                        <div class="alert alert-success">
+                                            <h4 class="alert-heading">Project Complete</h4>
+                                            <p>This project has been completed</p>
+                                        </div>
+                                    <%}%>
+                            </div>
                         </div>
                     </div>   
-        <%})} else{%>   
+                <hr class="my-4">  
+        <%})} else{%>  
             <h1>List of customers</h1>
             <div class=" card customer_dash_content">
                 <div class="card-body align-items-center">
@@ -82,7 +123,9 @@
                             </div>
                             <%if(scheduleStatus){%>
                                 <div class="col-lg-3">
-                                    <a href="#"><input type="submit" class="btn btn-success btn-lg" value="Complete"></a>
+                                    <form action="/contractor/<%=project._id%>/complete" method="post">
+                                        <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                    </form>
                                 </div>
                             <%}else{%> 
                                 <div class="col-lg-3">
@@ -99,6 +142,37 @@
                     </div>
                 </div>
             </div> 
+            <div class="container">
+                <%if(project.flags.contractorComplete){%>
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Project Complete</h4>
+                        <p>Waiting for customer to accept the request. Message him to do so</p>
+                    </div>
+                <%}else if(project.flags.customerComplete){%>
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Project Complete</h4>
+                        <p>Customer has sent request saying project has ended</p>
+                        <p>Please Make sure <b>everything is complete</b> before clicking complete</p>
+                        <div class="row">
+                            <div class="m-1">
+                                <form action="/contractor/<%=project._id%>/complete" method="post">
+                                    <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                </form>
+                            </div>
+                            <div class="m-1">
+                                <form action="/contractor/<%=project._id%>/incomplete" method="post">
+                                    <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
+                                </form>
+                            </div>                       
+                        </div>
+                    </div>
+                <%}else if(project.flags.complete){%>
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Project Complete</h4>
+                        <p>This project has been completed</p>
+                    </div>
+                <%}%>
+        </div>
         <%}%>    
             
     </div>

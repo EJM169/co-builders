@@ -630,7 +630,85 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   })
 }); 
 
+router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          if(project.flags.contractorComplete){
+              project.flags.complete=!project.flags.complete;
+              project.flags.customerComplete=!project.flags.customerComplete;
+              project.save(function(err,savedata){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while saving');
+                  res.redirect("/customer/dashboard");
+                }
+                else{
+                  req.flash('success','Successfully saved the data');
+                  res.redirect("/customer/"+project.contractor+"/contractor")
+                }
+              })
+          }else{
+            project.flags.customerComplete=!project.flags.customerComplete;
+            project.save(function(err,savedata){
+              if(err){
+                console.log(err);
+                req.flash('error','Error while saving');
+                res.redirect("/customer/dashboard");
+              }
+              else{
+                req.flash('success','Successfully saved the data');
+                res.redirect("/customer/"+project.customer+"/contractor")
+              }
+            });
+          }
+        }
+      }); 
+    }
+  });
+});
 
+router.post("/customer/:id/incomplete",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          project.flags.contractorComplete=!project.flags.contractorComplete;
+          project.save(function(err,savedata){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              req.flash('success','Successfully Cancelled');
+              res.redirect("/customer/"+project.customer+"/contractor")
+            }
+          });
+        }
+      }); 
+    }
+  });
+});
 
 router.get("/customer/logout",function(req,res){
   req.logout();
