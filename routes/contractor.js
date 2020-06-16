@@ -369,16 +369,15 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
-                  res.redirect("/customer/dashboard");
+                  res.redirect("/contractor/dashboard");
                 }   
                 else{
                   if(project){
                     var scheduleStatus=scheduleCheck(project);
-                    console.log(scheduleStatus);
                     res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project,scheduleStatus:scheduleStatus});
                   }
                   else{
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:null});
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:scheduleStatus});
                   }
                 } 
                 });

@@ -304,7 +304,22 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
               res.redirect("/customer/dashboard");
             }
             else{
-              res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor});
+              projectC.findOne({'customer':req.params.id},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }   
+                else{
+                  if(project){
+                    var scheduleStatus=scheduleCheck(project);
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project,scheduleStatus:scheduleStatus});
+                  }
+                  else{
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null,scheduleStatus:scheduleStatus});
+                  }
+                } 
+                });
             }
           });
         });
