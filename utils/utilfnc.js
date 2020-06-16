@@ -12,5 +12,20 @@ function amountCalc(budget){
     });
     return {invest,expense,total};
   }
+  function scheduleCheck(project){
+    var i=0,k=0;
+    project.planDate.forEach(function(plan){
+      ++i;
+      if(plan.status==true){
+        ++k;
+      }
+    });
+    if(i===k){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
-  module.exports = amountCalc;
+  module.exports = {amountCalc,scheduleCheck};

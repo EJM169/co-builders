@@ -10,7 +10,7 @@ var express             = require("express"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
     bCrypt              = require('bcrypt'),
-    amountCalc          = require("../utils/calc"),
+    {amountCalc,scheduleCheck}          = require("../utils/utilfnc"),
     middleware          = require("../middleware");
 
 var storage = multer.diskStorage({
@@ -365,7 +365,23 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
               res.redirect("/contractor/dashboard");
             }
             else{
-              res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer});
+              projectC.findOne({'contractor':req.params.id},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }   
+                else{
+                  if(project){
+                    var scheduleStatus=scheduleCheck(project);
+                    console.log(scheduleStatus);
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project,scheduleStatus:scheduleStatus});
+                  }
+                  else{
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:null});
+                  }
+                } 
+                });
             }
           });
         });
@@ -407,7 +423,7 @@ router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,r
         if(err){
           console.log(err);
           req.flash('error','Error whil loading details');
-          res.redirect("/customer/dash");
+          res.redirect("/contractor/dashboard");
         }   
         else{
           if(project){
@@ -415,7 +431,7 @@ router.get("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,r
               if(err){
                 console.log(err);
                 req.flash('error','Error whil loading details');
-                res.redirect("/customer/dash");
+                res.redirect("/contractor/dashboard");
               }
               else{
                 res.render("contractor/project-plan",{currentUser:contractor,project:project,customer:customer});

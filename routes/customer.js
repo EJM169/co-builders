@@ -12,7 +12,7 @@ var express                                 = require("express"),
     LocalStrategy                           = require("passport-local"),
     bCrypt                                  = require('bcrypt'),
     middleware                              = require("../middleware"),
-    amountCalc                              = require("../utils/calc");
+    {amountCalc,scheduleCheck}          = require("../utils/utilfnc");
 
 //<-----------Passport configuration------------------->
 
