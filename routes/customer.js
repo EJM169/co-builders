@@ -710,6 +710,36 @@ router.post("/customer/:id/incomplete",middleware.isCustomerLoggedIn,function(re
   });
 });
 
+router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          contractorUser.findById(project.contractor,function(err,contractor){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/dashboard");
+            }   
+            else{
+                res.render("customer/feedback",{currentUser:customer,project:project,otherUser:contractor});
+            }
+          });  
+        }
+      }); 
+    }
+  });
+});
+
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');
