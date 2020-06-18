@@ -733,7 +733,7 @@ router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,r
               res.redirect("/customer/dashboard");
             }   
             else{
-                res.render("customer/feedback-form",{currentUser:customer,project:project,otherUser:contractor});
+                res.render("customer/feedback",{currentUser:customer,project:project,otherUser:contractor});
             }
           });  
         }
