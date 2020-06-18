@@ -1,3 +1,5 @@
+const customer = require("../models/customer");
+
 var express                                 = require("express"),
     async                                   = require("async"),
     router                                  = express.Router({mergeParams:true}),
@@ -738,6 +740,48 @@ router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,r
       }); 
     }
   });
+});
+
+router.post("/customer/:id/feedback/:id1",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      contractorUser.findById(req.params.id,function(err,contractor){
+        if(err){
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          projectC.findById(req.params.id1,function(err,project){
+            if(err){
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/"+contractor._id+"/project");
+            }
+            else{
+              req.body.feedback.customerid=customer._id;
+              req.body.feedback.projectid=project._id;
+              contractor.feedback.push(req.body.feedback);
+              contractor.save(function(err,savedata){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while saving');
+                  res.redirect("/customer/"+project._id+"/feedback");
+                }
+                else{
+                  req.flash('success','Your review was saved');
+                  res.redirect("/customer/"+project._id+"/feedback");
+                }
+              })
+            }
+          })
+        }
+      })
+
+    }
+  })
 });
 
 router.get("/customer/logout",function(req,res){

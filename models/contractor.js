@@ -21,7 +21,15 @@ var contractorSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"customer"
     }],
-    projectStatus:{type:Boolean, default:false}
+    projectStatus:{type:Boolean, default:false},
+    feedback:[{
+        projectid:{type:mongoose.Schema.Types.ObjectId,
+            ref:"project"},
+        customerid:{type:mongoose.Schema.Types.ObjectId,
+            ref:"customer"},
+        headline:{type:String,default:null},
+        review:{type:String,default:null}
+    }]
 });
 
 contractorSchema.plugin(passportLocalMongoose);

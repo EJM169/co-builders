@@ -3,17 +3,21 @@
 <div class="container">
     <div class="card">
         <div class="card-body align-items-center">
-            <form action="/customer/<%=project._id%>/feedback" method="POST">
-                <div class="form-group">
-                    <label class="col-md-3 control-label" for="headline">Add a Headline</label>
-                    <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control" required>
+            <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/edit" method="POST">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="headline">Add a Headline</label>
+                    <div class="col-sm-9 ">
+                        <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control" required>
+                    </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-md-3 control-label" for="review">Write your review here</label>
-                    <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5"></textarea>
+                    <div class="col-md-9">
+                        <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5" required></textarea>
+                    </div>
                 </div>
                 <div class="form-group"> 
-                    <input type="submit" name="button" value="Done" class="btn btn-outline-success">
+                    <input type="submit" name="button" value="Submit" class="btn btn-outline-success">
                 </div>    
             </form>
             
