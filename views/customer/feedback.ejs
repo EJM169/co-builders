@@ -1,0 +1,25 @@
+<% include ../partials/customerHeader %>
+<section id="Dashboard" class="dash_banner_area">
+<div class="container">
+    <div class="card">
+        <div class="card-body align-items-center">
+            <form action="/customer/<%=project._id%>/feedback" method="POST">
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="headline">Add a Headline</label>
+                    <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="review">Write your review here</label>
+                    <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5"></textarea>
+                </div>
+                <div class="form-group"> 
+                    <input type="submit" name="button" value="Done" class="btn btn-outline-success">
+                </div>    
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+</section>        
+<% include ../partials/footer %>    
