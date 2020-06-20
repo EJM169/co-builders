@@ -1,0 +1,34 @@
+<% include ../partials/contractorHeader %>
+
+<section id="Dashboard" class="dash_banner_area">
+<div class="container">
+    <div class="card" style="width: 750px;">
+        <div class="card-body align-items-center">
+            <% if(!project.flags.complete){%>
+                <div class="jumbotron ">
+                    <p class="lead">Hi <%=currentUser.username%> please wait till the project is complete before checking feedback</p>
+                </div>
+            <%}else{%>
+          
+                    <h3>About <%=currentUser.username%></h3>
+                    <hr class="my-2">  
+                    <% currentUser.feedback.forEach(function(feedback){%>
+                        <%if(feedback.projectid.toString()===project._id.toString()){%>
+                            <div class="card">
+                                <div class="card-body align-items-center">
+                                    <p class="lead font-weight-bold"><%=customer.username%>: <%=feedback.headline%></p>
+                                    <hr class="my-1">  
+                                    <p class="font-weight-normal">Review: <%=feedback.review%></p>
+                                </div>
+                            </div>     
+                        <%}else{%>
+                        
+                        <%}%>   
+                    <%})%>    
+                    
+                <%}%>      
+        </div>
+    </div>
+</div>
+</section>        
+<% include ../partials/contractorFooter %>

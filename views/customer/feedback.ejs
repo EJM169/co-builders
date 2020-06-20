@@ -3,31 +3,37 @@
 <div class="container">
     <div class="card" style="width: 750px;">
         <div class="card-body align-items-center">
-            <!-- <div class="jumbotron"> -->
-            <h3>About <%=otherUser.username%></h3>
-            <hr class="my-2">  
-            <% var i=0;%>
-            <% otherUser.feedback.forEach(function(feedback){%>
-                <%if(feedback.projectid.toString()===project._id.toString()){%>
-                    <% i=1%>
-                    <div class="card">
-                        <div class="card-body align-items-center">
-                            <p class="lead font-weight-bold"><%=currentUser.username%>: <%=feedback.headline%></p>
-                            <hr class="my-1">  
-                            <p class="font-weight-normal">Review: <%=feedback.review%></p>
-                            <a class="btn btn-primary" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
-                        </div>
-                    </div>     
-                <%}else{%>
-                  
-                <%}%>   
-            <%})%>    
-            <% if(i!=1){%>
+            <% if(!project.flags.complete){%>
                 <div class="jumbotron ">
-                    <p class="lead">Hi <%=currentUser.username%> please fill the feedback  form</p>
-                    <a class="btn btn-primary btn-lg" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
+                    <p class="lead">Hi <%=currentUser.username%> please wait till the project is complete before giving feedback</p>
                 </div>
-            <%}%>             
+            <%}else{%>
+          
+                    <h3>About <%=otherUser.username%></h3>
+                    <hr class="my-2">  
+                    <% var i=0;%>
+                    <% otherUser.feedback.forEach(function(feedback){%>
+                        <%if(feedback.projectid.toString()===project._id.toString()){%>
+                            <% i=1%>
+                            <div class="card">
+                                <div class="card-body align-items-center">
+                                    <p class="lead font-weight-bold"><%=currentUser.username%>: <%=feedback.headline%></p>
+                                    <hr class="my-1">  
+                                    <p class="font-weight-normal">Review: <%=feedback.review%></p>
+                                    <a class="btn btn-primary" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
+                                </div>
+                            </div>     
+                        <%}else{%>
+                        
+                        <%}%>   
+                    <%})%>    
+                    <% if(i!=1){%>
+                        <div class="jumbotron ">
+                            <p class="lead">Hi <%=currentUser.username%> please fill the feedback  form</p>
+                            <a class="btn btn-primary btn-lg" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
+                        </div>
+                    <%}%>       
+                <%}%>      
         </div>
     </div>
 </div>

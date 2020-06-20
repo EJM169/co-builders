@@ -765,6 +765,37 @@ router.post("/contractor/:id/incomplete",middleware.isContractorLoggedIn,functio
   });
 });
 
+router.get("/contractor/:id/feedback",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          customerUser.findById(project.customer,function(err,customer){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/dashboard");
+            }   
+            else{
+                res.render("contractor/feedback",{currentUser:contractor,project:project,customer:customer});
+            }
+          });  
+        }
+      }); 
+    }
+  });
+});
+
+
 router.get("/contractor/logout",function(req,res){
     req.logout();
     req.flash('success','Bye..');
