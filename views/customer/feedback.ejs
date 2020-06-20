@@ -1,28 +1,27 @@
 <% include ../partials/customerHeader %>
 <section id="Dashboard" class="dash_banner_area">
 <div class="container">
-    <div class="card">
+    <div class="card" style="width: 750px;">
         <div class="card-body align-items-center">
-            <h3><%=otherUser.username%></h3>
-            <hr class="my-1">  
+            <!-- <div class="jumbotron"> -->
+            <h3>About <%=otherUser.username%></h3>
+            <hr class="my-2">  
             <% otherUser.feedback.forEach(function(feedback){%>
-                
                 <%if(feedback.projectid.toString()===project._id.toString()){%>
-                    <div class="container">
-                        
-                        <p class="lead font-weight-bold"><%=feedback.headline%></p>
-                        <p class="font-weight-normal"><%=feedback.review%></p>
-                        <a class="btn btn-primary" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
-
+                    <div class="card">
+                        <div class="card-body align-items-center">
+                            <p class="lead font-weight-bold"><%=currentUser.username%>: <%=feedback.headline%></p>
+                            <hr class="my-1">  
+                            <p class="font-weight-normal">Review: <%=feedback.review%></p>
+                            <a class="btn btn-primary" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
+                        </div>
                     </div>     
                 <%}else{%>
                     <%console.log("it shouldn't reach here")%>
                 <%}%>   
-            <%})%>
-                 
+            <%})%>                 
         </div>
     </div>
 </div>
-
 </section>        
 <% include ../partials/footer %>    

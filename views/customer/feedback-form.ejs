@@ -3,23 +3,51 @@
 <div class="container">
     <div class="card">
         <div class="card-body align-items-center">
-            <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/edit" method="POST">
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="headline">Add a Headline</label>
-                    <div class="col-sm-9 ">
-                        <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label" for="review">Write your review here</label>
-                    <div class="col-md-9">
-                        <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5" required></textarea>
-                    </div>
-                </div>
-                <div class="form-group"> 
-                    <input type="submit" name="button" value="Submit" class="btn btn-outline-success">
-                </div>    
-            </form>
+            <% var i=0;%>
+                <% otherUser.feedback.forEach(function(feedback){%>
+                    <%if(feedback.projectid.toString()===project._id.toString()){%>
+                        <% i=1;%>
+                        <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/edit" method="POST">
+                    
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="headline">Add a Headline</label>
+                                <div class="col-sm-9 ">
+                                    <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control" value="<%=feedback.headline%>" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label" for="review">Write your review here</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5" required><%=feedback.review%></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <input type="submit" name="button" value="Submit" class="btn btn-outline-success">
+                            </div>    
+                        </form>
+                        
+                    <%}});%>
+                    <% if(i!=1){%>
+                        <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/edit" method="POST">
+                    
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label" for="headline">Add a Headline</label>
+                                <div class="col-sm-9 ">
+                                    <input id="headline" name="feedback[headline]" type="text" placeholder="What's important to know?" class="form-control"  required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label" for="review">Write your review here</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" id="review" name="feedback[review]" placeholder="Write about your experience working with this contractor" rows="5" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group"> 
+                                <input type="submit" name="button" value="Submit" class="btn btn-outline-success">
+                            </div>    
+                        </form>
+                    <%}%>
+                    
             
         </div>
     </div>

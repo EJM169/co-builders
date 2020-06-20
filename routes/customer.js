@@ -772,7 +772,7 @@ router.get("/customer/:id/feedback/edit",middleware.isCustomerLoggedIn,function(
   });
 });
 
-router.post("/customer/:id/feedback/:id1",middleware.isCustomerLoggedIn,function(req,res){
+router.post("/customer/:id/feedback/:id1/edit",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
       req.flash('error','Error whil loading details');
