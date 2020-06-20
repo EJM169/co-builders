@@ -814,6 +814,51 @@ router.post("/customer/:id/feedback/:id1/edit",middleware.isCustomerLoggedIn,fun
   })
 });
 
+router.post("/customer/:id/feedback/:id1/update",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      contractorUser.findById(req.params.id,function(err,contractor){
+        if(err){
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }
+        else{
+          projectC.findById(req.params.id1,function(err,project){
+            if(err){
+              req.flash('error','Error whil loading details');
+              res.redirect("/customer/"+contractor._id+"/project");
+            }
+            else{
+              contractor.feedback.forEach(function(feedback){
+                if(feedback.projectid.toString()===project._id.toString()){
+                  feedback.headline=req.body.feedback.headline;
+                  feedback.review=req.body.feedback.review;
+                }
+              });   
+              contractor.save(function(err,savedata){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error while saving');
+                  res.redirect("/customer/"+project._id+"/feedback");
+                }
+                else{
+                  console.log("success");
+                  req.flash('success','Your review was saved');
+                  res.redirect("/customer/"+project._id+"/feedback");
+                }
+              })           
+            }
+          });
+        }
+      });
+    }
+  })
+});
+
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

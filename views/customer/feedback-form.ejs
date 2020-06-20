@@ -7,7 +7,7 @@
                 <% otherUser.feedback.forEach(function(feedback){%>
                     <%if(feedback.projectid.toString()===project._id.toString()){%>
                         <% i=1;%>
-                        <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/edit" method="POST">
+                        <form action="/customer/<%=otherUser._id%>/feedback/<%=project._id%>/update" method="POST">
                     
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label" for="headline">Add a Headline</label>

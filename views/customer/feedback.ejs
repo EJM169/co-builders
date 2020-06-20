@@ -6,8 +6,10 @@
             <!-- <div class="jumbotron"> -->
             <h3>About <%=otherUser.username%></h3>
             <hr class="my-2">  
+            <% var i=0;%>
             <% otherUser.feedback.forEach(function(feedback){%>
                 <%if(feedback.projectid.toString()===project._id.toString()){%>
+                    <% i=1%>
                     <div class="card">
                         <div class="card-body align-items-center">
                             <p class="lead font-weight-bold"><%=currentUser.username%>: <%=feedback.headline%></p>
@@ -17,9 +19,15 @@
                         </div>
                     </div>     
                 <%}else{%>
-                    <%console.log("it shouldn't reach here")%>
+                  
                 <%}%>   
-            <%})%>                 
+            <%})%>    
+            <% if(i!=1){%>
+                <div class="jumbotron ">
+                    <p class="lead">Hi <%=currentUser.username%> please fill the feedback  form</p>
+                    <a class="btn btn-primary btn-lg" href="/customer/<%=project._id%>/feedback/edit" role="button">Edit</a>
+                </div>
+            <%}%>             
         </div>
     </div>
 </div>
