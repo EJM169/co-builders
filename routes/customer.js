@@ -668,7 +668,7 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
                   },
                   function(callback){
                     contractor.active_proj_cust.pop(customer);
-                    contractor.past_proj_cust.pop(customer);
+                    contractor.past_proj_cust.push(customer);
                     contractor.projectStatus=!contractor.projectStatus;
                     contractor.no_project +=1;
                     contractor.save(function(err,data){
