@@ -29,6 +29,10 @@ var customerSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"
     }],
+    past_proj_cont:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"contractor"
+    }],
     projectStatus:{type:Boolean, default:false}
 });
 
