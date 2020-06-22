@@ -837,6 +837,7 @@ router.post("/customer/:id/feedback/:id1/edit",middleware.isCustomerLoggedIn,fun
             else{
               req.body.feedback.customerid=customer._id;
               req.body.feedback.projectid=project._id;
+              req.body.feedback.customerName=customer.username;
               contractor.feedback.push(req.body.feedback);
               contractor.save(function(err,savedata){
                 if(err){

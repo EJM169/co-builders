@@ -31,6 +31,7 @@ var contractorSchema = new mongoose.Schema({
             ref:"project"},
         customerid:{type:mongoose.Schema.Types.ObjectId,
             ref:"customer"},
+        customerName:{type:String,default:null},
         headline:{type:String,default:null},
         review:{type:String,default:null}
     }]

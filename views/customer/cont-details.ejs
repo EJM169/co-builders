@@ -11,7 +11,19 @@
                 <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
                 <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
                 <p>Office Address:<%= contractorDetail.address; %></p>    
-                <p>Criteria Details:<%= contractorDetail.criteria; %></p>   
+                <p>Criteria Details:<%= contractorDetail.criteria; %></p>  
+                <% if(contractorDetail.feedback){%>
+                <h3>Customer Review</h3>
+                    <%contractorDetail.feedback.forEach(function(feedback){%>
+                        <div class="card">
+                            <div class="card-body align-items-center">
+                                <p class="lead font-weight-bold"><%=feedback.customerName%>: <%=feedback.headline%></p>
+                                <hr class="my-1">  
+                                <p class="font-weight-normal">Review: <%=feedback.review%></p>
+                            </div>
+                        </div>    
+                    <%});%>
+                <%}%> 
                 <% if(contractorDetail.active_proj_cust.length!=0){ %>
                     <% contractorDetail.active_proj_cust.forEach(function(activcust){ %>
                         <% if(activcust.toString()==currentUser._id.toString()){ %>
