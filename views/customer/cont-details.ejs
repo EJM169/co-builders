@@ -12,8 +12,9 @@
                 <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
                 <p>Office Address:<%= contractorDetail.address; %></p>    
                 <p>Criteria Details:<%= contractorDetail.criteria; %></p>  
-                <% if(contractorDetail.feedback){%>
-                <h3>Customer Review</h3>
+                <h3>Customer Reviews</h3>
+                <hr class="my-1">  
+                <% if(!contractorDetail.feedback){%>
                     <%contractorDetail.feedback.forEach(function(feedback){%>
                         <div class="card">
                             <div class="card-body align-items-center">
@@ -23,6 +24,10 @@
                             </div>
                         </div>    
                     <%});%>
+                <%}else{%>
+                    <div class="jumbotron ">
+                        <p class="lead">There are no reviews available</p>
+                    </div>
                 <%}%> 
                 <% if(contractorDetail.active_proj_cust.length!=0){ %>
                     <% contractorDetail.active_proj_cust.forEach(function(activcust){ %>
