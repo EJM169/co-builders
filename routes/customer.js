@@ -903,6 +903,50 @@ router.post("/customer/:id/feedback/:id1/update",middleware.isCustomerLoggedIn,f
   })
 });
 
+router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.params.id,function(err,customer){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the page. Please try again');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+    //may need to use project db for id  
+      if(customer.past_proj_cont.length!=0){
+        customer.past_proj_cont.forEach(function(cont){
+          contractorUser.findById(cont,function(err,contractor){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              projectC.findOne({'customer':req.params.id},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }   
+                else{
+                  if(project){
+                    var scheduleStatus=scheduleCheck(project);
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project,scheduleStatus:scheduleStatus});
+                  }
+                  else{
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null,scheduleStatus:scheduleStatus});
+                  }
+                } 
+                });
+            }
+          });
+        });
+      }else{
+        res.render("customer/cont-page",{currentUser:customer,contractorDetail:null,project:null,scheduleStatus:null});
+      }
+    }
+  })
+});
+
 router.get("/customer/logout",function(req,res){
   req.logout();
   req.flash('success','Bye..');

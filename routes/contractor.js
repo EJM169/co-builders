@@ -693,14 +693,14 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
         if(err){
           console.log(err);
           req.flash('error','Error whil loading details');
-          res.redirect("/contractor/dashboard");
+          res.redirect("/contractor/"+contractor._id+"/customer");
         }   
         else{
           customerUser.findById(project.customer,function(err,customer){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
-              res.redirect("/contractor/dashboard");
+              res.redirect("/contractor/"+contractor._id+"/customer");
             }else{
               if(project.flags.customerComplete){
                 async.series([
@@ -746,7 +746,7 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                 ],function(err){
                   if(err){
                     req.flash('error','Error while saving all the data try again');
-                    res.redirect("/customer/"+customer._id+"/contractor");
+                    res.redirect("/contractor/"+contractor._id+"/customer");
                   }
                   req.flash('success','successfully saved and project is complete');
                   res.redirect("/contractor/"+contractor._id+"/customer");
@@ -758,7 +758,7 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                   if(err){
                     console.log(err);
                     req.flash('error','Error while saving');
-                    res.redirect("/contractor/dashboard");
+                    res.redirect("/contractor/"+contractor._id+"/customer");
                   }
                   else{
                     req.flash('success','Successfully saved the data');
@@ -836,6 +836,48 @@ router.get("/contractor/:id/feedback",middleware.isContractorLoggedIn,function(r
   });
 });
 
+router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.params.id,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error while loading the page. Please try again');
+      res.redirect("/contractor/dashboard");
+    }
+    else{
+      if(contractor.past_proj_cust.length!=0){
+        contractor.past_proj_cust.forEach(function(cust){
+          customerUser.findById(cust,function(err,customer){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/contractor/dashboard");
+            }
+            else{
+              projectC.findOne({'contractor':req.params.id},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/contractor/dashboard");
+                }   
+                else{
+                  if(project){
+                    var scheduleStatus=scheduleCheck(project);
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project,scheduleStatus:scheduleStatus});
+                  }
+                  else{
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:scheduleStatus});
+                  }
+                } 
+                });
+            }
+          });
+        });
+      }else{
+        res.render("contractor/cust-page",{currentUser:contractor,customerDetail:null,project:null,scheduleStatus:null});
+      }
+    }
+  })
+});
 
 router.get("/contractor/logout",function(req,res){
     req.logout();

@@ -38,6 +38,9 @@
                             <%}%>    
                 </ul>
             </li>
+            <% if(currentUser.past_proj_cust.length!=0){%>
+                <li><a href="/contractor/<%=currentUser._id%>/history">Past Projects</a></li>
+            <%}%>
             <li><a href="/contractor/logout">Logout</a></li>
         </ul>
     </div>
