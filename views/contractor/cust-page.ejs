@@ -58,9 +58,8 @@
                                     <%}%>
                                     
                                     <div class="col-lg-3">
-                                        <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
-                                            <a href="#"><input type="submit" class="btn btn-danger btn-lg disabled" value="Cancel"></a>                                
-                                         
+                                        <%if(project.overallPlan){%>
+
                                         <%}else{%>
                                             <form action="/contractor/<%=project._id%>/cancel" method="post">
                                                 <button type="submit" class="btn btn-success btn-lg">Cancel</button> 
@@ -104,12 +103,12 @@
                                                 <div class="row">
                                                     <div class="m-1">
                                                         <form action="/contractor/<%=project._id%>/cancel" method="post">
-                                                            <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                                            <button type="submit" class="btn btn-success btn-lg">Accept</button> 
                                                         </form>
                                                     </div>
                                                     <div class="m-1">
                                                         <form action="/contractor/<%=project._id%>/reject" method="post">
-                                                            <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
+                                                            <button type="submit" class="btn btn-danger btn-lg">Reject</button> 
                                                         </form>
                                                     </div>                       
                                                 </div>
@@ -166,12 +165,13 @@
                             <%}%>
                             
                             <div class="col-lg-3">
-                                <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
-                                    <a href="#"><input type="submit" class="btn btn-danger btn-lg disabled" value="Cancel"></a>                                
-                                 
-                                <%}else{%>
-                                    <a href="#"><input type="submit" class="btn btn-danger btn-lg " value="Cancel"></a>                                
-                                <%}%>
+                                <%if(project.overallPlan){%>
+
+                                    <%}else{%>
+                                        <form action="/contractor/<%=project._id%>/cancel" method="post">
+                                            <button type="submit" class="btn btn-success btn-lg">Cancel</button> 
+                                        </form>
+                                    <%}%>                       
                             </div>
                             <div class="col-lg-3">
                                 <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
@@ -204,6 +204,24 @@
                                 </div>                       
                             </div>
                         </div>
+                        <%}else if(project.flags.customerCancel){%>
+                            <div class="alert alert-success">
+                                <h4 class="alert-heading">Cancellation Request</h4>
+                                <p>Customer has sent request to cancel the project</p>
+                                <p>Contact the Customer before making a decision</p>
+                                <div class="row">
+                                    <div class="m-1">
+                                        <form action="/contractor/<%=project._id%>/cancel" method="post">
+                                            <button type="submit" class="btn btn-success btn-lg">Accept</button> 
+                                        </form>
+                                    </div>
+                                    <div class="m-1">
+                                        <form action="/contractor/<%=project._id%>/reject" method="post">
+                                            <button type="submit" class="btn btn-danger btn-lg">Reject</button> 
+                                        </form>
+                                    </div>                       
+                                </div>
+                            </div>
                     <%}else if(project.flags.complete){%>
                         <div class="alert alert-success">
                             <h4 class="alert-heading">Project Complete</h4>

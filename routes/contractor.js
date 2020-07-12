@@ -774,6 +774,39 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
   });
 });
 
+router.post("/contractor/:id/reject",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/contractor/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/contractor/dashboard");
+        }   
+        else{
+          project.flags.customerCancel=!project.flags.customerCancel;
+          project.save(function(err,savedata){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving');
+              res.redirect("/contractor/dashboard");
+            }
+            else{
+              req.flash('success','Successfully cancelled');
+              res.redirect("/contractor/"+project.contractor+"/customer")
+            }
+          })
+        }
+      }); 
+    }
+  });
+});
+
+
 
 router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.user,function(err,contractor){

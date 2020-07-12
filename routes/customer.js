@@ -631,6 +631,132 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
   })
 }); 
 
+router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading customer details ');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading project details');
+          res.redirect("/customer/"+customer._id+"/contractor");
+        }   
+        else{
+          contractorUser.findById(project.contractor,function(err,contractor){
+            if(err){
+              console.log(err);
+              req.flash('error',"Error while getting data try again");
+              res.redirect("/customer/"+customer._id+"/contractor");
+            }
+            else{
+              if(project.flags.contractorCancel){
+                async.series([
+                  function(callback){
+                    customer.active_proj_cont.pop(contractor);
+                    customer.past_proj_cont.push(contractor);
+                    customer.projectStatus=!customer.projectStatus;
+                    customer.save(function(err,data){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback();
+                    });
+                  },
+                  function(callback){
+                    contractor.active_proj_cust.pop(customer);
+                    contractor.past_proj_cust.push(customer);
+                    contractor.projectStatus=!contractor.projectStatus;
+                    contractor.no_project +=1;
+                    contractor.save(function(err,data){
+                      if(err){
+                        console.log(err)
+                        callback(err);
+                      }
+                      callback();
+                    });
+                  },
+                  function(callback){
+                    project.customerStatus=!project.customerStatus;
+                    project.projectStart=! project.projectStart;
+                    project.contractorStatus=!project.contractorStatus;
+                    project.flags.complete=!project.flags.complete;
+                    project.flags.customerComplete=!project.flags.customerComplete;
+                    project.save(function(err,savedata){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback()
+                    })
+                  }
+                ],function(err){
+                  if(err){
+                    req.flash('error','Error while saving all the data try again');
+                    res.redirect("/customer/"+customer._id+"/contractor");
+                  }
+                  req.flash('success','successfully saved and project is complete');
+                  res.redirect("/customer/"+customer._id+"/contractor");
+                });
+                 
+              }else{
+                project.flags.customerCancel=!project.flags.customerCancel;
+                project.save(function(err,savedata){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error while saving');
+                    res.redirect("/customer/"+customer._id+"/contractor");
+                  }
+                  else{
+                    req.flash('success','Successfully saved the data');
+                    res.redirect("/customer/"+project.customer+"/contractor")
+                  }
+                });
+              }
+            }
+          })
+        }
+      }); 
+    }
+  });
+});
+
+router.post("/customer/:id/reject",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/customer/dashboard");
+        }   
+        else{
+          project.flags.contractorCancel=!project.flags.contractorCancel;
+          project.save(function(err,savedata){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              req.flash('success','Successfully Cancelled');
+              res.redirect("/customer/"+project.customer+"/contractor")
+            }
+          });
+        }
+      }); 
+    }
+  });
+});
+
+
 router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,res){
   customerUser.findById(req.user,function(err,customer){
     if(err){
