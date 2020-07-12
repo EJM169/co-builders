@@ -682,6 +682,99 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.sin
  });
 });
 
+router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      req.flash('error','Error whil loading details');
+      res.redirect("/contractor/dashboard");
+    }
+    else{
+      projectC.findById(req.params.id,function(err,project){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/contractor/"+contractor._id+"/customer");
+        }   
+        else{
+          customerUser.findById(project.customer,function(err,customer){
+            if(err){
+              console.log(err);
+              req.flash('error','Error whil loading details');
+              res.redirect("/contractor/"+contractor._id+"/customer");
+            }else{
+              if(project.flags.customerCancel){
+                async.series([
+                  function(callback){
+                    customer.active_proj_cont.pop(contractor);
+                    customer.past_proj_cont.push(contractor);
+                    customer.projectStatus=!customer.projectStatus;
+                    customer.save(function(err,data){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback();
+                    });
+                  },
+                  function(callback){
+                    contractor.active_proj_cust.pop(customer);
+                    contractor.past_proj_cust.push(customer);
+                    contractor.projectStatus=!contractor.projectStatus;
+                    contractor.no_project +=1;
+                    contractor.save(function(err,data){
+                      if(err){
+                        console.log(err)
+                        callback(err);
+                      }
+                      callback();
+                    });
+                  },
+                  function(callback){
+                    project.customerStatus=!project.customerStatus;
+                    project.projectStart=! project.projectStart;
+                    project.contractorStatus=!project.contractorStatus;
+                    project.flags.complete=!project.flags.complete;
+                    project.flags.contractorComplete=!project.flags.contractorComplete;
+                    project.save(function(err,savedata){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback()
+                    })
+                  }
+                ],function(err){
+                  if(err){
+                    req.flash('error','Error while saving all the data try again');
+                    res.redirect("/contractor/"+contractor._id+"/customer");
+                  }
+                  req.flash('success','successfully saved and project is complete');
+                  res.redirect("/contractor/"+contractor._id+"/customer");
+                });
+                 
+              }else{
+                project.flags.contractorCancel=!project.flags.contractorCancel;
+                project.save(function(err,savedata){
+                  if(err){
+                    console.log(err);
+                    req.flash('error','Error while saving');
+                    res.redirect("/contractor/"+contractor._id+"/customer");
+                  }
+                  else{
+                    req.flash('success','Successfully saved the data');
+                    res.redirect("/contractor/"+project.contractor+"/customer")
+                  }
+                })
+              }
+            }
+          });
+        }
+      }); 
+    }
+  });
+});
+
+
 router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(req,res){
   contractorUser.findById(req.user,function(err,contractor){
     if(err){
