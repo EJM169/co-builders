@@ -57,15 +57,17 @@
                                         </div>                                
                                     <%}%>
                                     
-                                    <div class="col-lg-3">
-                                        <%if(project.overallPlan){%>
+                                        <%if(currentUser.projectStatus){%>
 
                                         <%}else{%>
+                                        <div class="col-lg-3">
+
                                             <form action="/contractor/<%=project._id%>/cancel" method="post">
-                                                <button type="submit" class="btn btn-success btn-lg">Cancel</button> 
+                                                <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
                                             </form>
+                                        </div>
+                                        
                                         <%}%>                       
-                                    </div>
                                     <div class="col-lg-3">
                                         <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
                                     </div>
@@ -164,15 +166,17 @@
                                     <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
                             <%}%>
                             
-                            <div class="col-lg-3">
-                                <%if(project.overallPlan){%>
+                                <%if(currentUser.projectStatus){%>
 
                                     <%}else{%>
+                                        <div class="col-lg-3">
+
                                         <form action="/contractor/<%=project._id%>/cancel" method="post">
-                                            <button type="submit" class="btn btn-success btn-lg">Cancel</button> 
+                                            <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
                                         </form>
+                                        </div>
+
                                     <%}%>                       
-                            </div>
                             <div class="col-lg-3">
                                 <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
 

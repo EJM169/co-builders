@@ -234,7 +234,7 @@ router.post("/customer/contractor/:id",middleware.isCustomerLoggedIn,function(re
           res.redirect("/customer/dashboard");
         }
         else{
-          contractorUser.findOne({'customer':customer._id},function(err,user){
+          contractorUser.findOne({_id:contractor._id,'customer':customer._id},function(err,user){
             if(err){
               req.flash('error','Error while retreiving data');
               res.redirect("/customer/dashboard");
@@ -656,8 +656,6 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                 async.series([
                   function(callback){
                     customer.active_proj_cont.pop(contractor);
-                    customer.past_proj_cont.push(contractor);
-                    customer.projectStatus=!customer.projectStatus;
                     customer.save(function(err,data){
                       if(err){
                         console.log(err);
@@ -668,9 +666,6 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                   },
                   function(callback){
                     contractor.active_proj_cust.pop(customer);
-                    contractor.past_proj_cust.push(customer);
-                    contractor.projectStatus=!contractor.projectStatus;
-                    contractor.no_project +=1;
                     contractor.save(function(err,data){
                       if(err){
                         console.log(err)
@@ -680,17 +675,12 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                     });
                   },
                   function(callback){
-                    project.customerStatus=!project.customerStatus;
-                    project.projectStart=! project.projectStart;
-                    project.contractorStatus=!project.contractorStatus;
-                    project.flags.complete=!project.flags.complete;
-                    project.flags.customerComplete=!project.flags.customerComplete;
-                    project.save(function(err,savedata){
+                    projectC.deleteOne({_id:project._id},function(err){
                       if(err){
                         console.log(err);
                         callback(err);
                       }
-                      callback()
+                      callback();
                     })
                   }
                 ],function(err){
