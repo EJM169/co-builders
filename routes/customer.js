@@ -681,7 +681,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                         callback(err);
                       }
                       callback();
-                    })
+                    });
                   }
                 ],function(err){
                   if(err){
@@ -689,7 +689,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                     res.redirect("/customer/"+customer._id+"/contractor");
                   }
                   req.flash('success','successfully saved and project is complete');
-                  res.redirect("/customer/"+customer._id+"/contractor");
+                  res.redirect("/customer/dashboard");
                 });
                  
               }else{
@@ -702,7 +702,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                   }
                   else{
                     req.flash('success','Successfully saved the data');
-                    res.redirect("/customer/"+project.customer+"/contractor")
+                    res.redirect("/customer/"+customer._id+"/contractor")
                   }
                 });
               }

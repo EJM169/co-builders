@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
+const { text } = require("body-parser");
 var projectSchema = new mongoose.Schema({
     customer:{type:mongoose.Schema.Types.ObjectId,
                 ref:"customer",
@@ -10,6 +11,7 @@ var projectSchema = new mongoose.Schema({
         ref:"contractor",
         index: {unique: true, sparse: true}
     },
+    username:{type:String,value:"12345"},
     overallPlan:{type:String},
     contractorStatus:{type:Boolean,
                         default:false},
@@ -40,4 +42,5 @@ var projectSchema = new mongoose.Schema({
 });
 
 projectSchema.plugin(passportLocalMongoose);
+projectSchema.plugin(require('mongoose-beautiful-unique-validation'));
 module.exports = mongoose.model("project",projectSchema);

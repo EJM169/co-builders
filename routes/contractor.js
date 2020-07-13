@@ -230,6 +230,7 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
      
               newData.customer=customer._id;
               newData.contractor=contractor._id;
+              newData.username=contractor.username;
               newData.save(function(err){
                 if(err){                  
                   console.log(err);
@@ -737,11 +738,14 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
                   }
                 ],function(err){
                   if(err){
+                  console.log("reached here  error");
+
                     req.flash('error','Error while saving all the data try again');
                     res.redirect("/contractor/"+contractor._id+"/customer");
                   }
+                  console.log(contractor);
                   req.flash('success','successfully saved and project is complete');
-                  res.redirect("/contractor/"+contractor._id+"/customer");
+                  res.redirect("/contractor/dashboard");
                 });
                  
               }else{
@@ -754,7 +758,7 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
                   }
                   else{
                     req.flash('success','Successfully saved the data');
-                    res.redirect("/contractor/"+project.contractor+"/customer")
+                    res.redirect("/contractor/"+contractor._id+"/customer")
                   }
                 })
               }
