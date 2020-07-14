@@ -466,20 +466,29 @@ router.post("/contractor/:id/plan",middleware.isContractorLoggedIn,function(req,
                 res.redirect("/contractor/dashboard");
               }
     else{
-      project.overallPlan=req.body.project.overallPlan;
-      project.contractorStatus=!project.contractorStatus;
-      project.save(function(err,savedata){
+      customerUser.findOne({project:project._id},function(err,customer) {
         if(err){
-          console.log(err);
-          req.flash('error','Error while saving')
+         console.log(err);
+         req.flash('error','Error while loading customer details');
+         res.redirect("/contractor/dashboard");  
         }
         else{
-          req.flash('success','Successfully saved the data');
-          res.redirect("/contractor/"+project.customer+"/plan")
+          project.overallPlan=req.body.project.overallPlan;
+          project.contractorStatus=!project.contractorStatus;
+          project.save(function(err,savedata){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while saving')
+            }
+            else{
+              req.flash('success','Successfully saved the data');
+              res.redirect("/contractor/"+customer._id+"/plan")
+            }
+          }); 
         }
-      })
+      });
     }
-  })
+  });
 });
 
 
@@ -674,21 +683,31 @@ router.post("/contractor/:id/budget",middleware.isContractorLoggedIn,uploads.sin
      req.flash('error','Error while loading project details');
      res.redirect("/contractor/dashboard");  
    }
-   else{
-         req.body.budget.budgetImage = req.file.path;
-         project.budget.push(req.body.budget);         
-         project.save(function(err,savedata){
-           if(err){
-             console.log(err);
-             req.flash('error','Error while saving');
-             res.redirect("/contractor/dashboard");
+    else{
+        customerUser.findOne({project:project._id},function(err,customer){
+          if(err){
+            console.log(err);
+            req.flash('error','Error while loading project details');
+            res.redirect("/contractor/dashboard");  
+          }
+          else{
+            req.body.budget.budgetImage = req.file.path;
+            project.budget.push(req.body.budget);         
+            project.save(function(err,savedata){
+              if(err){
+                console.log(err);
+                req.flash('error','Error while saving');
+                res.redirect("/contractor/dashboard");
 
-           }
-           else{
-             req.flash('success','Successfully saved the data');
-             res.redirect("/contractor/"+project.customer+"/budget")
-           }
-         })
+              }
+              else{
+                req.flash('success','Successfully saved the data');
+                res.redirect("/contractor/"+customer._id+"/budget")
+              }
+            })
+          }
+        });
+         
        }
  });
 });
@@ -810,7 +829,7 @@ router.post("/contractor/:id/reject",middleware.isContractorLoggedIn,function(re
             }
             else{
               req.flash('success','Successfully cancelled');
-              res.redirect("/contractor/"+project.contractor+"/customer")
+              res.redirect("/contractor/"+contractor._id+"/customer")
             }
           })
         }
@@ -901,7 +920,7 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                   }
                   else{
                     req.flash('success','Successfully saved the data');
-                    res.redirect("/contractor/"+project.contractor+"/customer")
+                    res.redirect("/contractor/"+contractor._id+"/customer")
                   }
                 })
               }
@@ -936,7 +955,7 @@ router.post("/contractor/:id/incomplete",middleware.isContractorLoggedIn,functio
             }
             else{
               req.flash('success','Successfully cancelled');
-              res.redirect("/contractor/"+project.contractor+"/customer")
+              res.redirect("/contractor/"+contractor._id+"/customer")
             }
           })
         }
