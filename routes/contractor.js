@@ -735,6 +735,15 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
                       }
                       callback();
                     })
+                  },
+                  function(callback){
+                    chat.deleteOne({contractor:contractor._id},function(err){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback();
+                    })
                   }
                 ],function(err){
                   if(err){

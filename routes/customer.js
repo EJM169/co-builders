@@ -682,6 +682,15 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                       }
                       callback();
                     });
+                  },
+                  function(callback){
+                    chat.deleteOne({customer:customer._id},function(err){
+                      if(err){
+                        console.log(err);
+                        callback(err);
+                      }
+                      callback();
+                    })
                   }
                 ],function(err){
                   if(err){
