@@ -296,7 +296,8 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
     }
     else{
     //may need to use project db for id  
-      if(customer.active_proj_cont.length!=0){
+      if(customer.active_proj_cont.length==1){
+        console.log("not here");
         customer.active_proj_cont.forEach(function(cont){
           contractorUser.findById(cont,function(err,contractor){
             if(err){
@@ -313,17 +314,51 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
                 }   
                 else{
                   if(project){
-                    var scheduleStatus=scheduleCheck(project);
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project,scheduleStatus:scheduleStatus});
+                    scheduleCheck(project);
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project});
                   }
                   else{
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null,scheduleStatus:scheduleStatus});
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null});
                   }
                 } 
                 });
             }
           });
         });
+      }else if(customer.active_proj_cont.length>1){
+        
+        // customer.active_proj_cont.forEach(function(cont){
+          contractorUser.find({ '_id':{$in:customer.active_proj_cont}},function(err,contractor){
+            if(err){
+              console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/customer/dashboard");
+            }
+            else{
+              projectC.find({ '_id':{$in:customer.project}},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }   
+                  else{
+                    console.log(project.flags);
+                      res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project});
+                    
+                  } 
+                });
+            }
+          });
+          
+              //       console.log(contractor);
+                    // if(project){
+                    //   var scheduleStatus=scheduleCheck(project);
+                    // }
+                    // else{
+                    //   res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null,scheduleStatus:scheduleStatus});
+                    // }
+          
+        // });
       }
     }
   })

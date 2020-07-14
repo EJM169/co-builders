@@ -37,7 +37,8 @@ var projectSchema = new mongoose.Schema({
         contractorCancel:{type:Boolean,default:false},
         customerCancel:{type:Boolean,default:false},
         planFlag:{type:Boolean,default:false},
-        complete:{type:Boolean,default:false}
+        complete:{type:Boolean,default:false},
+        scheduleStatus:{type:Boolean,default:false}
     }
 });
 

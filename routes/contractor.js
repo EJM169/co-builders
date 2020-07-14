@@ -366,8 +366,8 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
       res.redirect("/contractor/dashboard");
     }
     else{
-      if(contractor.active_proj_cust.length!=0){
-        contractor.active_proj_cust.forEach(function(cust){
+      if(contractor.active_proj_cust.length==1){
+        // contractor.active_proj_cust.forEach(function(cust){
           customerUser.findById(cust,function(err,customer){
             if(err){
               console.log(err);
@@ -382,19 +382,40 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
                   res.redirect("/contractor/dashboard");
                 }   
                 else{
-                  console.log(project);
                   if(project){
-                    var scheduleStatus=scheduleCheck(project);
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project,scheduleStatus:scheduleStatus});
+                    scheduleCheck(project);
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
                   }
                   else{
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:scheduleStatus});
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null});
                   }
                 } 
                 });
             }
-          });
+          // });
         });
+      }else if(contractor.active_proj_cust>1){
+        customerUser.find({'_id':{$in:contractor.active_proj_cust}},function(err,customer){
+          if(err){
+            console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/contractor/dashboard");
+          }
+          else{
+            projectC.find({'_id':{$in:contractor.project}},function(err,project){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/contractor/dashboard");
+              }   
+              else{
+               
+                  scheduleCheck(project);
+                  res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
+              } 
+            });
+          }
+        })
       }
     }
   })
@@ -726,7 +747,7 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
           res.redirect("/contractor/"+contractor._id+"/customer");
         }   
         else{
-          customerUser.findOne({project:customer._id},function(err,customer){
+          customerUser.findOne({project:project._id},function(err,customer){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -779,7 +800,6 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
                     req.flash('error','Error while saving all the data try again');
                     res.redirect("/contractor/"+contractor._id+"/customer");
                   }
-                  console.log(contractor);
                   req.flash('success','successfully saved and project is complete');
                   res.redirect("/contractor/dashboard");
                 });

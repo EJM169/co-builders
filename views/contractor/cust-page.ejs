@@ -7,125 +7,133 @@
             </div>
            
             <%} else if(customerDetail.length>1){%>
-                <%if(project.flags.contractorComplete){%>
-                    <div class="alert alert-success">
-                        <h4 class="alert-heading">Request Sent to Customer</h4>
-                        <p>Waiting for customer to accept the request. Message him to do so</p>
-                      </div>
-                <%}%>
-                
-                <h1>List of customers</h1>
-                <% customerDetail.forEach(function(customer){ %>   
-                    <div class=" card customer_dash_content">
-                        <div class="card-body align-items-center">
-                            <h3>Name: <%=customer.username%></h3>
-                            <p>Email: <%=customer.email%></p>
-                            <p>Mobile: <%=customer.mobile%></p>
-                            <p>Requirements: <%=customer.requirements%></p>
-                            <div class="container ">
-                                <div class="row pb-2">
-                                    <div class="col-lg-3">
-                                        <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <a href="/contractor/<%=customerDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>                            
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="col-lg-3">
-                                        <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
-                                    </div>
-                                    <%if(scheduleStatus){%>
-                                        <div class="col-lg-3">
-                                            <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
-                                                <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
-                                            <%}else{%>
-                                                <form action="/contractor/<%=project._id%>/complete" method="post">
-                                                    <button type="submit" class="btn btn-success btn-lg">Complete</button> 
-                                                </form>
-                                            <%}%>
-                                        </div>
-                                    <%}else{%> 
-                                        <div class="col-lg-3">
-                                            <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
-                                        </div>                                
-                                    <%}%>
-                                    
-                                        <%if(currentUser.projectStatus){%>
-
-                                        <%}else{%>
-                                        <div class="col-lg-3">
-
-                                            <form action="/contractor/<%=project._id%>/cancel" method="post">
-                                                <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
-                                            </form>
-                                        </div>
-                                        
-                                        <%}%>                       
-                                    <div class="col-lg-3">
-                                        <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="container">
-                                    <%if(project.flags.contractorComplete||project.flags.contractorCancel){%>
-                                        <div class="alert alert-success">
-                                            <h4 class="alert-heading">Project Complete</h4>
-                                            <p>Waiting for customer to accept the request. Message him to do so</p>
-                                        </div>
-                                    <%}else if(project.flags.customerComplete){%>
-                                        <div class="alert alert-success">
-                                            <h4 class="alert-heading">Project Complete</h4>
-                                            <p>Customer has sent request saying project has ended</p>
-                                            <p>Please Make sure <b>everything is complete</b> before clicking complete</p>
-                                            <div class="row">
-                                                <div class="m-1">
-                                                    <form action="/contractor/<%=project._id%>/complete" method="post">
-                                                        <button type="submit" class="btn btn-success btn-lg">Complete</button> 
-                                                    </form>
+                <%if(project.length>1){%>
+                    <%project.forEach(function(project){%>
+                        <%if(project.flags.contractorComplete){%>
+                            <div class="alert alert-success">
+                                <h4 class="alert-heading">Request Sent to Customer</h4>
+                                <p>Waiting for customer to accept the request. Message him to do so</p>
+                              </div>
+                              <h1>List of customers</h1>
+                              <% customerDetail.forEach(function(customer){ %>   
+                                <div class=" card customer_dash_content">
+                                    <div class="card-body align-items-center">
+                                        <h3>Name: <%=customer.username%></h3>
+                                        <p>Email: <%=customer.email%></p>
+                                        <p>Mobile: <%=customer.mobile%></p>
+                                        <p>Requirements: <%=customer.requirements%></p>
+                                        <div class="container ">
+                                            <div class="row pb-2">
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
                                                 </div>
-                                                <div class="m-1">
-                                                    <form action="/contractor/<%=project._id%>/incomplete" method="post">
-                                                        <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
-                                                    </form>
-                                                </div>                       
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/<%=customerDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>                            
+                                                </div>
                                             </div>
-                                        </div>
-                                        <%}else if(project.flags.customerCancel){%>
-                                            <div class="alert alert-success">
-                                                <h4 class="alert-heading">Cancellation Request</h4>
-                                                <p>Customer has sent request to cancel the project</p>
-                                                <p>Contact the Customer before making a decision</p>
-                                                <div class="row">
-                                                    <div class="m-1">
+                                            <div class="row ">
+                                                <div class="col-lg-3">
+                                                    <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
+                                                </div>
+                                                <%if(project.flags.scheduleStatus){%>
+                                                    <div class="col-lg-3">
+                                                        <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
+                                                            <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
+                                                        <%}else{%>
+                                                            <form action="/contractor/<%=project._id%>/complete" method="post">
+                                                                <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                                            </form>
+                                                        <%}%>
+                                                    </div>
+                                                <%}else{%> 
+                                                    <div class="col-lg-3">
+                                                        <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
+                                                    </div>                                
+                                                <%}%>
+                                                
+                                                    <%if(currentUser.projectStatus){%>
+            
+                                                    <%}else{%>
+                                                    <div class="col-lg-3">
+            
                                                         <form action="/contractor/<%=project._id%>/cancel" method="post">
-                                                            <button type="submit" class="btn btn-success btn-lg">Accept</button> 
+                                                            <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
                                                         </form>
                                                     </div>
-                                                    <div class="m-1">
-                                                        <form action="/contractor/<%=project._id%>/reject" method="post">
-                                                            <button type="submit" class="btn btn-danger btn-lg">Reject</button> 
-                                                        </form>
-                                                    </div>                       
+                                                    
+                                                    <%}%>                       
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
                                                 </div>
                                             </div>
-                                    <%}else if(project.flags.complete){%>
-                                        <div class="alert alert-success">
-                                            <h4 class="alert-heading">Project Complete</h4>
-                                            <p>This project has been completed</p>
                                         </div>
-                                    <%}%>
-                            </div>
-                        </div>
-                    </div>   
-                <hr class="my-4">  
-        <%})} else{%>  
+                                        <div class="container">
+                                                <%if(project.flags.contractorComplete||project.flags.contractorCancel){%>
+                                                    <div class="alert alert-success">
+                                                        <h4 class="alert-heading">Project Complete</h4>
+                                                        <p>Waiting for customer to accept the request. Message him to do so</p>
+                                                    </div>
+                                                <%}else if(project.flags.customerComplete){%>
+                                                    <div class="alert alert-success">
+                                                        <h4 class="alert-heading">Project Complete</h4>
+                                                        <p>Customer has sent request saying project has ended</p>
+                                                        <p>Please Make sure <b>everything is complete</b> before clicking complete</p>
+                                                        <div class="row">
+                                                            <div class="m-1">
+                                                                <form action="/contractor/<%=project._id%>/complete" method="post">
+                                                                    <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                                                </form>
+                                                            </div>
+                                                            <div class="m-1">
+                                                                <form action="/contractor/<%=project._id%>/incomplete" method="post">
+                                                                    <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
+                                                                </form>
+                                                            </div>                       
+                                                        </div>
+                                                    </div>
+                                                    <%}else if(project.flags.customerCancel){%>
+                                                        <div class="alert alert-success">
+                                                            <h4 class="alert-heading">Cancellation Request</h4>
+                                                            <p>Customer has sent request to cancel the project</p>
+                                                            <p>Contact the Customer before making a decision</p>
+                                                            <div class="row">
+                                                                <div class="m-1">
+                                                                    <form action="/contractor/<%=project._id%>/cancel" method="post">
+                                                                        <button type="submit" class="btn btn-success btn-lg">Accept</button> 
+                                                                    </form>
+                                                                </div>
+                                                                <div class="m-1">
+                                                                    <form action="/contractor/<%=project._id%>/reject" method="post">
+                                                                        <button type="submit" class="btn btn-danger btn-lg">Reject</button> 
+                                                                    </form>
+                                                                </div>                       
+                                                            </div>
+                                                        </div>
+                                                <%}else if(project.flags.complete){%>
+                                                    <div class="alert alert-success">
+                                                        <h4 class="alert-heading">Project Complete</h4>
+                                                        <p>This project has been completed</p>
+                                                    </div>
+                                                <%}%>
+                                        </div>
+                                    </div>
+                                </div>   
+                            <hr class="my-4">  
+                        <%});%>
+                        <%}%>
+                    <%})%>
+                <%}%>
+               
+                
+               
+                
+        <%} else{%>  
             <h1>List of customers</h1>
             <div class=" card customer_dash_content">
                 <div class="card-body align-items-center">
@@ -152,7 +160,7 @@
                             <div class="col-lg-3">
                                 <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
                             </div>
-                            <%if(scheduleStatus){%>
+                            <%if(project.flags.scheduleStatus){%>
                                 <div class="col-lg-3">
                                     <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
                                         <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>

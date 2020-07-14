@@ -19,53 +19,62 @@
                             <div class="container ">
                                 <div class="row pb-2">
                                     <div class="col-lg-3">
-                                        <a href="/customer/contractor/<%=contractorDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                                        <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="/customer/<%=contractorDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                                        <a href="/customer/<%=contractor._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="/customer/chat/<%=contractorDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                                        <a href="/customer/chat/<%=contractor._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
                                     </div>
                                     <div class="col-lg-3">
-                                        <a href="/customer/<%=contractorDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>
+                                        <a href="/customer/<%=contractor._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>
                                     </div>
                                 </div>
-                                <div class="row ">
-                                    <div class="col-lg-3">
-                                        <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
-                                    </div>
-                                    <%if(scheduleStatus){%>
-                                        <div class="col-lg-3">
-                                            <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
-                                                <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
-                                            <%}else{%>
-                                                <form action="/customer/<%=project._id%>/complete" method="post">
-                                                    <button type="submit" class="btn btn-success btn-lg">Complete</button> 
-                                                </form>
-                                            <%}%> 
-                                        </div>
-                                    <%}else{%> 
-                                        <div class="col-lg-3">
-                                            <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
-                                        </div>                                
-                                    <%}%>
-                                    
-                                        <%if(currentUser.projectStatus){%>
-                                           
-                                         
-                                        <%}else{%>
-                                        <div class="col-lg-3">
-
-                                            <form action="/customer/<%=project._id%>/cancel" method="post">
-                                                <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
-                                            </form>
-                                        </div>                      
-                                        <%}%>                                     
-                                    <div class="col-lg-3">
-                                        <a href="/customer/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
-                                    </div>
-                                </div>
+                                <%if(project.length>1){%>
+                                    <%project.forEach(function(project){%>
+                                        <%if(contractor.project.toString()==project._id.toString()){%>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
+                                                </div>
+                                                <%if(project.flags.scheduleStatus){%>
+                                                    <div class="col-lg-3">
+                                                        <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
+                                                            <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
+                                                        <%}else{%>
+                                                            <form action="/customer/<%=project._id%>/complete" method="post">
+                                                                <button type="submit" class="btn btn-success btn-lg">Complete</button> 
+                                                            </form>
+                                                        <%}%> 
+                                                    </div>
+                                                    <%}else{%> 
+                                                        <div class="col-lg-3">
+                                                            <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
+                                                        </div>                                
+                                                     <%}%>
+                                                
+                                                    <%if(currentUser.projectStatus){%>
+                                                       
+                                                     
+                                                    <%}else{%>
+                                                    <div class="col-lg-3">
+            
+                                                        <form action="/customer/<%=project._id%>/cancel" method="post">
+                                                            <button type="submit" class="btn btn-danger btn-lg">Cancel</button> 
+                                                        </form>
+                                                    </div>                      
+                                                    <%}%>                                     
+                                                     <div class="col-lg-3">
+                                                       <a href="/customer/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
+                                                    </div>
+                                                </div>
+                                            
+                                       <% }%>
+                                        
+                                    <%})%>
+                                <%}%>
+                                
                             </div>
                         </div>
                     </div>   
@@ -96,7 +105,7 @@
                             <div class="col-lg-3">
                                 <a href="#"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
                             </div>
-                            <%if(scheduleStatus){%>
+                            <%if(project.flags.scheduleStatus){%>
                                 <div class="col-lg-3">
                                     <%if(project.flags.contractorComplete||project.flags.customerComplete||project.flags.complete){%>
                                         <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
