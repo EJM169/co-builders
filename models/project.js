@@ -2,15 +2,15 @@ var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 const { text } = require("body-parser");
 var projectSchema = new mongoose.Schema({
-    customer:{type:mongoose.Schema.Types.ObjectId,
-                ref:"customer",
-                index: { unique: true,sparse: true}
-    },
-    contractor:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"contractor",
-        index: {unique: true, sparse: true}
-    },
+    // customer:{type:mongoose.Schema.Types.ObjectId,
+    //             ref:"customer",
+    //             index: { unique: true,sparse: true}
+    // },
+    // contractor:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:"contractor",
+    //     index: {unique: true, sparse: true}
+    // },
     username:{type:String,value:"12345"},
     overallPlan:{type:String},
     contractorStatus:{type:Boolean,

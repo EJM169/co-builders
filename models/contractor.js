@@ -34,6 +34,14 @@ var contractorSchema = new mongoose.Schema({
         customerName:{type:String,default:null},
         headline:{type:String,default:null},
         review:{type:String,default:null}
+    }],
+    project:[{type:mongoose.Schema.Types.ObjectId,
+        ref:"project",
+        index: { unique: true,sparse: true}
+    }],
+    chat:[{type:mongoose.Schema.Types.ObjectId,
+        ref:"chat",
+        index: { unique: true,sparse: true}
     }]
 });
 

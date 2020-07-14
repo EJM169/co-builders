@@ -305,7 +305,7 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
               res.redirect("/customer/dashboard");
             }
             else{
-              projectC.findOne({'customer':req.params.id},function(err,project){
+              projectC.findById(customer.project,function(err,project){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
@@ -417,7 +417,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/dashboard");
         }
         else{
-          projectC.findOne({'contractor':req.params.id},function(err,project){
+          projectC.findById(customer.project,function(err,project){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading project details');
@@ -425,7 +425,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
             }   
             else{
               if(project){
-                contractorUser.findById(project.contractor,function(err,contractor){
+                contractorUser.findOne({project:project._id},function(err,contractor){
                   if(err){
                     console.log(err);
                     req.flash('error','Error whil loading details');
@@ -453,16 +453,16 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/dashboard");
         }
         else{
-          customerUser.findById(project.customer,function(err,customer){
+          customerUser.findById(req.user,function(err,customer){
             if(err){
               req.flash('error','Error whil loading customer details');
-              res.redirect("/customer/"+project.customer+"/plan");
+              res.redirect("/customer/dashboard");
             }
             else{
-              contractorUser.findById(project.contractor,function(err,contractor){
+              contractorUser.findOne({project:project._id},function(err,contractor){
                 if(err){
                   req.flash('error','Error whil loading contractor details');
-                  res.redirect("/customer/"+project.customer+"/plan");
+                  res.redirect("/customer/"+customer._id+"/plan");
                 }
                 else{
                   async.series([
@@ -500,10 +500,10 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
                   ], function(err) {
                     if(err) {
                         req.flash('error','Error while saving data');
-                        res.redirect("/customer/"+project.contractor+"/plan");
+                        res.redirect("/customer/"+contractor._id+"/plan");
                     }
                     req.flash('success','succesfully accepted the plan');
-                    res.redirect("/customer/"+project.contractor+"/plan");  
+                    res.redirect("/customer/"+contractor._id+"/plan");  
                   });
                 }
               });
@@ -527,7 +527,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
             }
             else{
               req.flash('success','Successfully rejected the plan');
-              res.redirect("/customer/"+project.customer+"/plan")
+              res.redirect("/customer/"+req.user+"/plan")
             }
           })
         }
@@ -564,7 +564,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/dashboard");
         }
         else{
-          projectC.findOne({'contractor':req.params.id},function(err,project){
+          projectC.findById(customer.project,function(err,project){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -572,7 +572,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
             }   
             else{
               if(project){
-                contractorUser.findById(project.contractor,function(err,contractor){
+                contractorUser.findById(req.params.id,function(err,contractor){
                   if(err){
                     console.log(err);
                     req.flash('error','Error whil loading details');
@@ -603,7 +603,7 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
       res.redirect("/customer/dashboard");
     }
     else{
-      chat.findOne({'contractor':req.params.id},function(err,chatLog){
+      chat.findById(customer.chat,function(err,chatLog){
           if(err){
             console.log(err);
             req.flash('error','Error whil loading details');
@@ -611,7 +611,7 @@ router.get("/customer/chat/:id",middleware.isCustomerLoggedIn,function(req,res){
           }   
           else{
             if(chatLog){
-              contractorUser.findById(chatLog.contractor,function(err,contractor){
+              contractorUser.findOne({chat:chatLog._id},function(err,contractor){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
@@ -645,7 +645,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
           res.redirect("/customer/"+customer._id+"/contractor");
         }   
         else{
-          contractorUser.findById(project.contractor,function(err,contractor){
+          contractorUser.findOne({project:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error',"Error while getting data try again");
@@ -684,7 +684,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                     });
                   },
                   function(callback){
-                    chat.deleteOne({customer:customer._id},function(err){
+                    chat.deleteOne({_id:customer.chat},function(err){
                       if(err){
                         console.log(err);
                         callback(err);
@@ -746,7 +746,7 @@ router.post("/customer/:id/reject",middleware.isCustomerLoggedIn,function(req,re
             }
             else{
               req.flash('success','Successfully Cancelled');
-              res.redirect("/customer/"+project.customer+"/contractor")
+              res.redirect("/customer/"+customer._id+"/contractor")
             }
           });
         }
@@ -770,7 +770,7 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
           res.redirect("/customer/"+customer._id+"/contractor");
         }   
         else{
-          contractorUser.findById(project.contractor,function(err,contractor){
+          contractorUser.findOne({project:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error',"Error while getting data try again");
@@ -837,7 +837,7 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
                   }
                   else{
                     req.flash('success','Successfully saved the data');
-                    res.redirect("/customer/"+project.customer+"/contractor")
+                    res.redirect("/customer/"+customer._id+"/contractor")
                   }
                 });
               }
@@ -872,7 +872,7 @@ router.post("/customer/:id/incomplete",middleware.isCustomerLoggedIn,function(re
             }
             else{
               req.flash('success','Successfully Cancelled');
-              res.redirect("/customer/"+project.customer+"/contractor")
+              res.redirect("/customer/"+customer._id+"/contractor")
             }
           });
         }
@@ -895,7 +895,7 @@ router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,r
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findById(project.contractor,function(err,contractor){
+          contractorUser.findOne({project:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -925,7 +925,7 @@ router.get("/customer/:id/feedback/edit",middleware.isCustomerLoggedIn,function(
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findById(project.contractor,function(err,contractor){
+          contractorUser.findOne({project:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -1047,7 +1047,7 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
               res.redirect("/customer/dashboard");
             }
             else{
-              projectC.findOne({'customer':req.params.id},function(err,project){
+              projectC.findById(customer.project,function(err,project){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
