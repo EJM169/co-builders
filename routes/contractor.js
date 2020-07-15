@@ -367,7 +367,7 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
     }
     else{
       if(contractor.active_proj_cust.length==1){
-        // contractor.active_proj_cust.forEach(function(cust){
+        contractor.active_proj_cust.forEach(function(cust){
           customerUser.findById(cust,function(err,customer){
             if(err){
               console.log(err);
@@ -392,7 +392,7 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
                 } 
                 });
             }
-          // });
+          });
         });
       }else if(contractor.active_proj_cust>1){
         customerUser.find({'_id':{$in:contractor.active_proj_cust}},function(err,customer){
