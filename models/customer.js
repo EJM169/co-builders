@@ -34,6 +34,10 @@ var customerSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"contractor"
     }],
+    past_proj:[{type:mongoose.Schema.Types.ObjectId,
+        ref:"project",
+        index: { unique: true,sparse: true}
+    }],
     projectStatus:{type:Boolean, default:false},
     project:[{type:mongoose.Schema.Types.ObjectId,
         ref:"project",

@@ -16,15 +16,11 @@ function amountCalc(budget){
   }
 
   function scheduleCheck(project){
-    var i=0,k=0;
-    if(project.length>0){
-      project.forEach(function(project){
-      projectC.findById(project._id,function(err,project){
-        if(err){
-          console.log(err);
-            return 0;
-        }
-        else{
+    var i=0,k=0;4
+    if(project){
+   
+    // console.log("working");
+
           project.planDate.forEach(function(plan){
             ++i;
             if(plan.status==true){
@@ -32,27 +28,25 @@ function amountCalc(budget){
             }
           });
           if(i===k){
-           project.scheduleStatus=true;
+           project.flags.scheduleStatus=true;
            
           }
           else{
-            project.scheduleStatus=false;
+            project.flags.scheduleStatus=false;
           }
           project.save(function(err,data){
             if(err){
               return 0;
             }
             else{
-              console.log("worked");
+              // console.log("worked");
               return 1;
             }
           });
         }
-      });
-      });
   
       
-    }
+    
   
   }
 

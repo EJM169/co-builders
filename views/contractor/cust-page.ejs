@@ -58,7 +58,7 @@
                                                     </div>                                
                                                 <%}%>
                                                 
-                                                    <%if(currentUser.projectStatus){%>
+                                                    <%if(currentUser.projectStatus||project.flags.complete){%>
             
                                                     <%}else{%>
                                                     <div class="col-lg-3">
@@ -68,10 +68,12 @@
                                                         </form>
                                                     </div>
                                                     
-                                                    <%}%>                       
-                                                <div class="col-lg-3">
-                                                    <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
-                                                </div>
+                                                    <%}%>        
+                                                    <%if(project.flags.complete){%>
+                                                        <div class="col-lg-3">
+                                                            <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
+                                                        </div>
+                                                    <%}%>       
                                             </div>
                                         </div>
                                         <div class="container">
@@ -176,7 +178,7 @@
                                     <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
                             <%}%>
                             
-                                <%if(currentUser.projectStatus){%>
+                                <%if(currentUser.projectStatus||project.flags.complete){%>
 
                                     <%}else{%>
                                         <div class="col-lg-3">
@@ -186,21 +188,22 @@
                                         </form>
                                         </div>
 
-                                    <%}%>                       
-                            <div class="col-lg-3">
-                                <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
-
-                            </div>
+                                    <%}%>         
+                            <%if(project.flags.complete){%>
+                                <div class="col-lg-3">
+                                    <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
+                                </div>
+                            <%}%>
                         </div>
                     </div>
                 </div>
                 <div class="container">
-                    <%if(project.flags.contractorComplete||project.flags.contractorCancel){%>
+                    <%if((project.flags.contractorComplete||project.flags.contractorCancel)&&!(project.flags.complete)){%>
                         <div class="alert alert-success">
                             <h4 class="alert-heading">Project Complete</h4>
                             <p>Waiting for customer to accept the request. Message him to do so</p>
                         </div>
-                    <%}else if(project.flags.customerComplete){%>
+                    <%}else if(project.flags.customerComplete&&!project.flags.complete){%>
                         <div class="alert alert-success">
                             <h4 class="alert-heading">Project Complete</h4>
                             <p>Customer has sent request saying project has ended</p>

@@ -240,7 +240,6 @@ router.post("/contractor/dashboard/:id/accept",middleware.isContractorLoggedIn,f
               customer.contractor.pop(contractor);
               customer.project.push(newData);
               customer.chat.push(newChat);
-              console.log(customer);
               customer.active_proj_cont.push(contractor);
               customer.save(function(err,data){
                 if(err){
@@ -902,6 +901,8 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                   function(callback){
                     customer.active_proj_cont.pop(contractor);
                     customer.past_proj_cont.push(contractor);
+                    customer.project.pop(project);
+                    customer.past_proj.push(project);
                     customer.projectStatus=!customer.projectStatus;
                     customer.save(function(err,data){
                       if(err){
@@ -914,6 +915,8 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                   function(callback){
                     contractor.active_proj_cust.pop(customer);
                     contractor.past_proj_cust.push(customer);
+                    contractor.project.pop(project);
+                    contractor.past_proj.push(project);
                     contractor.projectStatus=!contractor.projectStatus;
                     contractor.no_project +=1;
                     contractor.save(function(err,data){
@@ -944,7 +947,7 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                     res.redirect("/contractor/"+contractor._id+"/customer");
                   }
                   req.flash('success','successfully saved and project is complete');
-                  res.redirect("/contractor/"+contractor._id+"/customer");
+                  res.redirect("/contractor/dashboard");
                 });
                  
               }else{
@@ -1015,7 +1018,7 @@ router.get("/contractor/:id/feedback",middleware.isContractorLoggedIn,function(r
           res.redirect("/customer/dashboard");
         }   
         else{
-          customerUser.findOne({project:project._id},function(err,customer){
+          customerUser.findOne({past_proj:project._id},function(err,customer){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -1048,7 +1051,7 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
               res.redirect("/contractor/dashboard");
             }
             else{
-              projectC.findById(req.params.id,function(err,project){
+              projectC.findById(contractor.past_proj,function(err,project){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
@@ -1056,11 +1059,11 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
                 }   
                 else{
                   if(project){
-                    var scheduleStatus=scheduleCheck(project);
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project,scheduleStatus:scheduleStatus});
+                    // scheduleCheck(project);
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
                   }
                   else{
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null,scheduleStatus:scheduleStatus});
+                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null});
                   }
                 } 
                 });

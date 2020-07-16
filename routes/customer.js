@@ -299,7 +299,6 @@ router.get("/customer/:id/contractor",middleware.isCustomerLoggedIn,function(req
     else{
     //may need to use project db for id  
       if(customer.active_proj_cont.length==1){
-        console.log("not here");
         customer.active_proj_cont.forEach(function(cont){
           contractorUser.findById(cont,function(err,contractor){
             if(err){
@@ -833,6 +832,8 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
                   function(callback){
                     customer.active_proj_cont.pop(contractor);
                     customer.past_proj_cont.push(contractor);
+                    customer.project.pop(project);
+                    customer.past_proj.push(project);
                     customer.projectStatus=!customer.projectStatus;
                     customer.save(function(err,data){
                       if(err){
@@ -845,6 +846,8 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
                   function(callback){
                     contractor.active_proj_cust.pop(customer);
                     contractor.past_proj_cust.push(customer);
+                    contractor.project.pop(project);
+                    contractor.past_proj.push(project);
                     contractor.projectStatus=!contractor.projectStatus;
                     contractor.no_project +=1;
                     contractor.save(function(err,data){
@@ -946,7 +949,7 @@ router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,r
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findOne({project:project._id},function(err,contractor){
+          contractorUser.findOne({past_proj:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -976,7 +979,7 @@ router.get("/customer/:id/feedback/edit",middleware.isCustomerLoggedIn,function(
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findOne({project:project._id},function(err,contractor){
+          contractorUser.findOne({past_proj:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -1088,7 +1091,6 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
       res.redirect("/customer/dashboard");
     }
     else{
-    //may need to use project db for id  
       if(customer.past_proj_cont.length!=0){
         customer.past_proj_cont.forEach(function(cont){
           contractorUser.findById(cont,function(err,contractor){
@@ -1098,7 +1100,7 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
               res.redirect("/customer/dashboard");
             }
             else{
-              projectC.findById(customer.project,function(err,project){
+              projectC.findById(customer.past_proj,function(err,project){
                 if(err){
                   console.log(err);
                   req.flash('error','Error whil loading details');
@@ -1106,11 +1108,11 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
                 }   
                 else{
                   if(project){
-                    var scheduleStatus=scheduleCheck(project);
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project,scheduleStatus:scheduleStatus});
+                    // scheduleCheck(project);
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project});
                   }
                   else{
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null,scheduleStatus:scheduleStatus});
+                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null});
                   }
                 } 
                 });

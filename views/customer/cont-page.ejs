@@ -61,7 +61,7 @@
                                                             </div>                                
                                                          <%}%>
                                                     
-                                                        <%if(currentUser.projectStatus){%>
+                                                        <%if(currentUser.projectStatus||project.flags.complete){%>
                                                            
                                                          
                                                         <%}else{%>
@@ -76,12 +76,12 @@
                                                            <a href="/customer/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
                                                         </div>
                                                     </div>
-                                                    <%if(project.flags.customerComplete||project.flags.customerCancel){%>
+                                                    <%if((project.flags.customerComplete||project.flags.customerCancel)&&!(project.flags.complete)){%>
                                                         <div class="alert alert-success">
                                                             <h4 class="alert-heading">Project Complete</h4>
                                                             <p>Waiting for contractor to accept the request. Message him to do so</p>
                                                             </div>
-                                                    <%}else if(project.flags.contractorComplete){%>
+                                                    <%}else if(project.flags.contractorComplete&&!project.flags.complete){%>
                                                         <div class="alert alert-success">
                                                             <h4 class="alert-heading">Project Complete</h4>
                                                             <p>Contractor has sent request saying project has ended</p>
@@ -177,7 +177,7 @@
                                 </div>                                
                             <%}%>
                             
-                                <%if(currentUser.projectStatus){%>
+                                <%if(currentUser.projectStatus||project.flags.complete){%>
                                            
                                  
                                 <%}else{%>
