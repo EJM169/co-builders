@@ -19,8 +19,8 @@
             <% if(currentUser.contractor.length==0 && currentUser.active_proj_cont.length==0){%>
                 <div class=" card customer_dash_content">
                     <div class="card-body align-items-center">
-                        <h3>Name: <%=contractor.username%></h3>
-                        <p>Contractor Id: <%=contractor.contractorid%></p>
+                        <h3>Name: <%=contractor.name%></h3>
+                        <p>Contractor user name: <%=contractor.username%></p>
                         <p>Email: <%=contractor.email%></p>
                         <p>Experience: <%=contractor.experience%></p>
                         <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
@@ -34,8 +34,8 @@
                         <%i=1%>
                         <div class=" card customer_dash_content">
                             <div class="card-body align-items-center">
-                                <h3>Name: <%=contractor.username%></h3>
-                                <p>Contractor Id: <%=contractor.contractorid%></p>
+                                <h3>Name: <%=contractor.name%></h3>
+                                <p>Contractor user name: <%=contractor.username%></p>
                                 <p>Email: <%=contractor.email%></p>
                                 <p>Experience: <%=contractor.experience%></p>
                                 
@@ -48,8 +48,8 @@
                         <%if(i==0) {%>
                             <div class=" card customer_dash_content">
                                 <div class="card-body align-items-center">
-                                    <h3>Name: <%=contractor.username%></h3>
-                                    <p>Contractor Id: <%=contractor.contractorid%></p>
+                                    <h3>Name: <%=contractor.name%></h3>
+                                    <p>Contractor user name: <%=contractor.username%></p>
                                     <p>Email: <%=contractor.email%></p>
                                     <p>Experience: <%=contractor.experience%></p>
                                     <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
@@ -64,8 +64,8 @@
                         <% i=1%>
                         <div class=" card customer_dash_content">
                             <div class="card-body align-items-center">
-                                <h3>Name: <%=contractor.username%></h3>
-                                <p>Contractor Id: <%=contractor.contractorid%></p>
+                                <h3>Name: <%=contractor.name%></h3>
+                                <p>Contractor user name: <%=contractor.username%></p>
                                 <p>Email: <%=contractor.email%></p>
                                 <p>Experience: <%=contractor.experience%></p>
                                 
@@ -78,8 +78,8 @@
                      <% if(i==0){%>
                         <div class=" card customer_dash_content">
                             <div class="card-body align-items-center">
-                                <h3>Name: <%=contractor.username%></h3>
-                                <p>Contractor Id: <%=contractor.contractorid%></p>
+                                <h3>Name: <%=contractor.name%></h3>
+                                <p>Contractor user name: <%=contractor.username%></p>
                                 <p>Email: <%=contractor.email%></p>
                                 <p>Experience: <%=contractor.experience%></p>
                                 <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
@@ -96,8 +96,8 @@
                             <% if(activcont.toString()==contractor._id.toString()){%>
                                 <div class=" card customer_dash_content">
                                     <div class="card-body align-items-center">
-                                        <h3>Name: <%=contractor.username%></h3>
-                                        <p>Contractor Id: <%=contractor.contractorid%></p>
+                                        <h3>Name: <%=contractor.name%></h3>
+                                        <p>Contractor user name: <%=contractor.username%></p>
                                         <p>Email: <%=contractor.email%></p>
                                         <p>Experience: <%=contractor.experience%></p>
                                         
@@ -109,8 +109,8 @@
                             <%}else if(cont.toString()==contractor._id.toString()){%>
                                     <div class=" card customer_dash_content">
                                         <div class="card-body align-items-center">
-                                            <h3>Name: <%=contractor.username%></h3>
-                                            <p>Contractor Id: <%=contractor.contractorid%></p>
+                                            <h3>Name: <%=contractor.name%></h3>
+                                            <p>Contractor user name: <%=contractor.username%></p>
                                             <p>Email: <%=contractor.email%></p>
                                             <p>Experience: <%=contractor.experience%></p>
                                             
@@ -122,8 +122,8 @@
                             <%}else{%>
                                 <div class=" card customer_dash_content">
                                     <div class="card-body align-items-center">
-                                        <h3>Name: <%=contractor.username%></h3>
-                                        <p>Contractor Id: <%=contractor.contractorid%></p>
+                                        <h3>Name: <%=contractor.name%></h3>
+                                        <p>Contractor user name: <%=contractor.username%></p>
                                         <p>Email: <%=contractor.email%></p>
                                         <p>Experience: <%=contractor.experience%></p>
                                         <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">
@@ -134,8 +134,8 @@
                 <%}else{%>
                     <div class=" card customer_dash_content">
                         <div class="card-body align-items-center">
-                            <h3>Name: <%=contractor.username%></h3>
-                            <p>Contractor Id: <%=contractor.contractorid%></p>
+                            <h3>Name: <%=contractor.name%></h3>
+                            <p>Contractor user name: <%=contractor.username%></p>
                             <p>Email: <%=contractor.email%></p>
                             <p>Experience: <%=contractor.experience%></p>
                             <a href="/customer/contractor/<%=contractor._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="See More">

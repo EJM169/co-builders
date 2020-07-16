@@ -8,7 +8,10 @@
                 <p>Please fill in this form to create an account!</p>
                 <hr>
                 <div class="form-group">
-                <input type="text" class="form-control" name="username" pattern="[A-Z a-z]{3,30}" minlength="3" placeholder="Enter your Name" required="required" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)||(event.charCode==32)">
+                    <input type="text" class="form-control" name="name" pattern="[A-Z a-z]{3,30}"  placeholder="Enter your Full Name here" maxlength="30" required="required" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)||(event.charCode==32)">
+                </div>  
+                <div class="form-group">
+                <input type="text" class="form-control" name="username" maxlength="15" placeholder="Enter your unique user Name" required="required" onkeypress="return (event.charCode!=32)">
                 </div>   
                     
                 <div class="form-group">
@@ -17,9 +20,6 @@
                 <div class="form-group">
                     <input type="tel" class="form-control" name="mobile" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" placeholder="Mobile No." maxlength="10" required="required">
                 </div>
-                <div class="form-group">
-                        <input type="text" class="form-control" minlength="4" name="conid" placeholder="Contractor id" required="required">
-                </div> 
                 <div class="form-group">
                         <input type="number" class="form-control" name="experience" placeholder="Years of Experience" required="required">
                 </div>  

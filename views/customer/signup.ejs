@@ -8,7 +8,10 @@
                 <p>Please fill in this form to create an account!</p>
                 <hr>
                 <div class="form-group">
-                    <input type="text" class="form-control" name="username" pattern="[A-Z a-z]{3,30}"  placeholder="Enter your Name" maxlength="30" required="required" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)||(event.charCode==32)">
+                    <input type="text" class="form-control" name="name" pattern="[A-Z a-z]{3,30}"  placeholder="Enter your Full Name here" maxlength="30" required="required" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)||(event.charCode==32)">
+                </div>   
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username"   placeholder="Enter your unique username " maxlength="15" required="required" onkeypress="return (event.charCode!=32)">
                 </div>   
                     
                 <div class="form-group">
@@ -19,7 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label>Home Address</label>
-                       <textarea class="form-control" name="customer[address]" rows="5" minlength="20" maxlength="1000" required="required" ></textarea>
+                       <textarea class="form-control" name="address" rows="5" minlength="20" maxlength="1000" required="required" ></textarea>
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" id="cust_pass1" name="password" minlength="8" maxlength="30" placeholder="Enter your Password" required="required">

@@ -18,7 +18,8 @@
                               <% customerDetail.forEach(function(customer){ %>   
                                 <div class=" card customer_dash_content">
                                     <div class="card-body align-items-center">
-                                        <h3>Name: <%=customer.username%></h3>
+                                        <h3>Name: <%=customer.name%></h3>
+                                        <p>username: <%=customer.username%></p>
                                         <p>Email: <%=customer.email%></p>
                                         <p>Mobile: <%=customer.mobile%></p>
                                         <p>Requirements: <%=customer.requirements%></p>
@@ -137,7 +138,8 @@
             <h1>List of customers</h1>
             <div class=" card customer_dash_content">
                 <div class="card-body align-items-center">
-                    <h3>Name: <%=customerDetail.username%></h3>
+                    <h3>Name: <%=customerDetail.name%></h3>
+                    <p>username: <%=customerDetail.username%></p>
                     <p>Email: <%=customerDetail.email%></p>
                     <p>Mobile: <%=customerDetail.mobile%></p>
                     <p>Requirements: <%=customerDetail.requirements%></p>

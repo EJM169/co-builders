@@ -110,10 +110,10 @@ passport.use("contractor-signup", new LocalStrategy({
           var newUser = new contractorUser();
           // set the user's local credentials
           newUser.username      =    username;
+          newUser.name          =    req.param("name");
           newUser.password      =    createHash(password);
           newUser.email         =       req.param('email');
           newUser.mobile        =     req.param('mobile');
-          newUser.contractorid  =     req.param('conid');
           newUser.experience    =       req.param('experience');
 
           // save the user
@@ -167,15 +167,14 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
             res.redirect("/");
         } else {
           if(contractor.customer.length>0){
-            contractor.customer.forEach(function(customer){
-              console.log(customer);
-              customerUser.findById(customer,function(err,customer){
+            contractor.customer.forEach(function(cust){
+         
+              customerUser.findById(cust,function(err,customer){
                 if(err){
                   console.log(err);
                   req.flash('error','Error while loading customer data');
                 }
                 else{
-                // console.log(customer);
                   res.render("contractor/dashboard",{currentUser:contractor,customerDetail:customer});
                 }
               });           
@@ -183,6 +182,8 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
            
           }
           else{
+
+
             res.render("contractor/dashboard",{currentUser:contractor,customerDetail:[]});
         }
           }
@@ -755,71 +756,85 @@ router.post("/contractor/:id/cancel",middleware.isContractorLoggedIn,function(re
               req.flash('error','Error whil loading details');
               res.redirect("/contractor/"+contractor._id+"/customer");
             }else{
-              if(project.flags.customerCancel){
-                async.series([
-                  function(callback){
-                    customer.active_proj_cont.pop(contractor);
-                    customer.save(function(err,data){
-                      if(err){
-                        console.log(err);
-                        callback(err);
+              chat.findOne({username:contractor.username},function(err,chat){
+                if(err){
+                  console.log(err);
+                  req.flash('error',"Error while getting data try again");
+                  res.redirect("/customer/"+customer._id+"/contractor");
+                }
+                else{
+                  if(project.flags.customerCancel){
+                    async.series([
+                      function(callback){
+                        customer.active_proj_cont.pop(contractor);
+                        customer.project.pop(project);
+                        customer.chat.pop(chat);
+                        customer.save(function(err,data){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        });
+                      },
+                      function(callback){
+                        contractor.active_proj_cust.pop(customer);
+                        contractor.project.pop(project);
+                        contractor.chat.pop(chat);
+                        contractor.save(function(err,data){
+                          if(err){
+                            console.log(err)
+                            callback(err);
+                          }
+                          callback();
+                        });
+                      },
+                      function(callback){
+                        projectC.deleteOne({_id:project._id},function(err){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        })
+                      },
+                      function(callback){
+                        chat.deleteOne({_id:contractor.chat},function(err){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        })
                       }
-                      callback();
+                    ],function(err){
+                      if(err){
+                      console.log("reached here  error");
+    
+                        req.flash('error','Error while saving all the data try again');
+                        res.redirect("/contractor/"+contractor._id+"/customer");
+                      }
+                      req.flash('success','successfully saved and project is complete');
+                      res.redirect("/contractor/dashboard");
                     });
-                  },
-                  function(callback){
-                    contractor.active_proj_cust.pop(customer);
-                    contractor.save(function(err,data){
-                      if(err){
-                        console.log(err)
-                        callback(err);
-                      }
-                      callback();
-                    });
-                  },
-                  function(callback){
-                    projectC.deleteOne({_id:project._id},function(err){
+                     
+                  }else{
+                    project.flags.contractorCancel=!project.flags.contractorCancel;
+                    project.save(function(err,savedata){
                       if(err){
                         console.log(err);
-                        callback(err);
+                        req.flash('error','Error while saving');
+                        res.redirect("/contractor/"+contractor._id+"/customer");
                       }
-                      callback();
-                    })
-                  },
-                  function(callback){
-                    chat.deleteOne({_id:contractor.chat},function(err){
-                      if(err){
-                        console.log(err);
-                        callback(err);
+                      else{
+                        req.flash('success','Successfully saved the data');
+                        res.redirect("/contractor/"+contractor._id+"/customer")
                       }
-                      callback();
                     })
                   }
-                ],function(err){
-                  if(err){
-                  console.log("reached here  error");
-
-                    req.flash('error','Error while saving all the data try again');
-                    res.redirect("/contractor/"+contractor._id+"/customer");
-                  }
-                  req.flash('success','successfully saved and project is complete');
-                  res.redirect("/contractor/dashboard");
-                });
-                 
-              }else{
-                project.flags.contractorCancel=!project.flags.contractorCancel;
-                project.save(function(err,savedata){
-                  if(err){
-                    console.log(err);
-                    req.flash('error','Error while saving');
-                    res.redirect("/contractor/"+contractor._id+"/customer");
-                  }
-                  else{
-                    req.flash('success','Successfully saved the data');
-                    res.redirect("/contractor/"+contractor._id+"/customer")
-                  }
-                })
-              }
+                }
+              });
+              
             }
           });
         }

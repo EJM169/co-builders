@@ -79,7 +79,7 @@ passport.use("customer-signup", new LocalStrategy({
         if (user) {
             console.log('User already exists');
             return done(null, false, 
-                 req.flash('error','User Already Exists')
+                 req.flash('error','Username Already Exists')
                 );
         }
         
@@ -89,6 +89,7 @@ passport.use("customer-signup", new LocalStrategy({
           var newUser = new customerUser();
           // set the user's local credentials
           newUser.username  =    username;
+          newUser.name      =    req.param('name');
           newUser.password  =    createHash(password);
           newUser.email     =       req.param('email');
           newUser.mobile    =     req.param('mobile');
@@ -688,69 +689,83 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
               res.redirect("/customer/"+customer._id+"/contractor");
             }
             else{
-              if(project.flags.contractorCancel){
-                async.series([
-                  function(callback){
-                    customer.active_proj_cont.pop(contractor);
-                    customer.save(function(err,data){
+              chat.findOne({username:contractor.username},function(err,chat){
+                if(err){
+                  console.log(err);
+                  req.flash('error',"Error while getting data try again");
+                  res.redirect("/customer/"+customer._id+"/contractor");
+                }
+                else{
+                  if(project.flags.contractorCancel){
+                    async.series([
+                      function(callback){
+                        customer.active_proj_cont.pop(contractor);
+                        customer.project.pop(project);
+                        customer.chat.pop(chat);
+                        customer.save(function(err,data){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        });
+                      },
+                      function(callback){
+                        contractor.active_proj_cust.pop(customer);
+                        contractor.project.pop(project);
+                        contractor.chat.pop(chat);
+                        contractor.save(function(err,data){
+                          if(err){
+                            console.log(err)
+                            callback(err);
+                          }
+                          callback();
+                        });
+                      },
+                      function(callback){
+                        projectC.deleteOne({_id:project._id},function(err){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        });
+                      },
+                      function(callback){
+                        chat.deleteOne({_id:chat._id},function(err){
+                          if(err){
+                            console.log(err);
+                            callback(err);
+                          }
+                          callback();
+                        })
+                      }
+                    ],function(err){
+                      if(err){
+                        req.flash('error','Error while saving all the data try again');
+                        res.redirect("/customer/"+customer._id+"/contractor");
+                      }
+                      req.flash('success','successfully saved and project is complete');
+                      res.redirect("/customer/dashboard");
+                    });
+                     
+                  }else{
+                    project.flags.customerCancel=!project.flags.customerCancel;
+                    project.save(function(err,savedata){
                       if(err){
                         console.log(err);
-                        callback(err);
+                        req.flash('error','Error while saving');
+                        res.redirect("/customer/"+customer._id+"/contractor");
                       }
-                      callback();
+                      else{
+                        req.flash('success','Successfully saved the data');
+                        res.redirect("/customer/"+customer._id+"/contractor")
+                      }
                     });
-                  },
-                  function(callback){
-                    contractor.active_proj_cust.pop(customer);
-                    contractor.save(function(err,data){
-                      if(err){
-                        console.log(err)
-                        callback(err);
-                      }
-                      callback();
-                    });
-                  },
-                  function(callback){
-                    projectC.deleteOne({_id:project._id},function(err){
-                      if(err){
-                        console.log(err);
-                        callback(err);
-                      }
-                      callback();
-                    });
-                  },
-                  function(callback){
-                    chat.deleteOne({_id:customer.chat},function(err){
-                      if(err){
-                        console.log(err);
-                        callback(err);
-                      }
-                      callback();
-                    })
                   }
-                ],function(err){
-                  if(err){
-                    req.flash('error','Error while saving all the data try again');
-                    res.redirect("/customer/"+customer._id+"/contractor");
-                  }
-                  req.flash('success','successfully saved and project is complete');
-                  res.redirect("/customer/dashboard");
-                });
-                 
-              }else{
-                project.flags.customerCancel=!project.flags.customerCancel;
-                project.save(function(err,savedata){
-                  if(err){
-                    console.log(err);
-                    req.flash('error','Error while saving');
-                    res.redirect("/customer/"+customer._id+"/contractor");
-                  }
-                  else{
-                    req.flash('success','Successfully saved the data');
-                    res.redirect("/customer/"+customer._id+"/contractor")
-                  }
-                });
-              }
+                }
+              });
+              
             }
           })
         }
