@@ -1091,7 +1091,7 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
       res.redirect("/customer/dashboard");
     }
     else{
-      if(customer.past_proj_cont.length!=0){
+      if(customer.past_proj_cont.length==1){
         customer.past_proj_cont.forEach(function(cont){
           contractorUser.findById(cont,function(err,contractor){
             if(err){
@@ -1119,8 +1119,27 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
             }
           });
         });
-      }else{
-        res.render("customer/cont-page",{currentUser:customer,contractorDetail:null,project:null,scheduleStatus:null});
+      }else if(customer.past_proj_cont.length>1){
+        customerUser.find({'_id':{$in:customer.past_proj_cont}},function(err,customer){
+          if(err){
+            console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/contractor/dashboard");
+          }
+          else{
+            projectC.find({'_id':{$in:customer.past_proj}},function(err,project){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/contractor/dashboard");
+              }   
+              else{
+                 res.render("customer/cont-page",{currentUser:customer,customerDetail:contractor,project:project});
+              
+              }
+            });
+          }
+        });
       }
     }
   })

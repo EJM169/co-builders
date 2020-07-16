@@ -35,19 +35,13 @@ var customerSchema = new mongoose.Schema({
         ref:"contractor"
     }],
     past_proj:[{type:mongoose.Schema.Types.ObjectId,
-        ref:"project",
-        index: { unique: true,sparse: true}
-    }],
+        ref:"project"    }],
     projectStatus:{type:Boolean, default:false},
     project:[{type:mongoose.Schema.Types.ObjectId,
-        ref:"project",
-        index: { unique: true,sparse: true}
-    }],
+        ref:"project"    }],
     chat:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"chat",
-        index: { unique: true,sparse: true}
-    }]
+        ref:"chat"    }]
 });
 
 customerSchema.plugin(passportLocalMongoose);

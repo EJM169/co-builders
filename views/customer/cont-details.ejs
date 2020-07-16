@@ -14,7 +14,7 @@
                 <p>Criteria Details:<%= contractorDetail.criteria; %></p>  
                 <h3>Customer Reviews</h3>
                 <hr class="my-1">  
-                <% if(!contractorDetail.feedback){%>
+                <% if(contractorDetail.feedback){%>
                     <%contractorDetail.feedback.forEach(function(feedback){%>
                         <div class="card">
                             <div class="card-body align-items-center">

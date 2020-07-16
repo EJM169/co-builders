@@ -396,7 +396,7 @@ router.get("/contractor/:id/customer",middleware.isContractorLoggedIn,function(r
             }
           });
         });
-      }else if(contractor.active_proj_cust>1){
+      }else if(contractor.active_proj_cust.length>1){
         customerUser.find({'_id':{$in:contractor.active_proj_cust}},function(err,customer){
           if(err){
             console.log(err);
@@ -1042,7 +1042,7 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
       res.redirect("/contractor/dashboard");
     }
     else{
-      if(contractor.past_proj_cust.length!=0){
+      if(contractor.past_proj_cust.length==1){
         contractor.past_proj_cust.forEach(function(cust){
           customerUser.findById(cust,function(err,customer){
             if(err){
@@ -1058,20 +1058,39 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
                   res.redirect("/contractor/dashboard");
                 }   
                 else{
-                  if(project){
+                  // if(project){
                     // scheduleCheck(project);
                     res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
-                  }
-                  else{
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null});
-                  }
+                  // }
+                  // else{
+                  //   res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null});
+                  // }
                 } 
                 });
             }
           });
         });
-      }else{
-        res.render("contractor/cust-page",{currentUser:contractor,customerDetail:null,project:null,scheduleStatus:null});
+      }else if(contractor.past_proj_cust.length>1){
+        customerUser.find({'_id':{$in:contractor.past_proj_cust}},function(err,customer){
+          if(err){
+            console.log(err);
+              req.flash('error','Error while loading the page. Please try again');
+              res.redirect("/contractor/dashboard");
+          }
+          else{
+            projectC.find({'_id':{$in:contractor.past_proj}},function(err,project){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/contractor/dashboard");
+              }   
+              else{
+                 res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
+              
+              }
+            });
+          }
+        });
       }
     }
   })
