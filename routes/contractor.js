@@ -168,12 +168,14 @@ router.get("/contractor/dashboard",middleware.isContractorLoggedIn,function(req,
         } else {
           if(contractor.customer.length>0){
             contractor.customer.forEach(function(customer){
+              console.log(customer);
               customerUser.findById(customer,function(err,customer){
                 if(err){
                   console.log(err);
                   req.flash('error','Error while loading customer data');
                 }
                 else{
+                // console.log(customer);
                   res.render("contractor/dashboard",{currentUser:contractor,customerDetail:customer});
                 }
               });           
