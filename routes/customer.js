@@ -92,6 +92,7 @@ passport.use("customer-signup", new LocalStrategy({
           newUser.password  =    createHash(password);
           newUser.email     =       req.param('email');
           newUser.mobile    =     req.param('mobile');
+          newUser.address   =     req.param('address');
 
           // save the user
           newUser.save(function(err) {
