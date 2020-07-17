@@ -18,7 +18,6 @@ var express                 = require("express"),
 
 
 mongoose.connect("mongodb://localhost:27017/construction");
-// mongoose.set('useFindAndModify', false);
 mongoose.set('useFindAndModify', false);
 
 app.set("view engine","ejs");
@@ -44,11 +43,7 @@ app.use(function(req,res,next){
 });
 app.use(passport.initialize());
 app.use(passport.session());
-// passport.serializeUser(customerUser.serializeUser());
-// passport.deserializeUser(customerUser.deserializeUser());
 
-// passport.serializeUser(contractorUser.serializeUser());
-// passport.deserializeUser(contractorUser.deserializeUser());
 passport.serializeUser(function(user, done) { 
     done(null, user);
   });
@@ -58,16 +53,6 @@ passport.serializeUser(function(user, done) {
       done(null,user);
   });
 
-
-// app.listen(1690,function(){
-//     console.log("Runnning on 1690");
-// });
-
-
-// const io = require("socket.io")(server);
-
-
-  
 app.use(require("./routes/contractor")(io));
 app.use(require("./routes/customer")(io));
 app.use(adminRoute);
