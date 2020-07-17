@@ -11,17 +11,17 @@
                             <img src="/img/default-user.jpg"  alt="Profile image">
                         </div>
                         <div class="profile_name">
-                            <p>User Name:<%= currentUser.username ;%></p>
-                            <p>Name:<%= currentUser.name ;%></p>
+                            <p><span class="font-weight-bold">User Name: </span><%= currentUser.username ;%></p>
+                            <p><span class="font-weight-bold">Name: </span><%= currentUser.name ;%></p>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="profile_information">
                             <h4>Information</h4>
-                            <p>Email:<%= currentUser.email ;%></p>
-                            <p>Contact No.:<%= currentUser.mobile ;%></p> 
-                            <p>Date of Joining:<%= currentUser.dateOfJoin.toDateString() ;%></p>       
-                            <p>Address:<%= currentUser.address ;%></p>   
+                            <p><span class="font-weight-bold">Email:</span><%= currentUser.email ;%></p>
+                            <p><span class="font-weight-bold">Contact No.:</span><%= currentUser.mobile ;%></p> 
+                            <p><span class="font-weight-bold"> Date of Joining: </span><%= currentUser.dateOfJoin.toDateString() ;%></p>       
+                            <p><span class="font-weight-bold">Address :</span> <%= currentUser.address ;%></p>   
                             <%if(currentUser.projectStatus){%>
                                 <a href=""><input type="submit" class="btn btn-primary btn-lg disabled"  value="Edit"></a>
                             <%} else if(!currentUser.projectStatus){%>

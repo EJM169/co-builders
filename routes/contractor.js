@@ -1,17 +1,17 @@
-var express             = require("express"),
-    async               = require("async"),
-    router              = express.Router({mergeParams:true}),
-    multer              = require("multer"),
-    contractorUser      = require("../models/contractor"),
-    customerUser        = require("../models/customer"),
-    projectC            = require("../models/project"),
-    chat                = require("../models/chat"),
-    flash               = require("connect-flash"),
-    passport            = require("passport"),
-    LocalStrategy       = require("passport-local"),
-    bCrypt              = require('bcrypt'),
+var express                             = require("express"),
+    async                               = require("async"),
+    router                              = express.Router({mergeParams:true}),
+    multer                              = require("multer"),
+    contractorUser                      = require("../models/contractor"),
+    customerUser                        = require("../models/customer"),
+    projectC                            = require("../models/project"),
+    chat                                = require("../models/chat"),
+    flash                               = require("connect-flash"),
+    passport                            = require("passport"),
+    LocalStrategy                       = require("passport-local"),
+    bCrypt                              = require('bcrypt'),
     {amountCalc,scheduleCheck}          = require("../utils/utilfnc"),
-    middleware          = require("../middleware");
+    middleware                          = require("../middleware");
 
 var storage = multer.diskStorage({
   destination: function(req,file,cb){
@@ -1106,16 +1106,7 @@ router.get("/contractor/logout",function(req,res){
 
   //Socket.IO
   io.on('connection', function (socket) {
-   
-    // socket.on('chatMessage', msg =>{
-    //   io.emit('message', msg);
-    // });
-    // socket.on('username',username=>{
-    //   socket.on('chatMessage', msg =>{
-    //     io.emit('message', formatMessage(username,msg));
-    //   });
-    // })
-
+  
 });
 
 

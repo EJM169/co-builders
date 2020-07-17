@@ -26,8 +26,7 @@ var contractorSchema = new mongoose.Schema({
         ref:"customer"
     }],
     past_proj:[{type:mongoose.Schema.Types.ObjectId,
-        ref:"project"
-    }],
+        ref:"project"    }],
     projectStatus:{type:Boolean, default:false},
     feedback:[{
         projectid:{type:mongoose.Schema.Types.ObjectId,
