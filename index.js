@@ -25,7 +25,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use('/uploads',express.static('uploads'));
 app.use('/contractor/uploads',express.static('uploads'));
 app.use('/customer/uploads',express.static('uploads'));
-// app.use(express.static(__dirname+'uploads'));
 app.use(express.static(__dirname+"/public"));
 app.use(express.static(__dirname + '/routes'));
 app.use(methodOverride("_method"));
