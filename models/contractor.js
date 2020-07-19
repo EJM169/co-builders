@@ -25,8 +25,8 @@ var contractorSchema = new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"customer"
     }],
-    // past_proj:[{type:mongoose.Schema.Types.ObjectId,
-    //     ref:"project"    }],
+    pastproj:[{type:mongoose.Schema.Types.ObjectId,
+        ref:"project"    }],
     projectStatus:{type:Boolean, default:false},
     feedback:[{
         projectid:{type:mongoose.Schema.Types.ObjectId,
@@ -37,7 +37,7 @@ var contractorSchema = new mongoose.Schema({
         headline:{type:String,default:null},
         review:{type:String,default:null}
     }],
-    project:[{type:mongoose.Schema.Types.ObjectId,
+    contractorProject:[{type:mongoose.Schema.Types.ObjectId,
         ref:"project"
     }],
     chat:[{type:mongoose.Schema.Types.ObjectId,

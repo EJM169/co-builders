@@ -711,7 +711,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                       },
                       function(callback){
                         contractor.active_proj_cust.pop(customer);
-                        contractor.project.pop(project);
+                        contractor.contractorProject.pop(project);
                         contractor.chat.pop(chat);
                         contractor.save(function(err,data){
                           if(err){
@@ -846,8 +846,8 @@ router.post("/customer/:id/complete",middleware.isCustomerLoggedIn,function(req,
                   function(callback){
                     contractor.active_proj_cust.pop(customer);
                     contractor.past_proj_cust.push(customer);
-                    contractor.project.pop(project);
-                    contractor.past_proj.push(project);
+                    contractor.contractorProject.pop(project);
+                    contractor.pastproj.push(project);
                     contractor.projectStatus=!contractor.projectStatus;
                     contractor.no_project +=1;
                     contractor.save(function(err,data){
@@ -949,7 +949,7 @@ router.get("/customer/:id/feedback",middleware.isCustomerLoggedIn,function(req,r
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findOne({past_proj:project._id},function(err,contractor){
+          contractorUser.findOne({pastproj:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
@@ -979,7 +979,7 @@ router.get("/customer/:id/feedback/edit",middleware.isCustomerLoggedIn,function(
           res.redirect("/customer/dashboard");
         }   
         else{
-          contractorUser.findOne({past_proj:project._id},function(err,contractor){
+          contractorUser.findOne({pastproj:project._id},function(err,contractor){
             if(err){
               console.log(err);
               req.flash('error','Error whil loading details');
