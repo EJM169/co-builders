@@ -21,16 +21,16 @@
                         </div>
                     </form>
                 </div>
-            <%}else if(project.contractorStatus && !currentUser.projectStatus){%>
+            <%}else if(project.contractorStatus && !project.customerStatus){%>
                 <div class="container">
                     <p class="lead"><%=customer.username%></p>
                     <hr class="my-4">
                     <p><%=project.overallPlan%></p>
                     <div class="cont-send">
-                        <p class=" text-success"><i class="far fa-check-square"></i>Plan has been sent</p>
+                        <p class=" text-warning"><i class="far fa-check-square"></i>Plan has been sent</p>
                     </div>
                 </div>    
-            <%}else{%>
+            <%}else if(project.contractorStatus && project.customerStatus){%>
                 <div class="container">
                 <p class="lead"><%=customer.username%></p>
                 <hr class="my-4">

@@ -13,7 +13,6 @@
             <dvi class="chat-messages">
               <div id="messages">
                 <!-- To print messages from the chat database-->
-
                 <% if(message.messages){%>
                   <%message.messages.forEach(function(message){ %>
                     <p class="lead"><%=message.username%>: <%=message.messages%></p>
