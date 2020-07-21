@@ -1044,13 +1044,9 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
                   res.redirect("/contractor/dashboard");
                 }   
                 else{
-                  // if(project){
-                    // scheduleCheck(project);
-                    res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
-                  // }
-                  // else{
-                  //   res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:null});
-                  // }
+                
+                    res.render("contractor/hist-page",{currentUser:contractor,customerDetail:customer,project:project});
+                
                 } 
                 });
             }
@@ -1071,7 +1067,7 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
                 res.redirect("/contractor/dashboard");
               }   
               else{
-                 res.render("contractor/cust-page",{currentUser:contractor,customerDetail:customer,project:project});
+                 res.render("contractor/hist-page",{currentUser:contractor,customerDetail:customer,project:project});
               
               }
             });
@@ -1080,6 +1076,72 @@ router.get("/contractor/:id/history",middleware.isContractorLoggedIn,function(re
       }
     }
   })
+});
+
+router.get("/contractor/history/:id/plan",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/customer/dash");
+    }
+    else{
+      customerUser.findById(req.params.id,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/contractor/dashboard");
+        }   
+        else{
+         
+          
+                  projectC.findOne({$and:[{'_id':{$in:customer.past_proj}},{'_id':{$in:contractor.pastproj}}]},function(err,project){
+                    if(err){
+                      console.log(err);
+                      req.flash('error','Error whil loading details');
+                      res.redirect("/contractor/dashboard");
+                    }
+                    else{
+                      res.render("contractor/project-plan",{currentUser:contractor,project:project,customer:customer});
+                    }
+                  });
+        }
+      });
+    }
+  });    
+});
+
+router.get("/contractor/history/:id/budget",middleware.isContractorLoggedIn,function(req,res){
+  contractorUser.findById(req.user,function(err,contractor){
+    if(err){
+      console.log(err);
+      req.flash('error','Error whil loading details');
+      res.redirect("/contractor/dashboard");
+    }
+    else{
+      customerUser.findById(req.params.id,function(err,customer){
+        if(err){
+          console.log(err);
+          req.flash('error','Error whil loading details');
+          res.redirect("/contractor/dashboard");
+        }   
+        else{
+         
+            projectC.findOne({$and:[{'_id':{$in:customer.past_proj}},{'_id':{$in:contractor.pastproj}}]},function(err,project){
+              if(err){
+                console.log(err);
+                req.flash('error','Error whil loading details');
+                res.redirect("/contractor/dashboard");
+              }
+              else{
+                var amount = amountCalc(project.budget);
+                res.render("contractor/budget",{currentUser:contractor,project:project,customer:customer,amount:amount});
+              }
+            });
+        }
+      });
+    }
+  });    
 });
 
 router.get("/contractor/logout",function(req,res){

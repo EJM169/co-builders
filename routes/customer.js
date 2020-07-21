@@ -1094,13 +1094,8 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
                   res.redirect("/customer/dashboard");
                 }   
                 else{
-                  if(project){
-                    // scheduleCheck(project);
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:project});
-                  }
-                  else{
-                    res.render("customer/cont-page",{currentUser:customer,contractorDetail:contractor,project:null});
-                  }
+                 
+                    res.render("customer/hist-page",{currentUser:customer,contractorDetail:contractor,project:project});
                 } 
                 });
             }
@@ -1121,7 +1116,7 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
                 res.redirect("/contractor/dashboard");
               }   
               else{
-                 res.render("customer/cont-page",{currentUser:customer,customerDetail:contractor,project:project});
+                 res.render("customer/hist-page",{currentUser:customer,customerDetail:contractor,project:project});
               
               }
             });
@@ -1131,6 +1126,72 @@ router.get("/customer/:id/history",middleware.isCustomerLoggedIn,function(req,re
     }
   })
 });
+
+router.get("/customer/history/:id/plan",middleware.isCustomerLoggedIn,function(req,res){
+  customerUser.findById(req.user,function(err,customer){
+    if(err){
+        console.log(err);
+        req.flash('error','Error whil loading customer details');
+        res.redirect("/customer/dashboard");
+      }
+      else{
+        contractorUser.findById(req.params.id,function(err,contractor){
+          if(err){
+            console.log(err);
+            req.flash('error','Error whil loading project details');
+            res.redirect("/customer/dashboard");
+          }   
+          else{
+            
+              projectC.findOne({$and:[{'_id':{$in:customer.past_proj}},{'_id':{$in:contractor.pastproj}}]},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }
+                else{
+                  res.render("customer/project-plan",{currentUser:customer,project:project,contractor:contractor});
+                }
+              });
+          }
+        });
+      }
+    });    
+  });
+
+  router.get("/customer/history/:id/budget",middleware.isCustomerLoggedIn,function(req,res){
+    customerUser.findById(req.user,function(err,customer){
+      if(err){
+        console.log(err);
+        req.flash('error','Error whil loading details');
+        res.redirect("/customer/dashboard");
+      }
+      else{
+        contractorUser.findById(req.params.id,function(err,contractor){
+          if(err){
+            console.log(err);
+            req.flash('error','Error whil loading details');
+            res.redirect("/customer/dashboard");
+          }   
+          else{
+            
+              projectC.findOne({$and:[{'_id':{$in:customer.past_proj}},{'_id':{$in:contractor.pastproj}}]},function(err,project){
+                if(err){
+                  console.log(err);
+                  req.flash('error','Error whil loading details');
+                  res.redirect("/customer/dashboard");
+                }
+                else{
+              var amount = amountCalc(project.budget);
+
+                  res.render("customer/budget",{currentUser:customer,project:project,contractor:contractor,amount:amount});
+                }
+              });
+          }
+        });
+      }
+    });    
+  });
 
 router.get("/customer/logout",function(req,res){
   req.logout();

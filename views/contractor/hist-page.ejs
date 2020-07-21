@@ -1,0 +1,118 @@
+<% include ../partials/contractorHeader %>
+<section id="Dashboard" class="dash_banner_area">
+    <div class="container">
+        <% if(!customerDetail){ %>
+            <div class="jumbotron ">
+                <p class="lead">Sorry there are no customers to display right now, come back later </p>
+            </div>
+           
+            <%} else if(customerDetail.length>1){%>                        
+                <h1>List of customers</h1>
+                <% customerDetail.forEach(function(customer){ %> 
+                    <div class=" card customer_dash_content">
+                    <div class="card-body align-items-center">
+                    <h3>Name: <%=customer.name%></h3>
+                    <p>username: <%=customer.username%></p>
+                    <p>Email: <%=customer.email%></p>
+                    <p>Mobile: <%=customer.mobile%></p>
+                    <p>Requirements: <%=customer.requirements%></p>
+                    <div class="container ">
+                        <div class="row pb-2">
+                            <div class="col-lg-3">                               
+                                <a href="/contractor/customer/<%=customer._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/history/<%=customer._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/chat/<%=customer._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/history/<%=customer._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>                            
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-3">
+                                <a href="http://127.0.0.1:8000/example/"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
+                            </div>
+                                <%if(project.length>1){%>
+                                    <%project.forEach(function(project){%>     
+                                        <%customer.project.forEach(function(custproject){%>
+                                            <%if(custproject.toString()==project._id.toString()){%>
+                                                  
+                                                <div class="col-lg-3">
+                                                        <a href="#"><input type="submit" class="btn btn-success btn-lg disabled" value="Complete"></a>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
+                                                </div>                                   
+                                            <%}%>
+                                        <%});%>                
+                                    <%});%>
+                                <%}%>
+                                <div class="container">
+                                            
+                                    <div class="alert alert-success">
+                                        <h4 class="alert-heading">Project Complete</h4>
+                                        <p>This project has been completed</p>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>    
+                    </div>
+                    </div>   
+                
+                <hr class="my-4">                      
+    <%});%>
+        <%} else{%>  
+            <h1>List of customers</h1>
+            <div class=" card customer_dash_content">
+                <div class="card-body align-items-center">
+                    <h3>Name: <%=customerDetail.name%></h3>
+                    <p>username: <%=customerDetail.username%></p>
+                    <p>Email: <%=customerDetail.email%></p>
+                    <p>Mobile: <%=customerDetail.mobile%></p>
+                    <p>Requirements: <%=customerDetail.requirements%></p>
+                    <div class="container ">
+                        <div class="row pb-2">
+                            <div class="col-lg-3">
+                                <a href="/contractor/customer/<%=customerDetail._id%>/"><input type="submit" class="btn btn-primary btn-lg" value="Profile"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/history/<%=customerDetail._id%>/plan"><input type="submit" class="btn btn-info btn-lg" value="Project Plan"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/chat/<%=customerDetail._id%>"><input type="submit" class="btn btn-primary btn-lg" value="Chat"></a>
+                            </div>
+                            <div class="col-lg-3">
+                                <a href="/contractor/history/<%=customerDetail._id%>/budget"><input type="submit" class="btn btn-info btn-lg" value="Budget"></a>                            
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-3">
+                                <a href="http://127.0.0.1:8000/example/"><input type="submit" class="btn btn-info btn-lg" value="3D View"></a>
+                            </div>
+                                <div class="col-lg-3">
+                                        <a href="#"><input type="submit" class="btn btn-info btn-lg disabled" value="Complete"></a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <a href="/contractor/<%=project._id%>/feedback"><input type="submit" class="btn btn-info btn-lg" value="Feedback"></a>                            
+                                </div>
+                                <div class="container">
+                                            
+                                    <div class="alert alert-success">
+                                        <h4 class="alert-heading">Project Complete</h4>
+                                        <p>This project has been completed</p>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+               
+        <%}%>    
+        </div> 
+            
+    </div>
+</section>
+
+<% include ../partials/contractorFooter %>
