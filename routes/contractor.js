@@ -930,7 +930,7 @@ router.post("/contractor/:id/complete",middleware.isContractorLoggedIn,function(
                 ],function(err){
                   if(err){
                     req.flash('error','Error while saving all the data try again');
-                    res.redirect("/contractor/"+contractor._id+"/customer");
+                    res.redirect("/contractor/dashboard");
                   }
                   req.flash('success','successfully saved and project is complete');
                   res.redirect("/contractor/dashboard");

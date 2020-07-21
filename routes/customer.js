@@ -729,7 +729,7 @@ router.post("/customer/:id/cancel",middleware.isCustomerLoggedIn,function(req,re
                     ],function(err){
                       if(err){
                         req.flash('error','Error while saving all the data try again');
-                        res.redirect("/customer/"+customer._id+"/contractor");
+                        res.redirect("/customer/dashboard");
                       }
                       req.flash('success','successfully saved and project is complete');
                       res.redirect("/customer/dashboard");
