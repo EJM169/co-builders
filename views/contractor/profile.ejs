@@ -11,28 +11,28 @@
                             <img src="/img/default-user.jpg"  alt="Profile image">
                         </div>
                         <div class="profile_name">
-                            <p>User Name:<%= currentUser.username ;%></p>
-                            <p>Name:<%= currentUser.name ;%></p>
+                            <p><span class="font-weight-bold">User Name: </span><%= currentUser.username ;%></p>
+                            <p><span class="font-weight-bold">Name: </span><%= currentUser.name ;%></p>
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="profile_information">
                             <h4>Information</h4>
-                            <p>Email:<%= currentUser.email ;%></p>
-                            <p>Contact No.:<%= currentUser.mobile ;%></p>    
-                            <p>Number of years of experience:<%= currentUser.experience ;%></p>    
-                            <p>Date of Joining:<%= currentUser.dateOfJoin.toDateString() ;%></p>    
+                            <p><span class="font-weight-bold">Email: </span><%= currentUser.email ;%></p>
+                            <p><span class="font-weight-bold">Contact No.: </span><%= currentUser.mobile ;%></p>    
+                            <p><span class="font-weight-bold">Number of years of experience: </span><%= currentUser.experience ;%></p>    
+                            <p><span class="font-weight-bold">Date of Joining: </span><%= currentUser.dateOfJoin.toDateString() ;%></p>    
                             <% if(currentUser.budget){ %>
-                                <p>Minimum Budget:<%= currentUser.budget; %></p>    
+                                <p><span class="font-weight-bold">Minimum Budget: </span><%= currentUser.budget; %></p>    
                             <%} %>
                             <% if(currentUser.no_project){ %>
-                                <p>Number of Projects worked on:<%= currentUser.no_project; %></p>    
+                                <p><span class="font-weight-bold">Number of Projects worked on: </span><%= currentUser.no_project; %></p>    
                             <%} %>
                             <% if(currentUser.address){ %>
-                                <p>Office Address:<%= currentUser.address; %></p>    
+                                <p><span class="font-weight-bold">Office Address: </span><%= currentUser.address; %></p>    
                             <%} %>
                             <% if(currentUser.criteria){ %>
-                                <p>Criteria Details:<%= currentUser.criteria; %></p>    
+                                <p><span class="font-weight-bold">Criteria Details: </span><%= currentUser.criteria; %></p>    
                             <%} %>
                         </div>
                     </div>
