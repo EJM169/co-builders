@@ -4,14 +4,15 @@
         <h1>Contractor Details</h1>
         <div class=" card dash_content">
             <div class="card-body align-items-center">
-                <h3>Name: <%=contractorDetail.username%></h3>
-                <p>Email: <%=contractorDetail.email%></p>
-                <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
-                <p>Home Address:<%= contractorDetail.address; %></p>    
-                <p>Requirement Details:<%= contractorDetail.requirements; %></p>   
-                <p>Budget range:<%= contractorDetail.budget; %></p>   
-                <p>Home Type:<%=  contractorDetail.reqselect; %></p>    
-                <p>Bathroom Specification:<%=  contractorDetail.bathRoomreq; %></p>    
+                <h3>Name: <%=contractorDetail.name%></h3>
+                <p><span class="font-weight-bold">Username: </span><%=contractorDetail.username%></p>
+                <p><span class="font-weight-bold">Email:</span> <%=contractorDetail.email%></p>
+                <p><span class="font-weight-bold">Contact No.: </span><%= contractorDetail.mobile ;%></p>    
+                <p><span class="font-weight-bold">Home Address: </span><%= contractorDetail.address; %></p>    
+                <p><span class="font-weight-bold">Requirement Details: </span><%= contractorDetail.requirements; %></p>   
+                <p><span class="font-weight-bold">Budget range: </span><%= contractorDetail.budget; %></p>   
+                <p><span class="font-weight-bold">Home Type: </span><%=  contractorDetail.reqselect; %></p>    
+                <p><span class="font-weight-bold">Bathroom Specification: </span><%=  contractorDetail.bathRoomreq; %></p>    
                 <% if( contractorDetail.prayerRoomreq){ %>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="defaultChecked2" checked disabled>

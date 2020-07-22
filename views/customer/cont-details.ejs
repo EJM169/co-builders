@@ -5,13 +5,13 @@
         <div class=" card dash_content">
             <div class="card-body align-items-center">
                 <h3>Name: <%=contractorDetail.username%></h3>
-                <p>Contractor Id: <%=contractorDetail.contractorid%></p>
-                <p>Email: <%=contractorDetail.email%></p>
-                <p>Experience: <%=contractorDetail.experience%></p>
-                <p>Contact No.:<%= contractorDetail.mobile ;%></p>    
-                <p>Number of years of experience:<%= contractorDetail.experience ;%></p>
-                <p>Office Address:<%= contractorDetail.address; %></p>    
-                <p>Criteria Details:<%= contractorDetail.criteria; %></p>  
+                <p><span class="font-weight-bold">Username: </span><%=contractorDetail.username%></p>
+                <p><span class="font-weight-bold">Email: </span><%=contractorDetail.email%></p>
+                <p><span class="font-weight-bold">Experience: </span><%=contractorDetail.experience%></p>
+                <p><span class="font-weight-bold">Contact No.: </span><%= contractorDetail.mobile ;%></p>    
+                <p><span class="font-weight-bold">Number of years of experience: </span><%= contractorDetail.experience ;%></p>
+                <p><span class="font-weight-bold">Office Address: </span><%= contractorDetail.address; %></p>    
+                <p><span class="font-weight-bold">Criteria Details: </span><%= contractorDetail.criteria; %></p>  
                 <h3>Customer Reviews</h3>
                 <hr class="my-1">  
                 <% if(contractorDetail.feedback){%>
