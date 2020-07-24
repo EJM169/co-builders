@@ -558,7 +558,7 @@ router.put("/customer/:id/project",middleware.isCustomerLoggedIn,function(req,re
             }
             else{
               req.flash('success','Successfully rejected the plan');
-              res.redirect("/customer/"+req.user+"/plan")
+              res.redirect("/customer/dashboard")
             }
           })
         }
@@ -783,7 +783,7 @@ router.post("/customer/:id/reject",middleware.isCustomerLoggedIn,function(req,re
             }
             else{
               req.flash('success','Successfully Cancelled');
-              res.redirect("/customer/"+customer._id+"/contractor")
+              res.redirect("/customer/dashboard")
             }
           });
         }
